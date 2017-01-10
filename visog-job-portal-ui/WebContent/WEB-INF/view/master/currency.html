@@ -1,0 +1,139 @@
+
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="resources/css/user.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script src="resources/js/jquery-3.1.1.min.js"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(e){
+	$('.masters').click(function(){
+		$(this).toggleClass('tap');
+		
+	});
+	$('.transactions').click(function(){
+		$(this).toggleClass('tap');
+		
+	});
+	
+});
+</script>
+<meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
+ <link rel="stylesheet" type="text/css" href="/visog-job-portal-ui/resources/css/master.css" media="screen" />
+
+ <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script src="/visog-job-portal-ui/resources/js/currency.js"></script>
+<!-- 	<style rel="stylesheet" href ="css/master.css"></style> -->
+	</head>
+	<body>
+	<div id="header">
+		<div class="logo">
+			<a href="#">Job<span>Portal</span></a>
+		</div>
+
+	</div>
+	
+	<div id="container">
+		<div class="sidebar">
+			<ul id="nav">
+
+				<li class="masters"><a href="#">Masters<span class="sub"></span></a>
+				<ul>
+				<li class="child"><a href="/visog-job-portal-ui/city">city</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/country">country</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/state">state</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/courses">courses</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/gender">gender</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employertype">employer Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employmenttype">employment Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/currency">currency</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/roles">roles</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/fileExtension">file Extension</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/university">university</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/specilization">specilization</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/domains">domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/industry">industry</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/roles">roles</a></li>
+				</ul>
+				</li>
+				
+				<li class="transactions"><a href="#">Transactions<span class="sub"></span></a>
+				<ul>
+				<li class="child"><a href="/visog-job-portal-ui/users">users</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/adress">address</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postjob">post Job</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postjobdomains">post Job Domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postjobseeker">post Job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobseeker">job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/educationdetails">education Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/languagesknown">languages Known</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/projectdetails">project Details</a></li>
+				
+				<li class="child"><a href="/visog-job-portal-ui/files">files</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employerjobseeker">employer Job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/experiencedetails">experience Details</a></li>
+				
+				
+				
+				</ul>
+				</li>
+				<li><a href="/visog-job-portal-ui/reg">registration</a></li>
+				<li><a href="/visog-job-portal-ui/user">login</a></li>
+			</ul>
+		</div>
+	<div class="content" ng-app="CurrencyManagement" ng-controller="CurrencyController">->
+	<h1>Currency Master</h1>
+	<form ng-submit="submitCurrency()">
+		<table>
+
+			<tr>
+				<th colspan="2">Add/Edit Currency</th>
+			</tr>
+			<tr>
+				<td>Currency Name</td>
+				<td><input type="text" ng-model="currencyForm.name" /></td>
+			</tr>
+
+			<tr>
+				<td>Description</td>
+				<td><input type="text" ng-model="currencyForm.description" /></td>
+			</tr>
+			<tr>
+				<td>Currency_code</td>
+				<td><input type="text" ng-model="currencyForm.currency_code" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Submit"
+					class="blue-button" /></td>
+			</tr>
+		</table>
+	</form>
+	<table>
+		<tr>
+
+			<th>Name</th>
+			<th>Description</th>
+			<th>Currency_code </th>
+			<th></th>
+
+		</tr>
+
+		<tr ng-repeat="currency in currencys">
+
+			<td>{{ currency.name }}</td>
+			<td>{{ currency.description }}</td>
+			<td>{{ currency.currency_code }}</td>
+
+			<td><a ng-click="editCurrency(currency)" class="blue-button">Edit</a>
+				| <a ng-click="deleteCurrency(currency)" class="red-button">Delete</a></td>
+		</tr>
+
+	</table>
+</div>
+</body>
+</html>
