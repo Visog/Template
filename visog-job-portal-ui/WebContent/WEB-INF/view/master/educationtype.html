@@ -293,22 +293,22 @@ td, th {
 				<li><a href="/visog-job-portal-ui/user">login</a></li>
 			</ul>
 		</div>
-<div class="content" ng-app="AddressTypeManagement" ng-controller="AddressTypeController">
-	<h1>AddressType Master</h1>
-	<form ng-submit="submitAddressType()">
+<div class="content" ng-app="EducationTypeManagement" ng-controller="EducationTypeController">
+	<h1>EducationType Master</h1>
+	<form ng-submit="submitEducationType()">
 		<table>
 
 			<tr>
-				<th colspan="2">Add/Edit AddressType</th>
+				<th colspan="2">Add/Edit EducationType</th>
 			</tr>
 			<tr>
-				<td>AddressType Name</td>
-				<td><input type="text" ng-model="addresstypeForm.name" /></td>
+				<td>EducationType Name</td>
+				<td><input type="text" ng-model="educationtypeForm.name" /></td>
 			</tr>
 
 			<tr>
 				<td>Description</td>
-				<td><input type="text" ng-model="addresstypeForm.description" /></td>
+				<td><input type="text" ng-model="educationtypeForm.description" /></td>
 			</tr>
 			<!-- <tr>
 				<td>OrderNum</td>
@@ -332,12 +332,12 @@ td, th {
 
 		<tr ng-repeat="country in countrys">
 
-			<td>{{ addresstype.name }}</td>
-			<td>{{ addresstype.description }}</td>
+			<td>{{ educationtype.name }}</td>
+			<td>{{ educationtype.description }}</td>
 			<!-- <td>{{ country.orderNum }}</td> -->
 
-			<td><a ng-click="editAddressType(addresstype)" class="blue-button">Edit</a>
-				| <a ng-click="deleteAddressType(addresstype)" class="red-button">Delete</a></td>
+			<td><a ng-click="editEducationType(educationtype)" class="blue-button">Edit</a>
+				| <a ng-click="deleteEducationType(educationtype)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>
