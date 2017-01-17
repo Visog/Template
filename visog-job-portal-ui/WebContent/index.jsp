@@ -20,10 +20,11 @@
   <h4><a href="/visog-job-portal-ui/employertype">EmployerType</a></h4>
    <h4><a href="/visog-job-portal-ui/employmenttype">EmploymentType</a></h4>
    <h4><a href="/visog-job-portal-ui/currency">Currency</a></h4>
-    <h4><a href="/visog-job-portal-ui/roles">roles</a></h4>
-  <h4><a href="/visog-job-portal-ui/fileExtension">File Extension</a></h4>
-  <h4><a href="/visog-job-portal-ui/university">university</a></h4>
-    <h4><a href="/visog-job-portal-ui/specilization">specilization</a></h4>
+    <h4><a href="/visog-job-portal-ui/roles">Roles</a></h4>
+     <h4><a href="/visog-job-portal-ui/educationtype">Education Type</a></h4>
+  <h4><a href="/visog-job-portal-ui/filetype">File Type</a></h4>
+  <h4><a href="/visog-job-portal-ui/university">University</a></h4>
+    <h4><a href="/visog-job-portal-ui/specilization">Specilization</a></h4>
     <h4><a href="/visog-job-portal-ui/index">index</a></h4>
  </center>
 </body>

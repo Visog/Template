@@ -43,7 +43,7 @@ public class HelloSpring4Controller {
 	@RequestMapping(value = "/gender", method = RequestMethod.GET)   
 	public String gender() {  
 		String message = "visog-job-portal-ui";
-		return "master/gender1";
+		return "master/gender";
 	} 
 	
 	@RequestMapping(value = "/currency", method = RequestMethod.GET)   
@@ -68,7 +68,7 @@ public class HelloSpring4Controller {
 	public String country() {  
 		String message = "visog-job-portal-ui";
 
-		return "master/country1";
+		return "master/country";
 	} 
 	 
 	@RequestMapping(value = "/state", method = RequestMethod.GET)  
@@ -117,11 +117,23 @@ public class HelloSpring4Controller {
 			return "master/roles";
 		} 
 		 
-		@RequestMapping(value= "/fileExtension" ,method = RequestMethod.GET)  
-		public String fileExtension() {  
+		@RequestMapping(value= "/filetype" ,method = RequestMethod.GET)  
+		public String filetype() {  
 			String message = "visog-job-portal-ui";
-			return "master/fileExtension";
+			return "master/file_Type";
 		} 
+		
+		@RequestMapping(value= "/addresstype" ,method = RequestMethod.GET)  
+		public String addresstype() {  
+			String message = "visog-job-portal-ui";
+			return "master/address_Type";
+		}
+		
+		@RequestMapping(value= "/educationtype" ,method = RequestMethod.GET)  
+		public String educationtype() {  
+			String message = "visog-job-portal-ui";
+			return "master/education_Type";
+		}
 		
 		@RequestMapping(value= "/index" ,method = RequestMethod.GET)  
 		public String index() {  
