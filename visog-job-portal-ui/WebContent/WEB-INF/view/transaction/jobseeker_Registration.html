@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Registration Form</title>
+  
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script language='javascript' type='text/javascript'>
+
+//alert('hiff');
+function check(input) {
+    if (input.value != document.getElementById('password').value) {
+        input.setCustomValidity('Password Must be Matching.');
+    } else {
+        // input is valid -- reset the error message
+        input.setCustomValidity('');
+    }
+}
+
+</script>
+
+<script>
+
+
+	var app = angular.module("myApp", []);
+	//alert('hi:::::::::::::::');
+	//Controller Part
+	app
+			.controller(
+					"myCtrl",
+					function($scope, $http) {
+						
+						$scope.registrationForm = []; 
+						_refreshGenderData();
+						
+				$scope.registrationForm = {
+							id : -1,
+							fname : "",
+							mname : "",
+							lname :"",
+							dob : "",
+							email : "",
+							password : "",
+							mobile : "",
+							confirmpassword :""
+						};
+						
+						// Now load the data from server
+						//	_refreshGenderData();
+				
+						//  alert('hi');
+						///////////
+			   			  $scope.submitFile = function() {
+         
+                    var method = "";
+                    var url = "";
+                 // alert($scope.registrationForm.id);
+                    if ($scope.registrationForm.id == -1 || $scope.registrationForm.id == undefined) {
+                        //Id is absent in form data, it is create new file operation
+                //        alert('hhhh');
+                        method = "POST";
+                        url = 'http://localhost:8080/visog-job-portal-api/transaction/job_seeker/';
+                     /*    alert($scope.registrationForm.fname);
+                        alert($scope.registrationForm.mname);
+                        alert($scope.registrationForm.lname);
+                        alert($scope.registrationForm.dob);
+                        alert($scope.registrationForm.GenderGroup);
+                        alert($scope.registrationForm.a_email);
+                        alert($scope.registrationForm.email);
+                        alert($scope.registrationForm.landline);
+                        alert($scope.registrationForm.password);
+                         */
+                        $http.post(url, { "firstName": $scope.registrationForm.fname, "middleName": $scope.registrationForm.mname, "lastName": $scope.registrationForm.lname, "email": $scope.registrationForm.email, "alternativeEmail": $scope.registrationForm.a_email, "gender": $scope.registrationForm.GenderGroup, "dob": $scope.registrationForm.dob, "password": $scope.registrationForm.password, "phone": $scope.registrationForm.mobile, "landline" : $scope.registrationForm.landline,"role" : "2d2ad4a6-f88e-4f51-975b-280fee8ed891" }).then( _success, _error ); 
+                    alert('complete');
+                        
+                    } else {
+                    	 
+                        //Id is present in form data, it is edit file operation
+                        id=$scope.registrationForm.id;
+                        method = "PUT";
+                        url = 'http://localhost:8080/visog-job-portal-api/transaction/job_seeker/'+ id;
+                        $http.post(url, { "firstName": $scope.registrationForm.fname, "middleName": $scope.registrationForm.mname, "lastName": $scope.registrationForm.lname, "email": $scope.registrationForm.email, "alternativeEmail": $scope.registrationForm.a_email, "gender": $scope.registrationForm.GenderGroup, "dob": $scope.registrationForm.dob, "password": $scope.registrationForm.password, "phone": $scope.registrationForm.mobile, "landline" : $scope.registrationForm.landline,"role" : "2d2ad4a6-f88e-4f51-975b-280fee8ed891" }).then( _success, _error ); 
+                          $scope.registrationForm.id = -1;
+                    }};
+						
+						///////////
+//alert('hi fh');
+	function _refreshGenderData() {
+		$http(
+				{
+					method : 'GET',
+					url : 'http://localhost:8080/visog-job-portal-api/master/gender/'
+				}).then(function successCallback(response) {
+					
+					
+			$scope.genders = response.data.data;
+			//alert('hijj dfdfdf 1'+response.data.data);
+		}, function errorCallback(response) {
+			console.log(response.statusText);
+		});//alert('jjffj');
+	}
+
+	function _success(response) {
+		alert(response.data.message);
+		_refreshGenderData();
+		_clearFormData()
+	}
+	
+	/* function _success(response) {
+		//	alert(response.data.message);
+			_refreshGenderData();
+			_clearFormData()
+		} */
+		//Clear the form
+	    function _clearFormData() {
+	    	 $scope.registrationForm.id == -1
+	    	  $scope.registrationForm.fname= "";
+	          $scope.registrationForm.mname= "";
+	          $scope.registrationForm.lname= "";
+	          $scope.registrationForm.dob= "";
+	          $scope.registrationForm.GenderGroup= "";
+	          $scope.registrationForm.a_email= "";
+	          $scope.registrationForm.email= "";
+	          $scope.registrationForm.landline= "";
+	          $scope.registrationForm.password= "";
+	          $scope.registrationForm.mobile= "";
+	          $scope.registrationForm.confirmpassword= "";
+			
+	    
+	    };
+	
+	
+
+	function _error(response) {
+
+		console.log(response.statusText);
+	}
+});
+</script>
+<link rel="stylesheet" type="text/css" href="/visog-job-portal-ui/resources/css/style.css" media="screen" />
+</head>
+<body ng-app="myApp" ng-controller="myCtrl"> 
+  
+  <form class="register" id="registration" ng-submit="submitFile()">
+ 
+    <input type="text" id="fname" class="register-input" placeholder="First Name" required ng-model="registrationForm.fname">
+    <input type="text" class="register-input" placeholder="Middle Name" ng-model="registrationForm.mname">
+    <input type="text" class="register-input" placeholder="Last Name" ng-model="registrationForm.lname"  required>
+    <input type="date" class="register-input" placeholder="DOB" required ng-model="registrationForm.dob">
+    <input type="email" class="register-input" placeholder="Email address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  required ng-model="registrationForm.email"/>
+    <input type="email" class="register-input" placeholder="AlterEmail address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required  ng-model="registrationForm.a_email"/>
+      <input type="text" class="register-input" placeholder="Moblie Number" required ng-model="registrationForm.mobile"  required >
+            <input type="text" class="register-input" placeholder="LandLine" ng-model="registrationForm.landline"  >
+         <div  ng-repeat="gender in genders" >
+            <input type="radio" name="GenderGroup"  value="{{gender.id}}" ng-model="registrationForm.GenderGroup" required>{{gender.name}} 
+       </div>
+    <input type="password" class="register-input" placeholder="Password" ng-model="registrationForm.password" id="password" required>
+    <input type="password" class="register-input" placeholder="Re-Enter Password" ng-model="registrationForm.confirmpassword" id="confirmpassword" oninput="check(this)" required>
+    <input type="submit" value="Create Account" class="register-button">
+  </form>
+
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 
 <html>
 <head>
+
 <link rel="stylesheet" type="text/css" href="resources/css/user.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -25,133 +26,11 @@
 </script>
 <meta name="viewport"
 	content="width=device-width, initial-scale:1, user-scalable=0" />
--
+<!-- <link rel="stylesheet" type="text/css" href="/visog-job-portal-ui/resources/css/master.css" media="screen" /> -->
 <script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-<script src="/visog-job-portal-ui/resources/js/employmenttype.js"></script>
-
-<title>AngularJS $http Rest example</title>
-<script type="text/javascript">
-	var app = angular.module("EmploymentTypeManagement", []);
-
-	//Controller Part
-	app
-			.controller(
-					"EmploymentTypeController",
-					function($scope, $http) {
-
-						$scope.employmenttypeForm = {
-							//  id : -1,
-							name : "",
-							description : ""
-						};
-
-						//Now load the data from server
-						_refreshEmploymentTypeData();
-
-						//HTTP POST/PUT methods for add/edit role 
-						// with the help of id, we are going to find out whether it is put or post operation
-
-						$scope.submitEmploymentType = function() {
-
-							var method = "";
-							var url = "";
-							// alert($scope.roleForm.id);
-							if ($scope.employmenttypeForm.id == -1
-									|| $scope.employmenttypeForm.id == undefined) {
-								//Id is absent in form data, it is create new role operation
-
-								method = "POST";
-								url = 'http://localhost:8080/visog-job-portal-api/master/employmenttype/';
-								$http
-										.post(
-												url,
-												{
-													"name" : $scope.employmenttypeForm.name,
-													"description" : $scope.employmenttypeForm.description
-												}).then(_success, _error);
-
-							} else {
-
-								//Id is present in form data, it is edit role operation
-								id = $scope.employmenttypeForm.id;
-								method = "PUT";
-								url = 'http://localhost:8080/visog-job-portal-api/master/employmenttype/'
-										+ id;
-								$http
-										.put(
-												url,
-												{
-													"name" : $scope.employmenttypeForm.name,
-													"description" : $scope.employmenttypeForm.description
-												}).then(_success, _error);
-								$scope.employmenttypeForm.id = -1;
-							}
-							/*         
-							                   $http({
-							                       method : method,
-							                       url : url,
-							                       data : angular.toJson($scope.roleForm),
-							                       headers : {
-							                           'Content-Type' : 'application/json'
-							                       }
-							                   }).then( _success, _error ); */
-						};
-
-						//HTTP DELETE- delete role by Id
-						$scope.deleteEmploymentType = function(employmenttype) {
-							$http(
-									{
-										method : 'DELETE',
-										url : 'http://localhost:8080/visog-job-portal-api/master/employmenttype/'
-												+ employmenttype.id
-									}).then(_success, _error);
-						};
-
-						// In case of edit, populate form fields and assign form.id with role id
-						$scope.editEmploymentType = function(employmenttype) {
-
-							$scope.employmenttypeForm.name = employmenttype.name;
-							$scope.employmenttypeForm.description = employmenttype.description;
-							$scope.employmenttypeForm.id = employmenttype.id;
-						};
-
-						/* Private Methods */
-						//HTTP GET- get all countries collection
-						function _refreshCoursesData() {
-							$http(
-									{
-										method : 'GET',
-										url : 'http://localhost:8080/visog-job-portal-api/master/employmenttype/'
-									}).then(function successCallback(response) {
-								//alert(response.data.data)
-								$scope.employmenttype = response.data.data;
-							}, function errorCallback(response) {
-								console.log(response.statusText);
-							});
-						}
-
-						function _success(response) {
-
-							_refreshEmploymentTypeData();
-							_clearFormData()
-						}
-
-						function _error(response) {
-
-							console.log(response.statusText);
-						}
-
-						//Clear the form
-						function _clearFormData() {
-							//  $scope.roleForm.id = -1;
-							$scope.employmenttypeForm.name = "";
-							$scope.employmenttypeForm.description = "";
-
-						}
-						;
-					});
-</script>
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script src="/visog-job-portal-ui/resources/js/gender.js"></script>
+<!-- Mubarak djshfj-->
 <style>
 .blue-button {
 	background: #25A6E1;
@@ -227,8 +106,12 @@ td, th {
 	padding: 5px 10px;
 }
 </style>
+
+
+<title>AngularJS $http Rest example</title>
 <head>
 <body>
+
 	<div id="header">
 		<div class="logo">
 			<a href="#">Job<span>Portal</span></a>
@@ -239,7 +122,6 @@ td, th {
 	<div id="container">
 		<div class="sidebar">
 			<ul id="nav">
-
 
 				<li class="masters"><a href="#">Masters<span class="sub"></span></a>
 					<ul>
@@ -309,55 +191,61 @@ td, th {
 
 			</ul>
 
-
-			</ul>
-
-			<div class="content" ng-app="EmploymentTypeManagement"
-				ng-controller="EmploymentTypeController">
-				<h1>EmploymentType Master</h1>
-				<form ng-submit="submitEmploymentType()">
-					<table>
-
-						<tr>
-							<th colspan="2">Add/Edit domain</th>
-						</tr>
-						<tr>
-							<td>EmploymentType Name</td>
-							<td><input type="text" ng-model="employmenttypeForm.name" /></td>
-						</tr>
-						<tr>
-							<td>Description</td>
-							<td><input type="text"
-								ng-model="employmenttypeForm.description" /></td>
-						</tr>
-						<tr>
-							<td colspan="2"><input type="submit" value="Submit"
-								class="blue-button" /></td>
-						</tr>
-					</table>
-				</form>
-				<table>
-					<tr>
-
-						<th>Name</th>
-						<th>Description</th>
-						<th></th>
-
-					</tr>
-
-					<tr ng-repeat="employmenttype in employmenttypes">
-
-						<td>{{ employmenttype.name }}</td>
-						<td>{{ employmenttype.description }}</td>
-
-						<td><a ng-click="editEmploymentType(employmenttype)"
-							class="blue-button">Edit</a> | <a
-							ng-click="deleteEmploymentType(employmenttype)"
-							class="red-button">Delete</a></td>
-					</tr>
-
-				</table>
-			</div>
 		</div>
+		<div class="content" ng-app="GenderManagement"
+			ng-controller="GenderController">
+			<h1>Gender Master</h1>
+			<form ng-submit="submitGender()">
+				<table>
+
+					<tr>
+						<th colspan="2">Add/Edit Gender</th>
+					</tr>
+					<tr>
+						<td>Gender Name</td>
+						<td><input type="text" ng-model="genderForm.name" /></td>
+					</tr>
+
+					<tr>
+						<td>Code</td>
+						<td><input type="text" ng-model="genderForm.code" /></td>
+					</tr>
+					<tr>
+						<td>Description</td>
+						<td><input type="text" ng-model="genderForm.description" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="submit" value="Submit"
+							class="blue-button" /></td>
+					</tr>
+				</table>
+			</form>
+			<table>
+				<tr>
+
+					<th>Name</th>
+					<th>Code</th>
+					<th>Description</th>
+					<th></th>
+
+				</tr>
+
+				<tr ng-repeat="gender in genders">
+
+					<td>{{ gender.name }}</td>
+					<td>{{ gender.code }}</td>
+					<td>{{ gender.description }}</td>
+
+					<td><a ng-click="editGender(gender)" class="blue-button">Edit</a>
+						| <a ng-click="deleteGender(gender)" class="red-button">Delete</a></td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+
+	<!-- <script src="static/js/gender.js"></script> -->
+	<!-- 	<style rel="stylesheet" href ="css/master.css"></style> -->
+	<!-- 	<link rel="stylesheet" type="text/css" href="staic/css/master.css" media="screen" /> -->
 </body>
 </html>
