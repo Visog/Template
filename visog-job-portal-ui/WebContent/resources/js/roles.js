@@ -5,7 +5,7 @@
             app.controller("RoleController", function($scope, $http) {
          
                
-                $scope.countries = [];
+                $scope.role = [];
                 $scope.roleForm = {
                  id : -1,
                     name : "",
