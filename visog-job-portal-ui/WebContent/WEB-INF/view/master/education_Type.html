@@ -302,7 +302,7 @@ td, th {
 				<th colspan="2">Add/Edit EducationType</th>
 			</tr>
 			<tr>
-				<td>EducationType Name</td>
+				<td> Name</td>
 				<td><input type="text" ng-model="educationtypeForm.name" /></td>
 			</tr>
 
@@ -330,7 +330,7 @@ td, th {
 
 		</tr>
 
-		<tr ng-repeat="country in countrys">
+		<tr ng-repeat="educationtype in educationtype">
 
 			<td>{{ educationtype.name }}</td>
 			<td>{{ educationtype.description }}</td>

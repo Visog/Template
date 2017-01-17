@@ -294,27 +294,39 @@ td, th {
 				<li><a href="/visog-job-portal-ui/user">login</a></li>
 			</ul>
 		</div>
-<div class="content" ng-app="AddressTypeManagement" ng-controller="AddressTypeController">
-	<h1>AddressType Master</h1>
-	<form ng-submit="submitAddressType()">
+<div class="content" ng-app="StatusTypeManagement" ng-controller="StatusController">
+	<h1>Status Master</h1>
+	<form ng-submit="submitStatus()">
 		<table>
 
 			<tr>
-				<th colspan="2">Add/Edit AddressType</th>
+				<th colspan="2">Add/Edit Status</th>
 			</tr>
 			<tr>
-				<td>AddressType Name</td>
-				<td><input type="text" ng-model="addresstypeForm.name" /></td>
+				<td> Name</td>
+				<td><input type="text" ng-model="statusForm.name" /></td>
 			</tr>
 
 			<tr>
-				<td>Description</td>
-				<td><input type="text" ng-model="addresstypeForm.description" /></td>
+				<td>Code</td>
+				<td><input type="text" ng-model="statusForm.code" /></td>
 			</tr>
-			<!-- <tr>
+			
+			<tr>
+				<td>Category</td>
+				<td><input type="text" ng-model="statusForm.category" /></td>
+			</tr>
+			
+			<tr>
 				<td>OrderNum</td>
-				<td><input type="text" ng-model="countryForm.orderNum" /></td>
-			</tr> -->
+				<td><input type="text" ng-model="statusForm.ordernum" /></td>
+			</tr>
+			
+			<tr>
+				<td>Description</td>
+				<td><input type="text" ng-model="statusForm.description" /></td>
+			</tr>
+			
 			<tr>
 				<td colspan="2"><input type="submit" value="Submit"
 					class="blue-button" /></td>
@@ -325,20 +337,23 @@ td, th {
 		<tr>
 
 			<th>Name</th>
+			<th>Code</th>
+			<th>Category</th>
+			<th>OrderNum</th>
 			<th>description</th>
 			<!-- <th>OrderNum</th> -->
 			<th></th>
 
 		</tr>
 
-		<tr ng-repeat="addresstype in addresstype">
+		<tr ng-repeat="status in status">
 
-			<td>{{ addresstype.name }}</td>
-			<td>{{ addresstype.description }}</td>
+			<td>{{ status.name }}</td>
+			<td>{{ status.description }}</td>
 			<!-- <td>{{ country.orderNum }}</td> -->
 
-			<td><a ng-click="editAddressType(addresstype)" class="blue-button">Edit</a>
-				| <a ng-click="deleteAddressType(addresstype)" class="red-button">Delete</a></td>
+			<td><a ng-click="editStatus(status)" class="blue-button">Edit</a>
+				| <a ng-click="deleteStatus(status)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>
