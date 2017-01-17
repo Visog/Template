@@ -1,7 +1,7 @@
 
 <html>
-<head>
-
+  <head>  
+  
 <link rel="stylesheet" type="text/css" href="resources/css/user.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
@@ -22,26 +22,212 @@ $(document).ready(function(e){
 	});
 	
 });
-</script>
+ </script>
 <meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
- <link rel="stylesheet" type="text/css" href="/visog-job-portal-ui/resources/css/master.css" media="screen" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    
+    <title>AngularJS $http Rest example</title>  
+ <script type="text/javascript">
+            var app = angular.module("LanguagesManagement", []);
+         
+            //Controller Part
+            app.controller("LanguagesController", function($scope, $http) {
+         
+               
+                $scope.languages = [];
+                $scope.languagesForm = {
+                  //  id : -1,
+                  code   : "",
+                  name  : ""
+                };
+         
+                //Now load the data from server
+                _refreshLanguagesData();
+         
+                //HTTP POST/PUT methods for add/edit role 
+                // with the help of id, we are going to find out whether it is put or post operation
+                
+                $scope.submitLanguages = function() {
+         
+                    var method = "";
+                    var url = "";
+                   // alert($scope.roleForm.id);
+                    if ($scope.languagesForm.id == -1 || $scope.languagesForm.id == undefined) {
+                        //Id is absent in form data, it is create new role operation
+                        
+                        method = "POST";
+                        url = 'http://localhost:8080/visog-job-portal-api/master/languages/';
+                        $http.post(url, { "code": $scope.languagesForm.code,
+                        	"name" : $scope.languagesForm.name }).then( _success, _error ); 
+                        }
+                    
+                    } else {
+                    	 
+                        //Id is present in form data, it is edit role operation
+                        id=$scope.languagesForm.id;
+                        method = "PUT";
+                        url = 'http://localhost:8080/visog-job-portal-api/master/languages/'+ id;
+                      $http.put(url, { "code": $scope.languagesForm.code, 
+                    	  "name" : $scope.languagesForm.name }).then( _success, _error );
+                      }
+                      $scope.languagesForm.id = -1;
+                    }
+ /*         
+                    $http({
+                        method : method,
+                        url : url,
+                        data : angular.toJson($scope.roleForm),
+                        headers : {
+                            'Content-Type' : 'application/json'
+                        }
+                    }).then( _success, _error ); */
+                };
+         
+                //HTTP DELETE- delete role by Id
+                $scope.deleteLanguages = function(languages) {
+                    $http({
+                        method : 'DELETE',
+                        url : 'http://localhost:8080/visog-job-portal-api/master/languages/' + languages.id
+                    }).then(_success, _error);
+                };
+ 
+             // In case of edit, populate form fields and assign form.id with role id
+                $scope.editLanguages = function(languages) {
+                  
+                    $scope.languagesForm.code = languages.code;
+                    $scope.languagesForm.name = languages.name;
+                    $scope.languagesForm.id = languages.id;
+                };
+         
+                /* Private Methods */
+                //HTTP GET- get all countries collection
+                function _refreshLanguagesData() {
+                    $http({
+                        method : 'GET',
+                        url : 'http://localhost:8080/visog-job-portal-api/master/languages/'
+                    }).then(function successCallback(response) {
+                    	//alert(response.data.data)
+                        $scope.roles = response.data.data;
+                    }, function errorCallback(response) {
+                        console.log(response.statusText);
+                    });
+                }
+         
+                function _success(response) {
+                	
+                    _refreshLanguagesData();
+                    _clearFormData()
+                }
+         
+                function _error(response) {
+                	
+                    console.log(response.statusText);
+                }
+         
+                //Clear the form
+                function _clearFormData() {
+                  //  $scope.roleForm.id = -1;
+                    $scope.languagesForm.code = "";
+                    $scope.languagesForm.name = "";
+                
+                };
+            });
+        </script>
+        <style>
+           
+.blue-button{
+	background: #25A6E1;
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#25A6E1',endColorstr='#188BC0',GradientType=0);
+	padding:3px 5px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:4px;
+	border:1px solid #1A87B9
+}     
 
- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-<script src="/visog-job-portal-ui/resources/js/currency.js"></script>
-<!-- 	<style rel="stylesheet" href ="css/master.css"></style> -->
-	</head>
-	<body>
+.red-button{
+	background: #CD5C5C;
+
+	padding:3px 5px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:4px;
+	border:1px solid #CD5C5C
+}      
+
+table {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+   width: 50%;
+}
+
+caption {
+  text-align: left;
+  color: silver;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+th {
+  background: SteelBlue;
+  color: white;
+}
+
+
+tbody tr:nth-child(even) {
+  background: WhiteSmoke;
+}
+
+tbody tr td:nth-child(2) {
+  text-align:center;
+}
+
+tbody tr td:nth-child(3),
+tbody tr td:nth-child(4) {
+  text-align: center;
+  font-family: monospace;
+}
+
+tfoot {
+  background: SeaGreen;
+  color: white;
+  text-align: right;
+}
+
+tfoot tr th:last-child {
+  font-family: monospace;
+}
+
+            td,th{
+                border: 1px solid gray;
+                width: 25%;
+                text-align: left;
+                padding: 5px 10px;
+            }
+          
+            
+            
+        </style>
+    <head>
+    <body>
+    
 	<div id="header">
 		<div class="logo">
 			<a href="#">Job<span>Portal</span></a>
 		</div>
 
 	</div>
-	
+	<a class="mobile" href="#">Menu</a>
 	<div id="container">
 		<div class="sidebar">
 			<ul id="nav">
-
+			 
 				<li class="masters"><a href="#">Masters<span class="sub"></span></a>
 				<ul>
 				<li class="child"><a href="/visog-job-portal-ui/roles">roles</a></li>
@@ -58,7 +244,7 @@ $(document).ready(function(e){
 				<li class="child"><a href="/visog-job-portal-ui/currency">currency</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/industry">industry</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/domains">domains</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/jobroles">job Role</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobrole">job Role</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/status">status</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employmenttype">employment Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employertype">employer Type</a></li>
@@ -85,58 +271,62 @@ $(document).ready(function(e){
 				
 				</ul>
 				</li>
-				<li><a href="/visog-job-portal-ui/reg">registration</a></li>
-				<li><a href="/visog-job-portal-ui/user">login</a></li>
+				<li><a href="/visog-job-portal-ui/reg">UsersRegistration</a></li>
+				<li><a href="#">Login</a></li>
+
+
 			</ul>
+
 		</div>
-	<div class="content" ng-app="LanguagesManagement" ng-controller="LanguagesController">->
-	<h1>Languages Master</h1>
-	<form ng-submit="submitLanguages()">
-		<table>
-
-			<tr>
-				<th colspan="2">Add/Edit Languages</th>
-			</tr>
-			<tr>
-				<td>Languages Name</td>
-				<td><input type="text" ng-model="currencyForm.name" /></td>
-			</tr>
-
-			<tr>
-				<td>Description</td>
-				<td><input type="text" ng-model="currencyForm.description" /></td>
-			</tr>
-			<tr>
-				<td>Code</td>
-				<td><input type="text" ng-model="currencyForm.code" /></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="Submit"
-					class="blue-button" /></td>
-			</tr>
-		</table>
-	</form>
-	<table>
-		<tr>
-
-			<th>Name</th>
-			<th>Description</th>
-			<th>Code </th>
-			<th></th>
-
-		</tr>
-
-		<tr ng-repeat="languages in languages">
-
-			<td>{{ languages.name }}</td>
-			<td>{{ languages.description }}</td>
-			<td>{{ languages.currency_code }}</td>
-
-			<td><a ng-click="editLanguages(languages)" class="blue-button">Edit</a>
-				| <a ng-click="deleteLanguages(languages)" class="red-button">Delete</a></td>
-		</tr>
-
-	</table>
-</div>
-</body>
+    
+    <div class="content" ng-app="LanguagesManagement" ng-controller="LanguagesController">
+         <h1>
+           Languages Master
+        </h1> 
+        <form ng-submit="submitLanguages()">
+            <table>
+               
+                <tr>
+                    <th colspan="2">Add/Edit Languages</th>
+                 </tr>
+                 
+                 <tr>
+                    <td>Code</td>
+                    <td><input type="text" ng-model="languagesForm.code"  /></td>
+                </tr>
+                
+                <tr>
+                    <td>Languages Name</td>
+                    <td><input type="text" ng-model="languagesForm.name" required /></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" class="blue-button" /></td>
+                </tr>
+            </table>
+        </form>
+        <table>
+            <tr>
+              
+                <th>Code</th>
+                <th>Name</th>
+                <th> </th>
+               
+            </tr>
+ 
+            <tr ng-repeat="languages in languages">
+       
+    <td> {{ languages.code }}</td>
+    <td >{{ languages.name }}</td>  
+                
+                <td><a ng-click="editLanguages(languages)" class="blue-button">Edit</a> | <a ng-click="deleteLanguages(languages)" class="red-button">Delete</a></td>
+            </tr>
+ 
+        </table>
+ </div>
+       
+ </div>
+       
+      
+  </body>
 </html>
