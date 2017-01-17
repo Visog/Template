@@ -24,115 +24,6 @@ $(document).ready(function(e){
 	});
 	
 });
-<!-- <script>bbm
-	<meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-
-<title>AngularJS $http Rest example</title>
-<script type="text/javascript">
-            var app = angular.module("CoursesManagement", []);
-         
-            //Controller Part
-            app.controller("CoursesController", function($scope, $http) {
-         
-               
-                $scope.countries = [];
-                $scope.coursesForm = {
-                  //  id : -1,
-                    name : "",
-                    description : ""
-                };
-         
-                //Now load the data from server
-                _refreshCoursesData();
-         
-                //HTTP POST/PUT methods for add/edit role 
-                // with the help of id, we are going to find out whether it is put or post operation
-                
-                $scope.submitCourses = function() {
-         
-                    var method = "";
-                    var url = "";
-                   // alert($scope.roleForm.id);
-                    if ($scope.coursesForm.id == -1 || $scope.coursesForm.id == undefined) {
-                        //Id is absent in form data, it is create new role operation
-                        
-                        method = "POST";
-                        url = 'http://localhost:8080/visog-job-portal-api/master/courses/';
-                        $http.post(url, { "name": $scope.coursesForm.name, "description" : $scope.coursesForm.description }).then( _success, _error ); 
-                    
-                    } else {
-                    	 
-                        //Id is present in form data, it is edit role operation
-                        id=$scope.coursesForm.id;
-                        method = "PUT";
-                        url = 'http://localhost:8080/visog-job-portal-api/master/courses/'+ id;
-                      $http.put(url, { "name": $scope.coursesForm.name, "description" : $scope.coursesForm.description }).then( _success, _error );
-                      $scope.coursesForm.id = -1;
-                    }
- /*         
-                    $http({
-                        method : method,
-                        url : url,
-                        data : angular.toJson($scope.roleForm),
-                        headers : {
-                            'Content-Type' : 'application/json'
-                        }
-                    }).then( _success, _error ); */
-                };
-         
-                //HTTP DELETE- delete role by Id
-                $scope.deleteCourses = function(courses) {
-                    $http({
-                        method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/courses/' + courses.id
-                    }).then(_success, _error);
-                };
- 
-             // In case of edit, populate form fields and assign form.id with role id
-                $scope.editCourses = function(course) {
-                  
-                    $scope.coursesForm.name = course.name;
-                    $scope.coursesForm.description = course.description;
-                    $scope.coursesForm.id = course.id;
-                };
-         
-                /* Private Methods */
-                //HTTP GET- get all countries collection
-                function _refreshCoursesData() {
-                    $http({
-                        method : 'GET',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/courses/'
-                    }).then(function successCallback(response) {
-                    	//alert(response.data.data)
-                        $scope.courses = response.data.data;
-                    }, function errorCallback(response) {
-                        console.log(response.statusText);
-                    });
-                }
-         
-                function _success(response) {
-                	
-                    _refreshCoursesData();
-                    _clearFormData()
-                }
-         
-                function _error(response) {
-                	
-                    console.log(response.statusText);
-                }
-         
-                //Clear the form
-                function _clearFormData() {
-                  //  $scope.roleForm.id = -1;
-                    $scope.coursesForm.name = "";
-                    $scope.coursesForm.description = "";
-                
-                };
-            });
-        </script>
--->
-
 
 <style>
 .blue-button {
@@ -222,68 +113,49 @@ td, th {
 		<div class="sidebar">
 			<ul id="nav">
 
-				<li class="masters"><a href="#">Masters<span class="sub"></span></a>
-					<ul>
-						<li class="child"><a href="/visog-job-portal-ui/roles">roles</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/gender">gender</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/country">country</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/state">state</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/city">city</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/addresstype">address
-								Type</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/courses">courses</a></li>
-						<li class="child"><a
-							href="/visog-job-portal-ui/specilization">specialization</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/university">university</a></li>
-						<li class="child"><a
-							href="/visog-job-portal-ui/educationtype">education Type</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/languages">languages
-						</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/currency">currency</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/industry">industry</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/domains">domains</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/jobroles">job
-								Role</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/status">status</a></li>
-						<li class="child"><a
-							href="/visog-job-portal-ui/employmenttype">employment Type</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/employertype">employer
-								Type</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/filetype">file
-								Type</a></li>
-
-					</ul></li>
-
-				<li class="transactions"><a href="#">Transactions<span
-						class="sub"></span></a>
-					<ul>
-						<li class="child"><a href="/visog-job-portal-ui/users">users</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/adress">address</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/employer">employer</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/postjob">post
-								Job</a></li>
-						<li class="child"><a
-							href="/visog-job-portal-ui/postjobdomains">post Job Domains</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/files">files</a></li>
-						<li class="child"><a
-							href="/visog-job-portal-ui/employerjobseeker">employer Job
-								Seeker</a></li>
-						<li class="child"><a
-							href="/visog-job-portal-ui/postjobseeker">post Job Seeker</a></li>
-						<li class="child"><a href="/visog-job-portal-ui/jobseeker">job
-								Seeker</a></li>
-						<li class="child"><a
-							href="/visog-job-portal-ui/educationdetails">education
-								Details</a></li>
-						<li class="child"><a
-							href="/visog-job-portal-ui/languagesknown">languages Known</a></li>
-						<li class="child"><a
-							href="/visog-job-portal-ui/projectdetails">project Details</a></li>
-						<li class="child"><a
-							href="/visog-job-portal-ui/experiencedetails">experience
-								Details</a></li>
-
-					</ul></li>
+			<li class="masters"><a href="#">Masters<span class="sub"></span></a>
+			<ul>
+			<li class="child"><a href="/visog-job-portal-ui/roles">roles</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/gender">gender</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/country">country</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/state">state</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/city">city</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/addresstype">address Type</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/courses">courses</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/specilization">specialization</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/university">university</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/educationtype">education Type</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/languages">languages </a></li>
+			<li class="child"><a href="/visog-job-portal-ui/currency">currency</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/industry">industry</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/domains">domains</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/jobroles">job Role</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/status">status</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/employmenttype">employment Type</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/employertype">employer Type</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/filetype">file Type</a></li>
+			
+			</ul>
+			</li>
+			
+			<li class="transactions"><a href="#">Transactions<span class="sub"></span></a>
+			<ul>
+			<li class="child"><a href="/visog-job-portal-ui/users">users</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/adress">address</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/employer">employer</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/postjob">post Job</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/postjobdomains">post Job Domains</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/files">files</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/employerjobseeker">employer Job Seeker</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/postjobseeker">post Job Seeker</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/jobseeker">job Seeker</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/educationdetails">education Details</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/languagesknown">languages Known</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/projectdetails">project Details</a></li>
+			<li class="child"><a href="/visog-job-portal-ui/experiencedetails">experience Details</a></li>
+			
+			</ul>
+			</li>
 				<li><a href="/visog-job-portal-ui/reg">registration</a></li>
 				<li><a href="/visog-job-portal-ui/user">login</a></li>
 			</ul>
@@ -295,7 +167,7 @@ td, th {
 				<table>
 
 					<tr>
-						<th colspan="2">Add/Edit domain</th>
+						<th colspan="2">Add/Edit Courses</th>
 					</tr>
 					<tr>
 						<td>Courses Name</td>
