@@ -276,7 +276,7 @@ td, th {
 				<ul>
 				<li class="child"><a href="/visog-job-portal-ui/users">users</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/adress">Address</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/employer">employer</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employer">Employer</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/postjob">post Job</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/postjobdomains">post Job Domains</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/files">files</a></li>
@@ -294,59 +294,36 @@ td, th {
 				<li><a href="/visog-job-portal-ui/user">login</a></li>
 			</ul>
 		</div>
-<div class="content" ng-app="AddressManagement" ng-controller="AddressController">
-	<h1>Address Type Transaction</h1>
-	<form ng-submit="submitAddressType()">
+<div class="content" ng-app="EmployerManagement" ng-controller="EmployerController">
+	<h1>AddressType Master</h1>
+	<form ng-submit="submitEmployer()">
 		<table>
 
 			<tr>
-				<th colspan="2">Add/Edit Address</th>
+				<th colspan="2">Add/Edit Employer</th>
 			</tr>
 			<tr>
 			
 			<tr>
-				<td>Address Type</td>
-				<td><input type="text" ng-model="addressForm.addresstype" /></td>
+				<td>Status Code</td>
+				<td><input type="text" ng-model="employerForm.code" /></td>
 			</tr>
 			
-				<td>Address Line1</td>
-				<td><input type="text" ng-model="addressForm.line1" /></td>
-			</tr>
-			
-			<tr>
-				<td>Address Line2</td>
-				<td><input type="text" ng-model="addressForm.line2" /></td>
+				<td>Status</td>
+				<td><input type="text" ng-model="employerForm.status" /></td>
 			</tr>
 			
 			<tr>
-				<td>City</td>
-				<td><input type="text" ng-model="addressForm.city" /></td>
+				<td>Status Description</td>
+				<td><input type="text" ng-model="employerForm.description" /></td>
 			</tr>
 			
 			<tr>
-				<td>State</td>
-				<td><input type="text" ng-model="addressForm.state" /></td>
+				<td>Data</td>
+				<td><input type="text" ng-model="employerForm.data" /></td>
 			</tr>
 			
-			<tr>
-				<td>Country</td>
-				<td><input type="text" ng-model="addressForm.country" /></td>
-			</tr>
 			
-			<tr>
-				<td>ZipCode</td>
-				<td><input type="text" ng-model="addressForm.zipcode" /></td>
-			</tr>
-			
-			<tr>
-				<td>Associated Type</td>
-				<td><input type="text" ng-model="addressForm.associatedtype" /></td>
-			</tr>
-			
-			<tr>
-				<td>Associated Id</td>
-				<td><input type="text" ng-model="addressForm.associatedid" /></td>
-			</tr>
 
 			
 			<!-- <tr>
@@ -363,15 +340,11 @@ td, th {
 	<table>
 		<tr>
 
-			<th>Address Type</th>
-			<th>Address Line1</th>
-			<th>Address Line2</th>
-			<th>City</th>
-			<th>State</th>
-			<th>Country</th>
-			<th>ZipCode</th>
-			<th>Associated  Type</th>
-			<th>Associated Id</th>
+			<th>Status Code</th>
+			<th>Status</th>
+			<th>Status Description</th>
+			<th>Data</th>
+			
 			<!-- <th>OrderNum</th> -->
 			<th></th>
 
@@ -379,28 +352,20 @@ td, th {
 
 		<tr ng-repeat="address in addresstype">
 
-						<td>{{ address.addresstype }}</td>
+						<td>{{ employer.code }}</td>
 						
-						<td>{{ address.line1 }}</td>
+						<td>{{ employer.status }}</td>
 			
-						<td>{{ address.line2 }}</td>
+						<td>{{ employer.description }}</td>
 			
-						<td>{{ address.city }}</td>
+						<td>{{ employer.data }}</td>
 			
-						<td>{{ address.state }}</td>
-			
-						<td>{{ address.country }}</td>
-			
-						<td>{{ address.zipcode }}</td>
-			
-						<td>{{ address.associatedtype }}</td>
-			
-						<td>{{ address.associatedid }}</td>
+						
 			
 			<!-- <td>{{ country.orderNum }}</td> -->
 
-			<td><a ng-click="editAddress(address)" class="blue-button">Edit</a>
-				| <a ng-click="deleteAddress(address)" class="red-button">Delete</a></td>
+			<td><a ng-click="editEmployer(employer)" class="blue-button">Edit</a>
+				| <a ng-click="deleteEmployer(employer)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>
