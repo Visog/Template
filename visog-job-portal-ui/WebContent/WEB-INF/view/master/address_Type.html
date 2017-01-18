@@ -27,68 +27,65 @@ $(document).ready(function(e){
 <meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 <script src="/visog-job-portal-ui/resources/js/addressType.js"></script>
-<!-- <script>bbmb
-	var app = angular.module("CountryManagement", []);
+ <script>bbmb
+	var app = angular.module("AddressTypeManagement", []);
 <commit2>
 	//Controller Part
 	app
 			.controller(
-					"CountryController",
+					"AddressTypeController",
 					function($scope, $http) {
 
-						$scope.countries = [];
-						$scope.countryForm = {
+						$scope.addressType = [];
+						$scope.addressTypeForm = {
 							// id : -1,
 							name : "",
-							code : "",
-							orderNum : ""
+							description : ""
 						};
 
 						// Now load the data from server
-						_refreshCountryData();
+						_refreshAddressTypeData();
 
 						// HTTP POST/PUT methods for add/edit role
 						// with the help of id, we are going to find out whether it
 						// is put or post operation
 
-						$scope.submitCountry = function() {
+						$scope.submitAddressType = function() {
 
 							var method = "";
 							var url = "";
 							// alert($scope.genderForm.id);
-							if ($scope.countryForm.id == -1
-									|| $scope.countryForm.id == undefined) {
+							if ($scope.addressTypeForm.id == -1
+									|| $scope.addressTypeForm.id == undefined) {
 								// Id is absent in form data, it is create new role
 								// operation
 
 								method = "POST";
-								url = 'http://localhost:8080/visog-job-portal-api/master/country/';
+								url = 'http://localhost:8080/visog-job-portal-api/master/addressType/';
 								$http
 										.post(
 												url,
 												{
-													"name" : $scope.countryForm.name,
-													"code" : $scope.countryForm.code,
-													"orderNum" : $scope.countryForm.orderNum
+													"name" : $scope.addressTypeForm.name,
+													"description" : $scope.addressTypeForm.description
 												}).then(_success, _error);
 
 							} else {
 
 								// Id is present in form data, it is edit role
 								// operation
-								id = $scope.countryForm.id;
+								id = $scope.addressTypeForm.id;
 								method = "PUT";
-								url = 'http://localhost:8080/visog-job-portal-api/master/country/'
+								url = 'http://localhost:8080/visog-job-portal-api/master/addressType/'
 										+ id;
 								$http
 										.put(
 												url,
 												{
-													"name" : $scope.countryForm.name,
-													"code" : $scope.countryForm.code,
-													"orderNum" : $scope.countryForm.orderNum
+													"name" : $scope.addressTypeForm.name,
+													"description" : $scope.addressTypeForm.description
 												}).then(_success, _error);
-								$scope.countryForm.id = -1;
+								$scope.addressTypeForm.id = -1;
 							}
 							/*
 							 * $http({ method : method, url : url, data :
@@ -99,35 +96,34 @@ $(document).ready(function(e){
 						};
 
 						// HTTP DELETE- delete role by Id
-						$scope.deleteCountry = function(country) {
+						$scope.deleteAddressType = function(addressType) {
 							$http(
 									{
 										method : 'DELETE',
-										url : 'http://localhost:8080/visog-job-portal-api/master/country/'
-												+ country.id
+										url : 'http://localhost:8080/visog-job-portal-api/master/addressType/'
+												+ addressType.id
 									}).then(_success, _error);
 						};
 
 						// In case of edit, populate form fields and assign form.id
 						// with role id
-						$scope.editCountry = function(country) {
+						$scope.editAddressType = function(addressType) {
 
-							$scope.countryForm.name = country.name;
-							$scope.countryForm.code = country.code;
-							$scope.countryForm.orderNum = country.orderNum;
-							$scope.countryForm.id =country.id;
+							$scope.addressTypeForm.name = addressType.name;
+							$scope.addressTypeForm.description = addressType.description;
+							$scope.addressTypeForm.id =addressType.id;
 						};
 
 						/* Private Methods */
 						// HTTP GET- get all countries collection
-						function _refreshCountryData() {
+						function _refreshAddressTypeData() {
 							$http(
 									{
 										method : 'GET',
-										url : 'http://localhost:8080/visog-job-portal-api/master/country/'
+										url : 'http://localhost:8080/visog-job-portal-api/master/addressType/'
 									}).then(function successCallback(response) {
 								// alert(response.data.data)
-								$scope.countrys = response.data.data;
+								$scope.addressType = response.data.data;
 							}, function errorCallback(response) {
 								console.log(response.statusText);
 							});
@@ -135,7 +131,7 @@ $(document).ready(function(e){
 
 						function _success(response) {
 
-							_refreshCountryData();
+							_refreshAddressTypeData();
 							_clearFormData()
 						}
 
@@ -147,14 +143,13 @@ $(document).ready(function(e){
 						// Clear the form
 						function _clearFormData() {
 							// $scope.genderForm.id = -1;
-							$scope.countryForm.name = "";
-							$scope.countryForm.code = "";
-							$scope.countryForm.orderNum = "";
+							$scope.addressTypeForm.name = "";
+							$scope.addressTypeForm.description = "";
 
 						}
 						;
 					});
-</script> -->
+</script>
 <style>
 .blue-button {
 	background: #25A6E1;
@@ -258,12 +253,11 @@ td, th {
 				<li class="child"><a href="/visog-job-portal-ui/specilization">specialization</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/university">university</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/educationtype">education Type</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/addresstype">Address Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/languages">languages </a></li>
 				<li class="child"><a href="/visog-job-portal-ui/currency">currency</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/industry">industry</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/domains">domains</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/jobroles">job Role</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobrole">job Role</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/status">status</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employmenttype">employment Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employertype">employer Type</a></li>
@@ -295,7 +289,7 @@ td, th {
 			</ul>
 		</div>
 <div class="content" ng-app="AddressTypeManagement" ng-controller="AddressTypeController">
-	<h1>AddressType Master</h1>
+	<h1>Address Type Master</h1>
 	<form ng-submit="submitAddressType()">
 		<table>
 
@@ -303,21 +297,17 @@ td, th {
 				<th colspan="2">Add/Edit AddressType</th>
 			</tr>
 			<tr>
-				<td>AddressType Name</td>
-				<td><input type="text" ng-model="addresstypeForm.name" /></td>
+				<td> Name</td>
+				<td><input type="text" ng-model="addressTypeForm.name" /></td>
 			</tr>
 
 			<tr>
 				<td>Description</td>
-				<td><input type="text" ng-model="addresstypeForm.description" /></td>
+				<td><input type="text" ng-model="addressTypeForm.description" /></td>
 			</tr>
-			<!-- <tr>
-				<td>OrderNum</td>
-				<td><input type="text" ng-model="countryForm.orderNum" /></td>
-			</tr> -->
+			
 			<tr>
-				<td colspan="2"><input type="submit" value="Submit"
-					class="blue-button" /></td>
+				<td colspan="2"><input type="submit" value="Submit"	class="blue-button" /></td>
 			</tr>
 		</table>
 	</form>
@@ -333,12 +323,12 @@ td, th {
 
 		<tr ng-repeat="addresstype in addresstype">
 
-			<td>{{ addresstype.name }}</td>
-			<td>{{ addresstype.description }}</td>
+			<td>{{ addressType.name }}</td>
+			<td>{{ addressType.description }}</td>
 			<!-- <td>{{ country.orderNum }}</td> -->
 
-			<td><a ng-click="editAddressType(addresstype)" class="blue-button">Edit</a>
-				| <a ng-click="deleteAddressType(addresstype)" class="red-button">Delete</a></td>
+			<td><a ng-click="editAddressType(addressType)" class="blue-button">Edit</a>
+				| <a ng-click="deleteAddressType(addressType)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>
