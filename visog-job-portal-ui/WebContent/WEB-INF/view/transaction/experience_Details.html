@@ -302,24 +302,40 @@ td, th {
 				<th colspan="2">Add/Edit ExperienceDetails</th>
 			</tr>
 			<tr>
-				<td>File Path</td>
-				<td><input type="text" ng-model="filesForm.filepath" /></td>
+				<td>User </td>
+				<td><input type="text" ng-model="experienceDetailsForm.user" /></td>
 			</tr>
 
 			<tr>
-				<td>File Type</td>
-				<td><input type="text" ng-model="filesForm.filetype" /></td>
+				<td>Company Name </td>
+				<td><input type="text" ng-model="experienceDetailsForm.companyName" /></td>
 			</tr>
 			
 			<tr>
-				<td>Associated Type</td>
-				<td><input type="text" ng-model="filesForm.associatedtype" /></td>
+				<td>Employment Type </td>
+				<td><input type="text" ng-model="experienceDetailsForm.employmentType" /></td>
 			</tr>
 			
 			<tr>
-				<td>Associated Id</td>
-				<td><input type="text" ng-model="filesForm.associatedId" /></td>
+				<td>Duration From </td>
+				<td><input type="text" ng-model="filesForm.durationFrom" /></td>
 			</tr>
+			
+			<tr>
+				<td>Duration To </td>
+				<td><input type="text" ng-model="experienceDetailsForm.durationTo" /></td>
+			</tr>
+			
+			<tr>
+				<td>Designation </td>
+				<td><input type="text" ng-model="experienceDetailsForm.designation" /></td>
+			</tr>
+			
+			<tr>
+				<td>Job Profile </td>
+				<td><input type="text" ng-model="experienceDetailsForm.jobProfile" /></td>
+			</tr>
+			
 			<tr>
 				<td colspan="2"><input type="submit" value="Submit"
 					class="blue-button" /></td>
@@ -342,10 +358,13 @@ td, th {
 
 		<tr ng-repeat="files in files">
 
-			<td>{{ ExperienceDetails.filepath }}</td>
-			<td>{{ files.filetype }}</td>
-			<td>{{ files.associatedtype }}</td>
-			<td>{{ files.associatedId }}</td>
+			<td>{{ experienceDetails.user }}</td>
+			<td>{{ experienceDetails.companyName }}</td>
+			<td>{{ experienceDetails.employmentType }}</td>
+			<td>{{ experienceDetails.durationFrom }}</td>
+			<td>{{ experienceDetails.durationTo }}</td>
+			<td>{{ experienceDetails.designation }}</td>
+			<td>{{ experienceDetails.jobProfile }}</td>
 
 			<td><a ng-click="editFiles(files)" class="blue-button">Edit</a>
 				| <a ng-click="deleteFiles(files)" class="red-button">Delete</a></td>
