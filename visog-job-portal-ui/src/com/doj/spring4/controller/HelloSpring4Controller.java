@@ -166,6 +166,18 @@ public class HelloSpring4Controller {
 		return "transaction/files";
 	}
 	
+	@RequestMapping(value = "/address", method = RequestMethod.GET)
+	public String address() {
+		String message = "visog-job-portal-ui";
+		return "transaction/address";
+	}
+	
+	@RequestMapping(value = "/employer", method = RequestMethod.GET)
+	public String employer() {
+		String message = "visog-job-portal-ui";
+		return "transaction/employer";
+	}
+	
 	
 
 }
