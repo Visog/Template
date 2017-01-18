@@ -82,6 +82,12 @@ public class HelloSpring4Controller {
 		return "master/courses";
 	}
 
+	@RequestMapping(value = "/specialization", method = RequestMethod.GET)
+	public String specialization() {
+		String message = "visog-job-portal-ui";
+		return "master/specialization";
+	}
+	
 	@RequestMapping(value = "/university", method = RequestMethod.GET)
 	public String university() {
 		String message = "visog-job-portal-ui";
@@ -153,5 +159,13 @@ public class HelloSpring4Controller {
 		String message = "visog-job-portal-ui";
 		return "main/index";
 	}
+	
+	@RequestMapping(value = "/files", method = RequestMethod.GET)
+	public String files() {
+		String message = "visog-job-portal-ui";
+		return "transaction/files";
+	}
+	
+	
 
 }

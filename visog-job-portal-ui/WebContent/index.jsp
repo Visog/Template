@@ -18,7 +18,7 @@
   <h4><a href="/visog-job-portal-ui/city">City</a></h4>
    <h4><a href="/visog-job-portal-ui/addresstype">Address Type</a></h4>
     <h4><a href="/visog-job-portal-ui/courses">Courses</a></h4>
-    <h4><a href="/visog-job-portal-ui/specilization">Specilization</a></h4>
+    <h4><a href="/visog-job-portal-ui/specialization">Specilization</a></h4>
     <h4><a href="/visog-job-portal-ui/university">University</a></h4>
       <h4><a href="/visog-job-portal-ui/educationtype">Education Type</a></h4>
       <h4><a href="/visog-job-portal-ui/languages">Languages </a></h4>

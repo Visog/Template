@@ -26,7 +26,7 @@ $(document).ready(function(e){
 </script>
 <meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-<script src="/visog-job-portal-ui/resources/js/country.js"></script>
+<script src="/visog-job-portal-ui/resources/js/files.js"></script>
 <!-- <script>bbmb
 	var app = angular.module("CountryManagement", []);
 <commit2>
@@ -293,39 +293,33 @@ td, th {
 				<li><a href="/visog-job-portal-ui/user">login</a></li>
 			</ul>
 		</div>
-<div class="content" ng-app="StatusTypeManagement" ng-controller="StatusController">
-	<h1>Status Master</h1>
-	<form ng-submit="submitStatus()">
+<div class="content" ng-app="FilesManagement" ng-controller="FilesController">
+	<h1>Files Transaction</h1>
+	<form ng-submit="submitFiles()">
 		<table>
 
 			<tr>
-				<th colspan="2">Add/Edit Status</th>
+				<th colspan="2">Add/Edit Files</th>
 			</tr>
 			<tr>
-				<td> Name</td>
-				<td><input type="text" ng-model="statusForm.name" /></td>
+				<td>File Path</td>
+				<td><input type="text" ng-model="filesForm.filepath" /></td>
 			</tr>
 
 			<tr>
-				<td>Code</td>
-				<td><input type="text" ng-model="statusForm.code" /></td>
+				<td>File Type</td>
+				<td><input type="text" ng-model="filesForm.filetype" /></td>
 			</tr>
 			
 			<tr>
-				<td>Category</td>
-				<td><input type="text" ng-model="statusForm.category" /></td>
+				<td>Associated Type</td>
+				<td><input type="text" ng-model="filesForm.associatedtype" /></td>
 			</tr>
 			
 			<tr>
-				<td>OrderNum</td>
-				<td><input type="text" ng-model="statusForm.ordernum" /></td>
+				<td>Associated Id</td>
+				<td><input type="text" ng-model="filesForm.associatedId" /></td>
 			</tr>
-			
-			<tr>
-				<td>Description</td>
-				<td><input type="text" ng-model="statusForm.description" /></td>
-			</tr>
-			
 			<tr>
 				<td colspan="2"><input type="submit" value="Submit"
 					class="blue-button" /></td>
@@ -335,24 +329,23 @@ td, th {
 	<table>
 		<tr>
 
-			<th>Name</th>
-			<th>Code</th>
-			<th>Category</th>
-			<th>OrderNum</th>
-			<th>description</th>
-			<!-- <th>OrderNum</th> -->
+			<th>filepath</th>
+			<th>filetype</th>
+			<th>associatedtype</th>
+			<th>associatedId</th>
 			<th></th>
 
 		</tr>
 
-		<tr ng-repeat="status in status">
+		<tr ng-repeat="files in files">
 
-			<td>{{ status.name }}</td>
-			<td>{{ status.description }}</td>
-			<!-- <td>{{ country.orderNum }}</td> -->
+			<td>{{ files.filepath }}</td>
+			<td>{{ files.filetype }}</td>
+			<td>{{ files.associatedtype }}</td>
+			<td>{{ files.associatedId }}</td>
 
-			<td><a ng-click="editStatus(status)" class="blue-button">Edit</a>
-				| <a ng-click="deleteStatus(status)" class="red-button">Delete</a></td>
+			<td><a ng-click="editFiles(files)" class="blue-button">Edit</a>
+				| <a ng-click="deleteFiles(files)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>

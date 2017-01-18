@@ -6,7 +6,7 @@
             app.controller("SpecilizationController", function($scope, $http) {
          
                
-                $scope.countries = [];
+                $scope.Specilization = [];
                 $scope.specilizationForm = {
                   // id : -1,
                     name : "",
@@ -30,7 +30,7 @@
 						// operation
                         
                         method = "POST";
-                        url = 'http://localhost:8080/visog-job-portal-api/master/specilization/';
+                        url = 'http://localhost:8080/visog-job-portal-api/master/specialization/';
                         $http.post(url, { "name": $scope.specilizationForm.name, "description" : $scope.specilizationForm.description }).then( _success, _error ); 
                     
                     } else {
@@ -38,7 +38,7 @@
                         // Id is present in form data, it is edit role operation
                         id=$scope.specilizationForm.id;
                         method = "PUT";
-                        url = 'http://localhost:8080/visog-job-portal-api/master/specilization/'+ id;
+                        url = 'http://localhost:8080/visog-job-portal-api/master/specialization/'+ id;
                       $http.put(url, { "name": $scope.specilizationForm.name, "description" : $scope.specilizationForm.description }).then( _success, _error );
                       $scope.specilizationForm.id = -1;
                     }
@@ -53,7 +53,7 @@
                 $scope.deleteSpecilization = function(specilization) {
                     $http({
                         method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/specilization/' + specilization.id
+                        url : 'http://localhost:8080/visog-job-portal-api/master/specialization/' + specilization.id
                     }).then(_success, _error);
                 };
  
@@ -71,7 +71,7 @@
                 function _refreshSpecilizationData() {
                     $http({
                         method : 'GET',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/specilization/'
+                        url : 'http://localhost:8080/visog-job-portal-api/master/specialization/'
                     }).then(function successCallback(response) {
                     	// alert(response.data.data)
                         $scope.specilization = response.data.data;
