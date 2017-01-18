@@ -27,80 +27,68 @@ $(document).ready(function(e){
 <meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 <script src="/visog-job-portal-ui/resources/js/files.js"></script>
-<script>bbmb
-	var app = angular.module("ExperienceDetailsManagement", []);
+<!-- <script>bbmb
+	var app = angular.module("CountryManagement", []);
 <commit2>
 	//Controller Part
 	app
 			.controller(
-					"ExperienceDetailsController",
+					"CountryController",
 					function($scope, $http) {
 
-						$scope.experiencedetails = [];
-						$scope.experiencedetailsForm = {
+						$scope.countries = [];
+						$scope.countryForm = {
 							// id : -1,
-							user : "",
-							companyName : "",
-							employmentType : "",
-							durationFrom : "",
-							durationTo : "",
-							designation : "",
-							jobProfile : ""
+							name : "",
+							code : "",
+							orderNum : ""
 						};
 
 						// Now load the data from server
-						_refreshExperienceDetailsData();
+						_refreshCountryData();
 
 						// HTTP POST/PUT methods for add/edit role
 						// with the help of id, we are going to find out whether it
 						// is put or post operation
 
-						$scope.submiExperienceDetails = function() {
+						$scope.submitCountry = function() {
 
 							var method = "";
 							var url = "";
 							// alert($scope.genderForm.id);
 							if ($scope.countryForm.id == -1
-									|| $scope.experiencedetailsForm.id == undefined) {
+									|| $scope.countryForm.id == undefined) {
 								// Id is absent in form data, it is create new role
 								// operation
 
 								method = "POST";
-								url = 'http://localhost:8080/visog-job-portal-api/master/experienceDetails/';
+								url = 'http://localhost:8080/visog-job-portal-api/master/country/';
 								$http
 										.post(
 												url,
 												{
-													"user" : $scope.experiencedetailsForm.user,
-													"companyName" : $scope.experiencedetailsForm.companyName,
-													"employmentType" : $scope.experiencedetailsForm.employmentType,
-													"durationFrom" : $scope.experiencedetailsForm.durationFrom,
-													"durationTo" : $scope.experiencedetailsForm.durationTo,
-													"designation" : $scope.experiencedetailsForm.designation,
-													"jobProfile" : $scope.experiencedetailsForm.jobProfile
+													"name" : $scope.countryForm.name,
+													"code" : $scope.countryForm.code,
+													"orderNum" : $scope.countryForm.orderNum
 												}).then(_success, _error);
 
 							} else {
 
 								// Id is present in form data, it is edit role
 								// operation
-								id = $scope.experiencedetailsForm.id;
+								id = $scope.countryForm.id;
 								method = "PUT";
-								url = 'http://localhost:8080/visog-job-portal-api/master/experienceDetails/'
+								url = 'http://localhost:8080/visog-job-portal-api/master/country/'
 										+ id;
 								$http
 										.put(
 												url,
 												{
-													"user" : $scope.experiencedetailsForm.user,
-													"companyName" : $scope.experiencedetailsForm.companyName,
-													"employmentType" : $scope.experiencedetailsForm.employmentType,
-													"durationFrom" : $scope.experiencedetailsForm.durationFrom,
-													"durationTo" : $scope.experiencedetailsForm.durationTo,
-													"designation" : $scope.experiencedetailsForm.designation,
-													"jobProfile" : $scope.experiencedetailsForm.jobProfile
+													"name" : $scope.countryForm.name,
+													"code" : $scope.countryForm.code,
+													"orderNum" : $scope.countryForm.orderNum
 												}).then(_success, _error);
-								$scope.experiencedetailsForm.id = -1;
+								$scope.countryForm.id = -1;
 							}
 							/*
 							 * $http({ method : method, url : url, data :
@@ -111,36 +99,32 @@ $(document).ready(function(e){
 						};
 
 						// HTTP DELETE- delete role by Id
-						$scope.deleteExperienceDetails = function(experiencedetails) {
+						$scope.deleteCountry = function(country) {
 							$http(
 									{
 										method : 'DELETE',
-										url : 'http://localhost:8080/visog-job-portal-api/master/experienceDetails/'
-												+ experienceDetails.id
+										url : 'http://localhost:8080/visog-job-portal-api/master/country/'
+												+ country.id
 									}).then(_success, _error);
 						};
 
 						// In case of edit, populate form fields and assign form.id
 						// with role id
-						$scope.editExperienceDetails = function(experiencedetails) {
+						$scope.editCountry = function(country) {
 
-							$scope.experiencedetailsForm.user = experiencedetails.user;
-							$scope.experiencedetailsForm.companyName = experiencedetails.companyName;
-							$scope.experiencedetailsForm.employmentType = experiencedetails.employmentType;
-							$scope.experiencedetailsForm.durationFrom = experiencedetails.durationFrom;
-							$scope.experiencedetailsForm.durationTo = experiencedetails.durationTo;
-							$scope.experiencedetailsForm.designation = experiencedetails.designation;
-							$scope.experiencedetailsForm.jobProfile = experiencedetails.jobProfile;
-							$scope.experiencedetailsForm.id =experiencedetails.id;
+							$scope.countryForm.name = country.name;
+							$scope.countryForm.code = country.code;
+							$scope.countryForm.orderNum = country.orderNum;
+							$scope.countryForm.id =country.id;
 						};
 
 						/* Private Methods */
 						// HTTP GET- get all countries collection
-						function _refreshExperienceDetailsData() {
+						function _refreshCountryData() {
 							$http(
 									{
 										method : 'GET',
-										url : 'http://localhost:8080/visog-job-portal-api/master/experienceDetails/'
+										url : 'http://localhost:8080/visog-job-portal-api/master/country/'
 									}).then(function successCallback(response) {
 								// alert(response.data.data)
 								$scope.countrys = response.data.data;
@@ -151,7 +135,7 @@ $(document).ready(function(e){
 
 						function _success(response) {
 
-							_refreshExperienceDetailsData();
+							_refreshCountryData();
 							_clearFormData()
 						}
 
@@ -163,18 +147,14 @@ $(document).ready(function(e){
 						// Clear the form
 						function _clearFormData() {
 							// $scope.genderForm.id = -1;
-							$scope.experiencedetailsForm.user = "";
-							$scope.experiencedetailsForm.companyName = "";
-							$scope.experiencedetailsForm.employmentType = "";
-							$scope.experiencedetailsForm.durationFrom = "";
-							$scope.experiencedetailsForm.durationTo = "";
-							$scope.experiencedetailsForm.designation = "";
-							$scope.experiencedetailsForm.jobProfile = "";
+							$scope.countryForm.name = "";
+							$scope.countryForm.code = "";
+							$scope.countryForm.orderNum = "";
 
 						}
 						;
 					});
-</script> 
+</script> -->
 <style>
 .blue-button {
 	background: #25A6E1;
@@ -313,49 +293,33 @@ td, th {
 				<li><a href="/visog-job-portal-ui/user">login</a></li>
 			</ul>
 		</div>
-<div class="content" ng-app="ExperienceDetailsManagement" ng-controller="ExperienceDetailsController">
-	<h1>Experience Details Transaction</h1>
-	<form ng-submit="submitFiles()">
+<div class="content" ng-app="EmployerJobseekerManagement" ng-controller="EmployerJobseekerController">
+	<h1>Employer Jobseeker Transaction</h1>
+	<form ng-submit="submitEmployerJobseeker()">
 		<table>
 
 			<tr>
-				<th colspan="2">Add/Edit ExperienceDetails</th>
+				<th colspan="2">Add/Edit EmployerJobseeker</th>
 			</tr>
 			<tr>
-				<td>User </td>
-				<td><input type="text" ng-model="experienceDetailsForm.user" /></td>
+				<td>Employer </td>
+				<td><input type="text" ng-model="employerjobseekerForm.employer" /></td>
 			</tr>
 
 			<tr>
-				<td>Company Name </td>
-				<td><input type="text" ng-model="experienceDetailsForm.companyName" /></td>
+				<td>JobSeeker </td>
+				<td><input type="text" ng-model="employerjobseekerForm.jobSeeker" /></td>
 			</tr>
 			
 			<tr>
-				<td>Employment Type </td>
-				<td><input type="text" ng-model="experienceDetailsForm.employmentType" /></td>
+				<td>Status </td>
+				<td><input type="text" ng-model="employerjobseekerForm.status" /></td>
 			</tr>
 			
 			<tr>
-				<td>Duration From </td>
-				<td><input type="text" ng-model="filesForm.durationFrom" /></td>
+				<td>Action Done </td>
+				<td><input type="text" ng-model="employerjobseekerForm.actionDone" /></td>
 			</tr>
-			
-			<tr>
-				<td>Duration To </td>
-				<td><input type="text" ng-model="experienceDetailsForm.durationTo" /></td>
-			</tr>
-			
-			<tr>
-				<td>Designation </td>
-				<td><input type="text" ng-model="experienceDetailsForm.designation" /></td>
-			</tr>
-			
-			<tr>
-				<td>Job Profile </td>
-				<td><input type="text" ng-model="experienceDetailsForm.jobProfile" /></td>
-			</tr>
-			
 			<tr>
 				<td colspan="2"><input type="submit" value="Submit"
 					class="blue-button" /></td>
@@ -365,29 +329,23 @@ td, th {
 	<table>
 		<tr>
 
-			<th>user</th>
-			<th>companyName</th>
-			<th>employmentType</th>
-			<th>durationFrom</th>
-			<th>durationTo</th>
-			<th>designation</th>
-			<th>jobProfile</th>
+			<th>employer</th>
+			<th>jobSeeker</th>
+			<th>status</th>
+			<th>actionDone</th>
 			<th></th>
 
 		</tr>
 
 		<tr ng-repeat="files in files">
 
-			<td>{{ experienceDetails.user }}</td>
-			<td>{{ experienceDetails.companyName }}</td>
-			<td>{{ experienceDetails.employmentType }}</td>
-			<td>{{ experienceDetails.durationFrom }}</td>
-			<td>{{ experienceDetails.durationTo }}</td>
-			<td>{{ experienceDetails.designation }}</td>
-			<td>{{ experienceDetails.jobProfile }}</td>
+			<td>{{ employerjobseeker.employer }}</td>
+			<td>{{ employerjobseeker.jobSeeker }}</td>
+			<td>{{ employerjobseeker.status }}</td>
+			<td>{{ employerjobseeker.actionDone }}</td>
 
-			<td><a ng-click="editFiles(files)" class="blue-button">Edit</a>
-				| <a ng-click="deleteFiles(files)" class="red-button">Delete</a></td>
+			<td><a ng-click="editEmployerJobseeker(employerjobseeker)" class="blue-button">Edit</a>
+				| <a ng-click="deleteEmployerJobseeker(employerjobseeker)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>

@@ -73,7 +73,7 @@ public class HelloSpring4Controller {
 	public String specialization() {
 		return "master/specialization";
 	}
-	
+
 	@RequestMapping(value = "/university", method = RequestMethod.GET)
 	public String university() {
 		return "master/university";
@@ -133,27 +133,30 @@ public class HelloSpring4Controller {
 	public String index() {
 		return "main/index";
 	}
-	
+
 	@RequestMapping(value = "/files", method = RequestMethod.GET)
 	public String files() {
 		return "transaction/files";
 	}
-	
+
 	@RequestMapping(value = "/experiencedetails", method = RequestMethod.GET)
 	public String experiencedetails() {
 		return "transaction/experience_Details";
 	}
-	
+
+	@RequestMapping(value = "/employerjobseeker", method = RequestMethod.GET)
+	public String employerjobseeker() {
+		return "transaction/employer_Jobseeker";
+	}
+
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
 	public String address() {
 		return "transaction/address";
 	}
-	
+
 	@RequestMapping(value = "/employer", method = RequestMethod.GET)
 	public String employer() {
 		return "transaction/employer";
 	}
-	
-	
 
 }
