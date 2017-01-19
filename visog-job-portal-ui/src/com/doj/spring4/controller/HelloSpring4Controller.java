@@ -144,6 +144,11 @@ public class HelloSpring4Controller {
 		return "transaction/experience_Details";
 	}
 
+	@RequestMapping(value = "/jobseeker", method = RequestMethod.GET)
+	public String jobseeker() {
+		return "transaction/job_Seeker";
+	}
+
 	@RequestMapping(value = "/employerjobseeker", method = RequestMethod.GET)
 	public String employerjobseeker() {
 		return "transaction/employer_Jobseeker";
@@ -157,6 +162,11 @@ public class HelloSpring4Controller {
 	@RequestMapping(value = "/employer", method = RequestMethod.GET)
 	public String employer() {
 		return "transaction/employer";
+	}
+	
+	@RequestMapping(value = "/languageknown", method = RequestMethod.GET)
+	public String languageknown() {
+		return "transaction/languageknown";
 	}
 
 	@RequestMapping(value = "/projectdetails", method = RequestMethod.GET)
