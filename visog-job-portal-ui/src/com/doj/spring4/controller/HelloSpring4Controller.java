@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/")
 public class HelloSpring4Controller {
-
+	
 	@RequestMapping("/user")
 	public ModelAndView user() {
 		return new ModelAndView("main/user");
