@@ -79,7 +79,7 @@ $(document).ready(function(e){
 				<li class="child"><a href="/visog-job-portal-ui/postjobseeker">post Job Seeker</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/jobseeker">job Seeker</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/educationdetails">education Details</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/languagesknown">languages Known</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/languageknown">Language Known</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/projectdetails">project Details</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/experiencedetails">experience Details</a></li>
 				
