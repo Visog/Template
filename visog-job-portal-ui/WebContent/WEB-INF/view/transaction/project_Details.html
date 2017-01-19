@@ -28,79 +28,88 @@ $(document).ready(function(e){
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 <script src="/visog-job-portal-ui/resources/js/files.js"></script>
 <script>bbmb
-	var app = angular.module("ExperienceDetailsManagement", []);
+	var app = angular.module("ProjectDetailsManagement", []);
 <commit2>
 	//Controller Part
 	app
 			.controller(
-					"ExperienceDetailsController",
+					"ProjectDetailsController",
 					function($scope, $http) {
 
-						$scope.experiencedetails = [];
-						$scope.experiencedetailsForm = {
+						$scope.projectdetails = [];
+						$scope.projectdetailsForm = {
 							// id : -1,
 							user : "",
-							companyName : "",
-							employmentType : "",
+							jobResponsibilities : "",
+							projectDetails : "",
+							projectTitle:"",
+							employmentType:"",
+							clientName:"",
 							durationFrom : "",
 							durationTo : "",
-							designation : "",
-							jobProfile : ""
+							teamSize : "",
+							technologiesUsed : ""
 						};
 
 						// Now load the data from server
-						_refreshExperienceDetailsData();
+						_refreshProjectDetailsData();
 
-						// HTTP POST/PUT methods for add/edit experienceDetails
+						// HTTP POST/PUT methods for add/edit projectDetails
 						// with the help of id, we are going to find out whether it
 						// is put or post operation
 
-						$scope.submiExperienceDetails = function() {
+						$scope.submiProjectDetails = function() {
 
 							var method = "";
 							var url = "";
 							// alert($scope.genderForm.id);
 							if ($scope.countryForm.id == -1
-									|| $scope.experiencedetailsForm.id == undefined) {
-								// Id is absent in form data, it is create new experienceDetails
+									|| $scope.projectdetailsForm.id == undefined) {
+								// Id is absent in form data, it is create new projectDetails
 								// operation
 
 								method = "POST";
-								url = 'http://localhost:8080/visog-job-portal-api/transaction/experienceDetails/';
+								url = 'http://localhost:8080/visog-job-portal-api/transaction/projectDetails/';
 								$http
 										.post(
 												url,
 												{
-													"user" : $scope.experiencedetailsForm.user,
-													"companyName" : $scope.experiencedetailsForm.companyName,
-													"employmentType" : $scope.experiencedetailsForm.employmentType,
-													"durationFrom" : $scope.experiencedetailsForm.durationFrom,
-													"durationTo" : $scope.experiencedetailsForm.durationTo,
-													"designation" : $scope.experiencedetailsForm.designation,
-													"jobProfile" : $scope.experiencedetailsForm.jobProfile
+													"user" : $scope.projectdetailsForm.user,
+													"jobResponsibilities" : $scope.projectdetailsForm.jobResponsibilities,
+													"projectDetails" : $scope.projectdetailsForm.projectDetails,
+													"projectTitle":$scope.projectdetailsForm.projectTitle,
+													"employmentType":$scope.projectdetailsForm.employmentType,
+													"clientName":$scope.projectdetailsForm.clientName,
+													"durationFrom" : $scope.projectdetailsForm.durationFrom,
+													"durationTo" : $scope.projectdetailsForm.durationTo,
+													"teamSize" : $scope.projectdetailsForm.teamSize,
+													"technologiesUsed" : $scope.projectdetailsForm.technologiesUsed
 												}).then(_success, _error);
 
 							} else {
 
-								// Id is present in form data, it is edit experienceDetails
+								// Id is present in form data, it is edit projectDetails
 								// operation
-								id = $scope.experiencedetailsForm.id;
+								id = $scope.projectdetailsForm.id;
 								method = "PUT";
-								url = 'http://localhost:8080/visog-job-portal-api/transaction/experienceDetails/'
+								url = 'http://localhost:8080/visog-job-portal-api/transaction/projectDetails/'
 										+ id;
 								$http
 										.put(
 												url,
 												{
-													"user" : $scope.experiencedetailsForm.user,
-													"companyName" : $scope.experiencedetailsForm.companyName,
-													"employmentType" : $scope.experiencedetailsForm.employmentType,
-													"durationFrom" : $scope.experiencedetailsForm.durationFrom,
-													"durationTo" : $scope.experiencedetailsForm.durationTo,
-													"designation" : $scope.experiencedetailsForm.designation,
-													"jobProfile" : $scope.experiencedetailsForm.jobProfile
+													"user" : $scope.projectdetailsForm.user,
+													"jobResponsibilities" : $scope.projectdetailsForm.jobResponsibilities,
+													"projectDetails" : $scope.projectdetailsForm.projectDetails,
+													"projectTitle":$scope.projectdetailsForm.projectTitle,
+													"employmentType":$scope.projectdetailsForm.employmentType,
+													"clientName":$scope.projectdetailsForm.clientName,
+													"durationFrom" : $scope.projectdetailsForm.durationFrom,
+													"durationTo" : $scope.projectdetailsForm.durationTo,
+													"teamSize" : $scope.projectdetailsForm.teamSize,
+													"technologiesUsed" : $scope.projectdetailsForm.technologiesUsed
 												}).then(_success, _error);
-								$scope.experiencedetailsForm.id = -1;
+								$scope.projectdetailsForm.id = -1;
 							}
 							/*
 							 * $http({ method : method, url : url, data :
@@ -110,37 +119,40 @@ $(document).ready(function(e){
 							 */
 						};
 
-						// HTTP DELETE- delete experienceDetails by Id
-						$scope.deleteExperienceDetails = function(experiencedetails) {
+						// HTTP DELETE- delete projectDetails by Id
+						$scope.deleteProjectDetails = function(projectdetails) {
 							$http(
 									{
 										method : 'DELETE',
-										url : 'http://localhost:8080/visog-job-portal-api/transaction/experienceDetails/'
-												+ experienceDetails.id
+										url : 'http://localhost:8080/visog-job-portal-api/transaction/projectDetails/'
+												+ projectDetails.id
 									}).then(_success, _error);
 						};
 
 						// In case of edit, populate form fields and assign form.id
-						// with experienceDetails id
-						$scope.editExperienceDetails = function(experiencedetails) {
+						// with projectDetails id
+						$scope.editProjectDetails = function(projectdetails) {
 
-							$scope.experiencedetailsForm.user = experiencedetails.user;
-							$scope.experiencedetailsForm.companyName = experiencedetails.companyName;
-							$scope.experiencedetailsForm.employmentType = experiencedetails.employmentType;
-							$scope.experiencedetailsForm.durationFrom = experiencedetails.durationFrom;
-							$scope.experiencedetailsForm.durationTo = experiencedetails.durationTo;
-							$scope.experiencedetailsForm.designation = experiencedetails.designation;
-							$scope.experiencedetailsForm.jobProfile = experiencedetails.jobProfile;
-							$scope.experiencedetailsForm.id =experiencedetails.id;
+							$scope.projectdetailsForm.user = projectdetails.user;
+							$scope.projectdetailsForm.jobResponsibilities = projectdetails.jobResponsibilities;
+							$scope.projectdetailsForm.projectDetails = projectdetails.projectDetails;
+							$scope.projectdetailsForm.projectTitle = projectdetails.projectTitle;
+							$scope.projectdetailsForm.employmentType = projectdetails.employmentType;
+							$scope.projectdetailsForm.clientName = projectdetails.clientName;
+							$scope.projectdetailsForm.durationFrom = projectdetails.durationFrom;
+							$scope.projectdetailsForm.durationTo = projectdetails.durationTo;
+							$scope.projectdetailsForm.teamSize = projectdetails.teamSize;
+							$scope.projectdetailsForm.technologiesUsed = projectdetails.technologiesUsed;
+							$scope.projectdetailsForm.id =projectdetails.id;
 						};
 
 						/* Private Methods */
 						// HTTP GET- get all countries collection
-						function _refreshExperienceDetailsData() {
+						function _refreshProjectDetailsData() {
 							$http(
 									{
 										method : 'GET',
-										url : 'http://localhost:8080/visog-job-portal-api/transaction/experienceDetails/'
+										url : 'http://localhost:8080/visog-job-portal-api/transaction/projectDetails/'
 									}).then(function successCallback(response) {
 								// alert(response.data.data)
 								$scope.countrys = response.data.data;
@@ -151,7 +163,7 @@ $(document).ready(function(e){
 
 						function _success(response) {
 
-							_refreshExperienceDetailsData();
+							_refreshProjectDetailsData();
 							_clearFormData()
 						}
 
@@ -163,13 +175,16 @@ $(document).ready(function(e){
 						// Clear the form
 						function _clearFormData() {
 							// $scope.genderForm.id = -1;
-							$scope.experiencedetailsForm.user = "";
-							$scope.experiencedetailsForm.companyName = "";
-							$scope.experiencedetailsForm.employmentType = "";
-							$scope.experiencedetailsForm.durationFrom = "";
-							$scope.experiencedetailsForm.durationTo = "";
-							$scope.experiencedetailsForm.designation = "";
-							$scope.experiencedetailsForm.jobProfile = "";
+							$scope.projectdetailsForm.user = "";
+							$scope.projectdetailsForm.jobResponsibilities = "";
+							$scope.projectdetailsForm.projectDetails = "";
+							$scope.projectdetailsForm.projectTitle = "";
+							$scope.projectdetailsForm.employmentType = "";
+							$scope.projectdetailsForm.clientName = "";
+							$scope.projectdetailsForm.durationFrom = "";
+							$scope.projectdetailsForm.durationTo = "";
+							$scope.projectdetailsForm.teamSize = "";
+							$scope.projectdetailsForm.technologiesUsed = "";
 
 						}
 						;
@@ -304,8 +319,8 @@ td, th {
 				<li class="child"><a href="/visog-job-portal-ui/jobseeker">job Seeker</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/educationdetails">education Details</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/languagesknown">languages Known</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/projectdetails">project Details</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/experiencedetails">experience Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/projectdetails">project Details</a></li>
 				
 				</ul>
 				</li>
@@ -313,27 +328,39 @@ td, th {
 				<li><a href="/visog-job-portal-ui/user">login</a></li>
 			</ul>
 		</div>
-<div class="content" ng-app="ExperienceDetailsManagement" ng-controller="ExperienceDetailsController">
-	<h1>Experience Details Transaction</h1>
+<div class="content" ng-app="ProjectDetailsManagement" ng-controller="ProjectDetailsController">
+	<h1>Project Details Transaction</h1>
 	<form ng-submit="submitFiles()">
 		<table>
 
 			<tr>
-				<th colspan="2">Add/Edit ExperienceDetails</th>
+				<th colspan="2">Add/Edit ProjectDetails</th>
 			</tr>
 			<tr>
 				<td>User </td>
-				<td><input type="text" ng-model="experienceDetailsForm.user" /></td>
+				<td><input type="text" ng-model="projectDetailsForm.user" /></td>
 			</tr>
 
 			<tr>
-				<td>Company Name </td>
-				<td><input type="text" ng-model="experienceDetailsForm.companyName" /></td>
+				<td>Job Responsibilities </td>
+				<td><input type="text" ng-model="projectDetailsForm.jobResponsibilities" /></td>
 			</tr>
 			
 			<tr>
+				<td>Project Details </td>
+				<td><input type="text" ng-model="projectDetailsForm.projectDetails" /></td>
+			</tr>
+			<tr>
+				<td>Project Title </td>
+				<td><input type="text" ng-model="projectDetailsForm.projectTitle" /></td>
+			</tr>
+			<tr>
 				<td>Employment Type </td>
-				<td><input type="text" ng-model="experienceDetailsForm.employmentType" /></td>
+				<td><input type="text" ng-model="projectDetailsForm.employmentType" /></td>
+			</tr>
+			<tr>
+				<td>Client Name </td>
+				<td><input type="text" ng-model="projectDetailsForm.clientName" /></td>
 			</tr>
 			
 			<tr>
@@ -343,17 +370,17 @@ td, th {
 			
 			<tr>
 				<td>Duration To </td>
-				<td><input type="text" ng-model="experienceDetailsForm.durationTo" /></td>
+				<td><input type="text" ng-model="projectDetailsForm.durationTo" /></td>
 			</tr>
 			
 			<tr>
-				<td>Designation </td>
-				<td><input type="text" ng-model="experienceDetailsForm.designation" /></td>
+				<td>Team Size </td>
+				<td><input type="text" ng-model="projectDetailsForm.teamSize" /></td>
 			</tr>
 			
 			<tr>
-				<td>Job Profile </td>
-				<td><input type="text" ng-model="experienceDetailsForm.jobProfile" /></td>
+				<td>Technologies Used </td>
+				<td><input type="text" ng-model="projectDetailsForm.technologiesUsed" /></td>
 			</tr>
 			
 			<tr>
@@ -366,25 +393,31 @@ td, th {
 		<tr>
 
 			<th>user</th>
-			<th>companyName</th>
+			<th>jobResponsibilities</th>
+			<th>projectDetails</th>
+			<th>projectTitle</th>
 			<th>employmentType</th>
+			<th>clientName</th>
 			<th>durationFrom</th>
 			<th>durationTo</th>
-			<th>designation</th>
-			<th>jobProfile</th>
+			<th>teamSize</th>
+			<th>technologiesUsed</th>
 			<th></th>
 
 		</tr>
 
 		<tr ng-repeat="files in files">
 
-			<td>{{ experienceDetails.user }}</td>
-			<td>{{ experienceDetails.companyName }}</td>
-			<td>{{ experienceDetails.employmentType }}</td>
-			<td>{{ experienceDetails.durationFrom }}</td>
-			<td>{{ experienceDetails.durationTo }}</td>
-			<td>{{ experienceDetails.designation }}</td>
-			<td>{{ experienceDetails.jobProfile }}</td>
+			<td>{{ projectDetails.user }}</td>
+			<td>{{ projectDetails.jobResponsibilities }}</td>
+			<td>{{ projectDetails.projectDetails }}</td>
+			<td>{{projectDetails.projectTitle}}</td>
+			<td>{{projectDetails.employmentType}}</td>
+			<td>{{projectDetails.clientName}}</td>
+			<td>{{ projectDetails.durationFrom }}</td>
+			<td>{{ projectDetails.durationTo }}</td>
+			<td>{{ projectDetails.teamSize }}</td>
+			<td>{{ projectDetails.technologiesUsed }}</td>
 
 			<td><a ng-click="editFiles(files)" class="blue-button">Edit</a>
 				| <a ng-click="deleteFiles(files)" class="red-button">Delete</a></td>
