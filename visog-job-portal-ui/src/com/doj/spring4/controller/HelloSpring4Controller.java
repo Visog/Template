@@ -164,9 +164,9 @@ public class HelloSpring4Controller {
 		return "transaction/employer";
 	}
 	
-	@RequestMapping(value = "/languageknown", method = RequestMethod.GET)
+	@RequestMapping(value = "/languagesknown", method = RequestMethod.GET)
 	public String languageknown() {
-		return "transaction/languageknown";
+		return "transaction/language_Known";
 	}
 
 	@RequestMapping(value = "/projectdetails", method = RequestMethod.GET)
