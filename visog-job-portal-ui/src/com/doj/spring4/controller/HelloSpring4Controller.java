@@ -148,7 +148,7 @@ public class HelloSpring4Controller {
 	public String jobseeker() {
 		return "transaction/job_Seeker";
 	}
-	
+
 	@RequestMapping(value = "/employerjobseeker", method = RequestMethod.GET)
 	public String employerjobseeker() {
 		return "transaction/employer_Jobseeker";
