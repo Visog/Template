@@ -302,15 +302,13 @@ td, th {
 				<th colspan="2">Add/Edit Status</th>
 			</tr>
 			<tr>
-				<td> Name</td>
-				<td><input type="text" ng-model="statusForm.name" /></td>
-			</tr>
-
-			<tr>
 				<td>Code</td>
 				<td><input type="text" ng-model="statusForm.code" /></td>
 			</tr>
-			
+			<tr>
+				<td> Name</td>
+				<td><input type="text" ng-model="statusForm.name" /></td>
+			</tr>	
 			<tr>
 				<td>Category</td>
 				<td><input type="text" ng-model="statusForm.category" /></td>
@@ -335,8 +333,8 @@ td, th {
 	<table>
 		<tr>
 
-			<th>Name</th>
 			<th>Code</th>
+			<th>Name</th>
 			<th>Category</th>
 			<th>OrderNum</th>
 			<th>description</th>
@@ -347,9 +345,11 @@ td, th {
 
 		<tr ng-repeat="status in status">
 
+			<td>{{ status.code }}</td>
 			<td>{{ status.name }}</td>
-			<td>{{ status.description }}</td>
-			<!-- <td>{{ country.orderNum }}</td> -->
+			<td>{{ status.category }}</td>
+			<td>{{ country.orderNum }}</td>
+			<td>{{ country.description }}</td>
 
 			<td><a ng-click="editStatus(status)" class="blue-button">Edit</a>
 				| <a ng-click="deleteStatus(status)" class="red-button">Delete</a></td>
