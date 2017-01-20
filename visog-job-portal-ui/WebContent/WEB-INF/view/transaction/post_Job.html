@@ -1,0 +1,451 @@
+
+<html>
+  <head>  
+  <link rel="stylesheet" type="text/css" href="resources/css/user.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script src="resources/js/jquery-3.1.1.min.js"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(e){
+	$('.masters').click(function(){
+		$(this).toggleClass('tap');
+		
+	});
+	
+	$('.transactions').click(function(){
+		$(this).toggleClass('tap');
+		
+	});
+	
+});
+ </script>
+<meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="/visog-job-portal-ui/resources/js/addressType.js"></script>
+    <title>AngularJS $http Rest example</title>  
+<!--  <script type="text/javascript">
+            var app = angular.module("JobSeekerManagement", []);
+         
+            //Controller Part
+            app.controller("JobSeekerController", function($scope, $http) {
+         
+               
+                $scope.jobseeker = [];
+                $scope.jobseekerForm = {
+                  //  id : -1,
+                    resumeHeadline : "",
+                    domain : "",
+                    companyName : "",
+                    user : "",
+                    keySkills : "",
+                    workExperienceYears : "",
+                    workExperienceMonths : "",
+                    hobbiesAndInterest : "",
+                    jobRole : "",
+                    otherJobRole : "",
+                    industry : "",
+                    profileSummary : "",
+                    employmentType : ""
+                };
+         
+                //Now load the data from server
+                _refreshCoursesData();
+         
+                //HTTP POST/PUT methods for add/edit role 
+                // with the help of id, we are going to find out whether it is put or post operation
+                
+                $scope.submitJobSeeker = function() {
+         
+                    var method = "";
+                    var url = "";
+                   // alert($scope.roleForm.id);
+                    if ($scope.jobseekerForm.id == -1 || $scope.jobseekerForm.id == undefined) {
+                        //Id is absent in form data, it is create new role operation
+                        
+                        method = "POST";
+                        url = 'http://localhost:8080/visog-job-portal-api/master/jobseeker/';
+                        $http.post(url, { 	"resumeHeadline": $scope.jobseekerForm.resumeHeadline,
+                        					"domain": $scope.jobseekerForm.domain,
+                        					"companyName": $scope.jobseekerForm.companyName,
+                        					"user": $scope.jobseekerForm.user,
+                        					"keySkills": $scope.jobseekerForm.keySkills,
+                        					"workExperienceYears": $scope.jobseekerForm.workExperienceYears,
+                        					"workExperienceMonths": $scope.jobseekerForm.workExperienceMonths,
+                        					"hobbiesAndInterest": $scope.jobseekerForm.hobbiesAndInterest,
+                        					"jobRole": $scope.jobseekerForm.jobRole,
+                        					"otherJobRole": $scope.jobseekerForm.otherJobRole,
+                        					"industry": $scope.jobseekerForm.industry,  
+                        					"profileSummary": $scope.jobseekerForm.profileSummary, 
+                        					"employmentType" : $scope.jobseekerForm.employmentType 
+                        	
+                        
+                        }).then( _success, _error ); 
+                        }
+                    
+                    } else {
+                    	 
+                        //Id is present in form data, it is edit role operation
+                        id=$scopejobseekerForm.id;
+                        method = "PUT";
+                        url = 'http://localhost:8080/visog-job-portal-api/master/jobseeker/'+ id;
+                      $http.put(url, { 
+                    	  "resumeHeadline": $scope.jobseekerForm.resumeHeadline,
+      					"domain": $scope.jobseekerForm.domain,
+      					"companyName": $scope.jobseekerForm.companyName,
+      					"user": $scope.jobseekerForm.user,
+      					"keySkills": $scope.jobseekerForm.keySkills,
+      					"workExperienceYears": $scope.jobseekerForm.workExperienceYears,
+      					"workExperienceMonths": $scope.jobseekerForm.workExperienceMonths,
+      					"hobbiesAndInterest": $scope.jobseekerForm.hobbiesAndInterest,
+      					"jobRole": $scope.jobseekerForm.jobRole,
+      					"otherJobRole": $scope.jobseekerForm.otherJobRole,
+      					"industry": $scope.jobseekerForm.industry,   
+      					"profileSummary": $scope.jobseekerForm.profileSummary, 
+      					"employmentType" : $scope.jobseekerForm.employmentType 
+                    	  
+                      
+                      }).then( _success, _error );
+                      }
+                      $scope.jobseekerForm.id = -1;
+                    }
+ /*         
+                    $http({
+                        method : method,
+                        url : url,
+                        data : angular.toJson($scope.roleForm),
+                        headers : {
+                            'Content-Type' : 'application/json'
+                        }
+                    }).then( _success, _error ); */
+                };
+         
+                //HTTP DELETE- delete role by Id
+                $scope.deleteJobSeeker = function(jobseeker) {
+                    $http({
+                        method : 'DELETE',
+                        url : 'http://localhost:8080/visog-job-portal-api/master/jobseeker/' + jobseeker.id
+                    }).then(_success, _error);
+                };
+ 
+             // In case of edit, populate form fields and assign form.id with role id
+                $scope.editJobSeeker = function(jobseeker) {
+                  
+                    $scope.jobseekerForm.resumeHeadline = jobseeker.resumeHeadline;
+                    $scope.jobseekerForm.domain = jobseeker.domain;
+                    $scope.jobseekerForm.companyName = jobseeker.companyName;
+                    $scope.jobseekerForm.user = jobseeker.user;
+                    $scope.jobseekerForm.keySkills = jobseeker.keySkills;
+                    $scope.jobseekerForm.workExperienceYears = jobseeker.workExperienceYears;
+                    $scope.jobseekerForm.workExperienceMonths = jobseeker.workExperienceMonths;
+                    $scope.jobseekerForm.hobbiesAndInterest = jobseeker.hobbiesAndInterest;
+                    $scope.jobseekerForm.jobRole = jobseeker.jobRole;
+                    $scope.jobseekerForm.otherJobRole = jobseeker.otherJobRole;
+                    $scope.jobseekerForm.industry = jobseeker.industry;
+                    $scope.jobseekerForm.profileSummary = jobseeker.profileSummary;
+                    $scope.jobseekerForm.employmentType = jobseeker.employmentType;
+                   
+                    $scope.jobseekerForm.id = jobseeker.id;
+                };
+         
+                /* Private Methods */
+                //HTTP GET- get all countries collection
+                function _refreshJobSeekerData() {
+                    $http({
+                        method : 'GET',
+                        url : 'http://localhost:8080/visog-job-portal-api/master/jobseeker/'
+                    }).then(function successCallback(response) {
+                    	//alert(response.data.data)
+                        $scope.jobseeker = response.data.data;
+                    }, function errorCallback(response) {
+                        console.log(response.statusText);
+                    });
+                }
+         
+                function _success(response) {
+                	
+                    _refreshJobSeekerData();
+                    _clearFormData()
+                }
+         
+                function _error(response) {
+                	
+                    console.log(response.statusText);
+                }
+         
+                //Clear the form
+                function _clearFormData() {
+                  //  $scope.roleForm.id = -1;
+                    $scope.jobseekerForm.resumeHeadline = "";
+                    $scope.jobseekerForm.domain = "";
+                    $scope.jobseekerForm.companyName = "";
+                    $scope.jobseekerForm.user = "";
+                    $scope.jobseekerForm.keySkills = "";
+                    $scope.jobseekerForm.workExperienceYears = "";
+                    $scope.jobseekerForm.workExperienceMonths = "";
+                    $scope.jobseekerForm.hobbiesAndInterest = "";
+                    $scope.jobseekerForm.jobRole = "";
+                    $scope.jobseekerForm.otherJobRole = "";
+                    $scope.jobseekerForm.industry = "";
+                    $scope.jobseekerForm.profileSummary = "";
+                    $scope.jobseekerForm.employmentType = "";
+                
+                };
+            });
+        </script> -->
+        <style>
+           
+.blue-button{
+	background: #25A6E1;
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#25A6E1',endColorstr='#188BC0',GradientType=0);
+	padding:3px 5px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:4px;
+	border:1px solid #1A87B9
+}     
+
+.red-button{
+	background: #CD5C5C;
+
+	padding:3px 5px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:4px;
+	border:1px solid #CD5C5C
+}      
+
+table {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+   width: 50%;
+}
+
+caption {
+  text-align: left;
+  color: silver;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+th {
+  background: SteelBlue;
+  color: white;
+}
+
+
+tbody tr:nth-child(even) {
+  background: WhiteSmoke;
+}
+
+tbody tr td:nth-child(2) {
+  text-align:center;
+}
+
+tbody tr td:nth-child(3),
+tbody tr td:nth-child(4) {
+  text-align: center;
+  font-family: monospace;
+}
+
+tfoot {
+  background: SeaGreen;
+  color: white;
+  text-align: right;
+}
+
+tfoot tr th:last-child {
+  font-family: monospace;
+}
+
+            td,th{
+                border: 1px solid gray;
+                width: 25%;
+                text-align: left;
+                padding: 5px 10px;
+            }
+          
+            
+            
+        </style>
+    <head>
+    <body >
+    <div id="header">
+		<div class="logo">
+			<a href="#">Job<span>Portal</span></a>
+		</div>
+
+	</div>
+	
+	<div id="container">
+		<div class="sidebar">
+			<ul id="nav">
+
+				<li class="masters"><a href="#">Masters<span class="sub"></span></a>
+				<ul>
+				<li class="child"><a href="/visog-job-portal-ui/roles">roles</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/gender">gender</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/country">country</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/state">state</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/city">city</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/addresstype">address Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/courses">courses</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/specialization">specialization</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/university">university</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/educationtype">education Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/languages">languages </a></li>
+				<li class="child"><a href="/visog-job-portal-ui/currency">currency</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/industry">industry</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/domains">domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobrole">job Role</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/status">status</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employmenttype">employment Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employertype">employer Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/filetype">file Type</a></li>
+				
+				</ul>
+				</li>
+				
+				<li class="transactions"><a href="#">Transactions<span class="sub"></span></a>
+				<ul>
+				<li class="child"><a href="/visog-job-portal-ui/users">users</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/adress">address</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employer">employer</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postjob">post Job</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postjobdomains">post Job Domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/files">files</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employerjobseeker">employer Job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postjobseeker">post Job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobseeker">job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/educationdetails">education Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/languagesknown">languages Known</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/projectdetails">project Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/experiencedetails">experience Details</a></li>
+				
+				</ul>
+				</li>
+				<li><a href="/visog-job-portal-ui/reg">registration</a></li>
+				<li><a href="/visog-job-portal-ui/user">login</a></li>
+			</ul>
+		</div>
+    <div class="content" ng-app="PostJobManagement" ng-controller="PostJobController">
+         <h1>
+          	PostJob Transaction
+        </h1> 
+        <form ng-submit="submitPostJob()">
+            <table>
+               
+                <tr>
+                    <th colspan="2">Add/Edit Post Job</th>
+                 </tr>
+                <tr>
+                    <td>User  </td>
+                    <td><input type="text" ng-model="postjobForm.user" /></td>
+                </tr>
+                <tr>
+                    <td>Job Title</td>
+                    <td><input type="text" ng-model="postjobForm.jobTitle"  /></td>
+                </tr>
+                <tr>
+                    <td>Job Description </td>
+                    <td><input type="text" ng-model="postjobForm.jobDescription"  /></td>
+                </tr>
+                <tr>
+                    <td>Annual Package From</td>
+                    <td><input type="text" ng-model="postjobForm.annualPackageFrom"  /></td>
+                </tr>
+                <tr>
+                    <td>Annual Package To </td>
+                    <td><input type="text" ng-model="postjobForm.annualPackageTo"  /></td>
+                </tr>
+                <tr>
+                    <td>Currency </td>
+                    <td><input type="text" ng-model="postjobForm.currency"  /></td>
+                </tr>
+                 <tr>
+                    <td>Company </td>
+                    <td><input type="text" ng-model="postjobForm.company"  /></td>
+                </tr>
+                <tr>
+                    <td>Effected Date From </td>
+                    <td><input type="text" ng-model="postjobForm.effectedDateFrom"  /></td>
+                </tr>
+                <tr>
+                    <td>Effected Date To </td>
+                    <td><input type="text" ng-model="postjobForm.effectedDateTo"  /></td>
+                </tr>
+                <tr>
+                    <td>Status </td>
+                    <td><input type="text" ng-model="postjobForm.status"  /></td>
+                </tr>
+                <tr>
+                    <td>Min Experience </td>
+                    <td><input type="text" ng-model="postjobForm.minExperience"  /></td>
+                </tr>
+                <tr>
+                    <td>Phone No</td>
+                    <td><input type="text" ng-model="postjobForm.phoneNo"  /></td>
+                </tr>
+                <tr>
+                    <td>Walk In </td>
+                    <td><input type="text" ng-model="postjobForm.walkIn"  /></td>
+                </tr>
+               
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" class="blue-button" /></td>
+                </tr>
+            </table>
+        </form>
+        <table>
+            <tr>
+              
+                <th>user </th>
+                <th>jobTitle</th>
+                <th>jobDescription </th>
+                <th>annualPackageFrom</th>
+                <th>annualPackageTo</th>
+                <th> currency </th>
+                <th>company </th>
+                <th>effectedDateFrom  </th>
+                <th>effectedDateTo </th>
+                <th>status</th>
+                <th>minExperience </th>
+                <th>phoneNo </th>
+                <th>walkIn </th>
+                <th> </th>
+               
+            </tr>
+ 
+            <tr ng-repeat="postjob in postjob">
+       
+    <td> {{ postjob.user }}</td>
+    <td> {{ postjob.jobTitle }}</td>
+    <td> {{ postjob.jobDescription }}</td>
+    <td> {{ postjob.annualPackageFrom }}</td>
+    <td> {{ postjob.annualPackageTo }}</td>
+    <td> {{ postjob.currency }}</td>
+    <td> {{ postjob.company }}</td>
+    <td> {{ postjob.effectedDateFrom }}</td>
+    <td> {{ postjob.effectedDateTo }}</td>
+    <td> {{ postjob.status }}</td>
+    <td> {{ postjob.minExperience }}</td>
+    <td >{{ postjob.phoneNo }}</td>  
+    <td >{{ postjob.walkIn }}</td>  
+                
+                <td><a ng-click="editPostJob(postjob)" class="blue-button">Edit</a> | <a ng-click="deletePostJob(postjob)" class="red-button">Delete</a></td>
+            </tr>
+ 
+        </table> 
+      </div>
+      </div>
+  </body>
+</html>
