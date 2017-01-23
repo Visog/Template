@@ -73,7 +73,7 @@ $(document).ready(function(e){
 				<li class="child"><a href="/visog-job-portal-ui/address">address</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employer">employer</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/postjob">post Job</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/postjobdomains">post Job Domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/Post_JodDomains">post Job Domains</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/files">files</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employerjobseeker">employer Job Seeker</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/postjobseeker">post Job Seeker</a></li>

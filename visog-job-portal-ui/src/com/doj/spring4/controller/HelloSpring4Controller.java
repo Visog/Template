@@ -178,4 +178,9 @@ public class HelloSpring4Controller {
 	public String projectdetails() {
 		return "transaction/project_Details";
 	}
+	
+	@RequestMapping(value = "/Post_JodDomains", method = RequestMethod.GET)
+	public String Post_JodDomains() {
+		return "transaction/post_JobDomains";
+	}
 }
