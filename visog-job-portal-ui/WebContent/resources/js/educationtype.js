@@ -49,7 +49,7 @@ app
 									+ id;
 							$http.put(url, {
 								"name" : $scope.educationtypeForm.name,
-								"discription" : $scope.educationtypeForm.discription
+								"description" : $scope.educationtypeForm.description
 								
 							}).then(_success, _error);
 							$scope.educationtypeForm.id = -1;
