@@ -1,58 +1,57 @@
-var app = angular.module("CityManagement", []);
+var app = angular.module("IndustryManagement", []);
 
 // Controller Part
 app
 		.controller(
-				"CityController",
+				"IndustryController",
 				function($scope, $http) {
 
-					$scope.countries = [];
-					$scope.cityForm = {
+					$scope.industry = [];
+					$scope.industryForm = {
 					 id : -1,
 						name : "",
-						country :"",
-						state : ""
+						description : ""
 					};
 
 					// Now load the data from server
-					_refreshCityData();
+					_refreshIndustryData();
 
 					// HTTP POST/PUT methods for add/edit role
 					// with the help of id, we are going to find out whether it
 					// is put or post operation
 
-					$scope.submitCity = function() {
+					$scope.submitIndustry = function() {
 
 						var method = "";
 						var url = "";
 						// alert($scope.cityForm.id);
-						if ($scope.cityForm.id == -1
-								|| $scope.cityForm.id == undefined) {
+						if ($scope.industryForm.id == -1
+								|| $scope.industryForm.id == undefined) {
 							// Id is absent in form data, it is create new role
 							// operation
 
 							method = "POST";
-							url = 'http://localhost:8080/visog-job-portal-api/master/city/';
+							url = 'http://localhost:8080/visog-job-portal-api/master/industry/';
 							$http.post(url, {
-								"name" : $scope.cityForm.name,
-								"country" : $scope.cityForm.country,
-								"state" : $scope.cityForm.state
+								"name" : $scope.industryForm.name,
+								"description" : $scope.industryForm.description
+								
 							}).then(_success, _error);
 
 						} else {
 
 							// Id is present in form data, it is edit role
 							// operation
-							id = $scope.cityForm.id;
+							id = $scope.industryForm.id;
 							method = "PUT";
-							url = 'http://localhost:8080/visog-job-portal-api/master/city/'
+							url = 'http://localhost:8080/visog-job-portal-api/master/industry/'
 									+ id;
 							$http.put(url, {
-								"name" : $scope.cityForm.name,
-								"country" : $scope.cityForm.country,
-								"state" : $scope.cityForm.state
+								"name" : $scope.industryForm.name,
+								"description" : $scope.industryForm.description
+					
 							}).then(_success, _error);
-							$scope.cityForm.id = -1;
+							$scope.industryForm.id = -1;
 						}
 						/*
 						 * $http({ method : method, url : url, data :
@@ -63,35 +62,34 @@ app
 					};
 
 					// HTTP DELETE- delete role by Id
-					$scope.deleteCity = function(city) {
+					$scope.deleteIndustry = function(industry) {
 						$http(
 								{
 									method : 'DELETE',
-									url : 'http://localhost:8080/visog-job-portal-api/master/city/'
-											+ city.id
+									url : 'http://localhost:8080/visog-job-portal-api/master/industry/'
+											+ industry.id
 								}).then(_success, _error);
 					};
 
 					// In case of edit, populate form fields and assign form.id
 					// with role id
-					$scope.editCity = function(city) {
+					$scope.editIndustry = function(industry) {
 
-						$scope.cityForm.name = city.name;
-						$scope.cityForm.country = city.country;
-						$scope.cityForm.state = city.state;
-						$scope.cityForm.id = city.id;
+						$scope.industryForm.name = industry.name;
+						$scope.industryForm.description = industry.description;
+						$scope.industryForm.id = industry.id;
 					};
 
 					/* Private Methods */
 					// HTTP GET- get all countries collection
-					function _refreshCityData() {
+					function _refreshIndustryData() {
 						$http(
 								{
 									method : 'GET',
-									url : 'http://localhost:8080/visog-job-portal-api/master/city/'
+									url : 'http://localhost:8080/visog-job-portal-api/master/industry/'
 								}).then(function successCallback(response) {
 							// alert(response.data.data)
-							$scope.cities = response.data.data;
+							$scope.industry = response.data.data;
 						}, function errorCallback(response) {
 							console.log(response.statusText);
 						});
@@ -111,9 +109,8 @@ app
 					// Clear the form
 					function _clearFormData() {
 						// $scope.cityForm.id = -1;
-						$scope.cityForm.name = "";
-						$scope.cityForm.country = "";
-						$scope.cityForm.state = "";
+						$scope.industryForm.name = "";
+						$scope.industryForm.description = "";
 
 					}
 					;
