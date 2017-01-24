@@ -4,7 +4,7 @@
             app.controller("PostJobDomainsController", function($scope, $http) {
          
                
-                $scope.countries = [];
+                $scope.PostJobDomains = [];
                 $scope.PostJobDomainsForm = {
                   //  id : -1,
                     postJob : "",

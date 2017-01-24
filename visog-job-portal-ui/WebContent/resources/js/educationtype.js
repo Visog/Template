@@ -45,7 +45,7 @@ app
 							// operation
 							id = $scope.educationtypeForm.id;
 							method = "PUT";
-							url = 'http://localhost:8080/visog-job-portal-api/master/educationType/'
+							url = 'http://localhost:8080/visog-job-portal-api/master/educationtype/'
 									+ id;
 							$http.put(url, {
 								"name" : $scope.educationtypeForm.name,
@@ -99,7 +99,7 @@ app
 
 					function _success(response) {
 
-						_refreshStateData();
+						_refreshEducationTypeData();
 						_clearFormData()
 					}
 

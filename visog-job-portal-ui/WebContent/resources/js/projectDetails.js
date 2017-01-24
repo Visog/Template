@@ -39,7 +39,7 @@
 								// operation
 
 								method = "POST";
-								url = 'http://localhost:8080/visog-job-portal-api/master/projectdDetails/';
+								url = 'http://localhost:8080/visog-job-portal-api/transaction/projectdDetails/';
 								$http
 										.post(
 												url,
@@ -64,7 +64,7 @@
 								// operation
 								id = $scope.projectdDetailsForm.id;
 								method = "PUT";
-								url = 'http://localhost:8080/visog-job-portal-api/master/projectdDetails/'
+								url = 'http://localhost:8080/visog-job-portal-api/transaction/projectdDetails/'
 										+ id;
 								$http
 										.put(
@@ -96,8 +96,8 @@
 							$http(
 									{
 										method : 'DELETE',
-										url : 'http://localhost:8080/visog-job-portal-api/master/projectdDetails/'
-												+ country.id
+										url : 'http://localhost:8080/visog-job-portal-api/transaction/projectdDetails/'
+												+ projectdDetails.id
 									}).then(_success, _error);
 						};
 
@@ -127,7 +127,7 @@
 							$http(
 									{
 										method : 'GET',
-										url : 'http://localhost:8080/visog-job-portal-api/master/projectdDetails/'
+										url : 'http://localhost:8080/visog-job-portal-api/transaction/projectdDetails/'
 									}).then(function successCallback(response) {
 								// alert(response.data.data)
 								$scope.projectdDetailsForm = response.data.data;

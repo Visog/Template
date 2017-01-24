@@ -97,7 +97,7 @@ app
 
 					function _success(response) {
 
-						_refreshCityData();
+						_refreshIndustryData();
 						_clearFormData()
 					}
 

@@ -36,13 +36,13 @@
 							var method = "";
 							var url = "";
 							// alert($scope.genderForm.id);
-							if ($scope.filesForm.id == -1
+							if ($scope.postjobForm.id == -1
 									|| $scope.postjobForm.id == undefined) {
 								// Id is absent in form data, it is create new role
 								// operation
 
 								method = "POST";
-								url = 'http://localhost:8080/visog-job-portal-api/master/postJob/';
+								url = 'http://localhost:8080/visog-job-portal-api/transaction/postJob/';
 								$http
 										.post(
 												url,
@@ -68,7 +68,7 @@
 								// operation
 								id = $scope.postjobForm.id;
 								method = "PUT";
-								url = 'http://localhost:8080/visog-job-portal-api/master/postJob/'
+								url = 'http://localhost:8080/visog-job-portal-api/transaction/postJob/'
 										+ id;
 								$http
 										.put(
@@ -105,8 +105,8 @@
 							$http(
 									{
 										method : 'DELETE',
-										url : 'http://localhost:8080/visog-job-portal-api/master/postJob/'
-												+ country.id
+										url : 'http://localhost:8080/visog-job-portal-api/transaction/postJob/'
+												+ postjob.id
 									}).then(_success, _error);
 						};
 
@@ -136,7 +136,7 @@
 							$http(
 									{
 										method : 'GET',
-										url : 'http://localhost:8080/visog-job-portal-api/master/postJob/'
+										url : 'http://localhost:8080/visog-job-portal-api/transaction/postJob/'
 									}).then(function successCallback(response) {
 								// alert(response.data.data)
 								$scope.postJobForm = response.data.data;
