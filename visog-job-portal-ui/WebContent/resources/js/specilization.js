@@ -53,7 +53,7 @@
                 $scope.deleteSpecilization = function(specilization) {
                     $http({
                         method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/specialization/' + specilization.id
+                        url : 'http://localhost:8080/visog-job-portal-api/master/specialization/' + specialization.id
                     }).then(_success, _error);
                 };
  
