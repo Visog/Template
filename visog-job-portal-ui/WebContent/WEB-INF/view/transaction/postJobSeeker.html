@@ -27,7 +27,7 @@ $(document).ready(function(e){
 <meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 <script src="/visog-job-portal-ui/resources/js/postJobSeeker.js"></script>
-<script>
+<!-- <script>
 	var app = angular.module("PostJobSeekerManagement", []);
 	//Controller Part
 	app
@@ -164,7 +164,7 @@ $(document).ready(function(e){
 						}
 						;
 					});
-</script> 
+</script>  -->
 <style>
 .blue-button {
 	background: #25A6E1;
@@ -350,7 +350,7 @@ td, th {
 
 		</tr>
  
-		<tr ng-repeat="files in files">
+		<tr ng-repeat="postJobSeeker in postJobSeeker">
 
 			
 			<td>{{ postJobSeeker.jobSeekerId }}</td>
@@ -359,8 +359,8 @@ td, th {
 			<td>{{postJobSeeker.status}}</td>
 			
 
-			<td><a ng-click="editFiles(files)" class="blue-button">Edit</a>
-				| <a ng-click="deleteFiles(files)" class="red-button">Delete</a></td>
+			<td><a ng-click="editPostJobSeeker(postJobSeeker)" class="blue-button">Edit</a>
+				| <a ng-click="deletePostJobSeeker(postJobSeeker)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>

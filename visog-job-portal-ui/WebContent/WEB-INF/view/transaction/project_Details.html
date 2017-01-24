@@ -26,8 +26,8 @@ $(document).ready(function(e){
 </script>
 <meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-<script src="/visog-job-portal-ui/resources/js/files.js"></script>
-<script>bbmb
+<script src="/visog-job-portal-ui/resources/js/projectDetails.js"></script>
+<!-- <script>bbmb
 	var app = angular.module("ProjectDetailsManagement", []);
 <commit2>
 	//Controller Part
@@ -189,7 +189,7 @@ $(document).ready(function(e){
 						}
 						;
 					});
-</script> 
+</script>  -->
 <style>
 .blue-button {
 	background: #25A6E1;
@@ -406,7 +406,7 @@ td, th {
 
 		</tr>
 
-		<tr ng-repeat="files in files">
+		<tr ng-repeat="projectDetails in projectDetails">
 
 			<td>{{ projectDetails.user }}</td>
 			<td>{{ projectDetails.jobResponsibilities }}</td>
@@ -419,8 +419,8 @@ td, th {
 			<td>{{ projectDetails.teamSize }}</td>
 			<td>{{ projectDetails.technologiesUsed }}</td>
 
-			<td><a ng-click="editFiles(files)" class="blue-button">Edit</a>
-				| <a ng-click="deleteFiles(files)" class="red-button">Delete</a></td>
+			<td><a ng-click="editProjectDetails(projectDetails)" class="blue-button">Edit</a>
+				| <a ng-click="deleteProjectDetails(projectDetails)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>
