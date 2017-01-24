@@ -179,7 +179,7 @@ public class HelloSpring4Controller {
 		return "transaction/project_Details";
 	}
 	
-	@RequestMapping(value = "/Post_JodDomains", method = RequestMethod.GET)
+	@RequestMapping(value = "/postjobdomains", method = RequestMethod.GET)
 	public String Post_JodDomains() {
 		return "transaction/post_JobDomains";
 	}
