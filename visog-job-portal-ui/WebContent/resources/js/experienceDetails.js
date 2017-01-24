@@ -88,7 +88,7 @@
 									{
 										method : 'DELETE',
 										url : 'http://localhost:8080/visog-job-portal-api/transaction/experienceDetails/'
-												+ country.id
+												+ experienceDetails.id
 									}).then(_success, _error);
 						};
 

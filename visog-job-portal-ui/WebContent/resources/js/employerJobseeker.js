@@ -33,7 +33,7 @@
 								// operation
 
 								method = "POST";
-								url = 'http://localhost:8080/visog-job-portal-api/master/employerjobseeker/';
+								url = 'http://localhost:8080/visog-job-portal-api/transaction/employerjobseeker/';
 								$http
 										.post(
 												url,
@@ -50,7 +50,7 @@
 								// operation
 								id = $scope.employerjobseekerForm.id;
 								method = "PUT";
-								url = 'http://localhost:8080/visog-job-portal-api/master/employerjobseeker/'
+								url = 'http://localhost:8080/visog-job-portal-api/transaction/employerjobseeker/'
 										+ id;
 								$http
 										.put(
@@ -76,8 +76,8 @@
 							$http(
 									{
 										method : 'DELETE',
-										url : 'http://localhost:8080/visog-job-portal-api/master/employerjobseeker/'
-												+ country.id
+										url : 'http://localhost:8080/visog-job-portal-api/transaction/employerjobseeker/'
+												+ employerjobseeker.id
 									}).then(_success, _error);
 						};
 
@@ -98,10 +98,10 @@
 							$http(
 									{
 										method : 'GET',
-										url : 'http://localhost:8080/visog-job-portal-api/master/employerjobseeker/'
+										url : 'http://localhost:8080/visog-job-portal-api/transaction/employerjobseeker/'
 									}).then(function successCallback(response) {
 								// alert(response.data.data)
-								$scope.filesForm = response.data.data;
+								$scope.employerjobseekerForm = response.data.data;
 							}, function errorCallback(response) {
 								console.log(response.statusText);
 							});
@@ -109,7 +109,7 @@
 
 						function _success(response) {
 
-							_refreshFilesData();
+							_refreshEmployerJobseekerData();
 							_clearFormData()
 						}
 

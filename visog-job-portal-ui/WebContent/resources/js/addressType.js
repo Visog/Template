@@ -23,7 +23,7 @@
                     var method = "";
                     var url = "";
                    // alert($scope.roleForm.id);
-                    if ($scope.addressForm.id == -1 || $scope.addresstypeForm.id == undefined) {
+                    if ($scope.addresstypeForm.id == -1 || $scope.addresstypeForm.id == undefined) {
                         //Id is absent in form data, it is create new role operation
                         
                         method = "POST";
