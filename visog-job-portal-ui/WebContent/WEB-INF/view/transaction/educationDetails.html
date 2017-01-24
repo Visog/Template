@@ -1,0 +1,177 @@
+
+<html>
+  <head>  
+  
+   <link rel="stylesheet" type="text/css" href="/visog-job-portal-ui/resources/css/master.css" media="screen" />
+   <link rel="stylesheet" type="text/css" href="resources/css/user.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  
+   <script src="resources/js/jquery-3.1.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+  
+  <script type="text/javascript">
+
+$(document).ready(function(e){
+	$('.masters').click(function(){
+		$(this).toggleClass('tap');
+		
+	});
+	
+	$('.transactions').click(function(){
+		$(this).toggleClass('tap');
+		
+	});
+});
+</script>
+  
+   <meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
+ <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="/visog-job-portal-ui/resources/js/postJobDomains.js"></script>
+    <title>AngularJS $http Rest example</title>  
+ <script type="text/javascript">
+          
+        </script>
+   
+    <head>
+     <body>
+    <div id="header">
+		<div class="logo">
+			<a href="#">Job<span>Portal</span></a>
+		</div>
+
+	</div>
+	<a class="mobile" href="#">Menu</a>
+	<div id="container">
+		<div class="sidebar">
+			<ul id="nav">
+			 
+				<li class="masters"><a href="#">Masters<span class="sub"></span></a>
+				<ul>
+				<li class="child"><a href="/visog-job-portal-ui/roles">roles</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/gender">gender</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/country">country</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/state">state</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/city">city</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/addresstype">address Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/courses">courses</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/specialization">specialization</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/university">university</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/educationtype">education Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/languages">languages </a></li>
+				<li class="child"><a href="/visog-job-portal-ui/currency">currency</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/industry">industry</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/domains">domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobrole">job Role</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/status">status</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employmenttype">employment Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employertype">employer Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/filetype">file Type</a></li>
+				
+				</ul>
+				</li>
+				
+				<li class="transactions"><a href="#">Transactions<span class="sub"></span></a>
+				<ul>
+				<li class="child"><a href="/visog-job-portal-ui/users">users</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/address">address</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employer">employer</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postjob">post Job</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postjobdomains">post Job Domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/files">files</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employerjobseeker">employer Job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postjobseeker">post Job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobseeker">job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/educationdetails">education Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/languagesknown">languages Known</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/projectdetails">project Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/experiencedetails">experience Details</a></li>
+				
+				</ul>
+				</li>
+				<li><a href="/visog-job-portal-ui/reg">UsersRegistration</a></li>
+				<li><a href="#">Login</a></li>
+
+
+			</ul>
+
+
+		</div>
+    
+    <div ng-app="EducationDetailsManagement" ng-controller="EducationDetailsController">
+         <h1>
+           Education Details Transaction
+        </h1> 
+        <form ng-submit="submitEducationDetails()">
+            <table>
+               
+                <tr>
+                    <th colspan="2">Add/Edit EducationDetails</th>
+                 </tr>
+                <tr>
+                    <td>User</td>
+                    <td><input type="text" ng-model="educationdetailsForm.user" /></td>
+                </tr>
+                <tr>
+                    <td>Courses</td>
+                    <td><input type="text" ng-model="educationdetailsForm.courses"  /></td>
+                </tr>
+                 <tr>
+                    <td>EducationType</td>
+                    <td><input type="text" ng-model="educationdetailsForm.educationType"  /></td>
+                </tr>
+                 <tr>
+                    <td>Specialization</td>
+                    <td><input type="text" ng-model="educationdetailsForm.specialization"  /></td>
+                </tr>
+                 <tr>
+                    <td>University</td>
+                    <td><input type="text" ng-model="educationdetailsForm.university"  /></td>
+                </tr>
+                 <tr>
+                    <td>DurationFromDate</td>
+                    <td><input type="text" ng-model="educationdetailsForm.durationFromDate"  /></td>
+                </tr>
+                 <tr>
+                    <td>DurationToDate</td>
+                    <td><input type="text" ng-model="educationdetailsForm.durationToDate"  /></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" class="blue-button" /></td>
+                </tr>
+            </table>
+        </form>
+        <table>
+            <tr>
+              
+                <th>user</th>
+                <th>courses</th>
+                <th>educationType</th>
+                <th>specialization</th>
+                <th>university</th>
+                <th>durationFromDate</th>
+                <th>durationToDate</th>
+                <th> </th>
+               
+            </tr>
+ 
+            <tr ng-repeat="educationdetails in educationdetails">
+       
+    <td> {{ educationdetails.user }}</td>
+    <td >{{ educationdetails.courses }}</td>  
+    <td >{{ educationdetails.educationType }}</td> 
+    <td >{{ educationdetails.specialization }}</td> 
+    <td >{{ educationdetails.university }}</td> 
+    <td >{{ educationdetails.durationFromDate }}</td> 
+    <td >{{ educationdetails.durationToDate }}</td> 
+       
+                
+                <td><a ng-click="editEducationDetails(educationdetails)" class="blue-button">Edit</a> | <a ng-click="deleteEducationDetails(educationdetails)" class="red-button">Delete</a></td>
+            </tr>
+ 
+        </table> 
+      </div>
+  </div>
+  
+  </body>
+</html>
