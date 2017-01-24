@@ -116,7 +116,7 @@
 						function _success(response) {
 
 							_refreshPostJobSeekerData();
-							_clearFormData()
+							_clearFormData() 
 						}
 
 						function _error(response) {
