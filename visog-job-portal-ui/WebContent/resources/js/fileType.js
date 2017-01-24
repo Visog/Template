@@ -1,43 +1,43 @@
 
-            var app = angular.module("FileExtensionManagement", []);
+            var app = angular.module("FileTypeManagement", []);
          
             //Controller Part
-            app.controller("FileExtensionController", function($scope, $http) {
+            app.controller("FileTypeController", function($scope, $http) {
          
                
-                $scope.countries = [];
-                $scope.FileExtensionForm = {
+                $scope.filetype = [];
+                $scope.filetypeForm = {
                  id : -1,
                     extension : "",
                     description : ""
                 };
          
                 //Now load the data from server
-                _refreshFileData();
+                _refreshFileTypeData();
          
                 //HTTP POST/PUT methods for add/edit file 
                 // with the help of id, we are going to find out whether it is put or post operation
                 
-                $scope.submitFile = function() {
+                $scope.submitFileType = function() {
          
                     var method = "";
                     var url = "";
                    // alert($scope.FileExtensionForm.id);
-                    if ($scope.FileExtensionForm.id == -1 || $scope.FileExtensionForm.id == undefined) {
+                    if ($scope.filetypeForm.id == -1 || $scope.filetypeForm.id == undefined) {
                         //Id is absent in form data, it is create new file operation
                         
                         method = "POST";
                         url = 'http://localhost:8080/visog-job-portal-api/master/fileType/';
-                        $http.post(url, { "extension": $scope.FileExtensionForm.extension, "description" : $scope.FileExtensionForm.description }).then( _success, _error ); 
+                        $http.post(url, { "extension": $scope.filetypeForm.extension, "description" : $scope.filetypeForm.description }).then( _success, _error ); 
                     
                     } else {
                     	 
                         //Id is present in form data, it is edit file operation
-                        id=$scope.FileExtensionForm.id;
+                        id=$scope.filetypeForm.id;
                         method = "PUT";
                         url = 'http://localhost:8080/visog-job-portal-api/master/fileType/'+ id;
-                      $http.put(url, { "extension": $scope.FileExtensionForm.extension, "description" : $scope.FileExtensionForm.description }).then( _success, _error );
-                      $scope.FileExtensionForm.id = -1;
+                      $http.put(url, { "extension": $scope.filetypeForm.extension, "description" : $scope.filetypeForm.description }).then( _success, _error );
+                      $scope.filetypeForm.id = -1;
                     }
  /*         
                     $http({
@@ -51,7 +51,7 @@
                 };
          
                 //HTTP DELETE- delete file by Id
-                $scope.deleteFile = function(file) {
+                $scope.deleteFileType = function(filetype) {
                     $http({
                         method : 'DELETE',
                         url : 'http://localhost:8080/visog-job-portal-api/master/fileType/' + file.id
@@ -59,16 +59,16 @@
                 };
  
              // In case of edit, populate form fields and assign form.id with file id
-                $scope.editFile = function(file) {
+                $scope.editFileType = function(filetype) {
                   
-                    $scope.FileExtensionForm.extension = file.extension;
-                    $scope.FileExtensionForm.description = file.description;
-                    $scope.FileExtensionForm.id = file.id;
+                    $scope.filetypeForm.extension = file.extension;
+                    $scope.filetypeForm.description = file.description;
+                    $scope.filetypeForm.id = file.id;
                 };
          
                 /* Private Methods */
                 //HTTP GET- get all countries collection
-                function _refreshFileData() {
+                function _refreshFileTypeData() {
                     $http({
                         method : 'GET',
                         url : 'http://localhost:8080/visog-job-portal-api/master/fileType/'
@@ -96,9 +96,9 @@
          
                 //Clear the form
                 function _clearFormData() {
-                    $scope.FileExtensionForm.id = -1;
-                    $scope.FileExtensionForm.extension = "";
-                    $scope.FileExtensionForm.description = "";
+                    $scope.filetypeForm.id = -1;
+                    $scope.filetypeForm.extension = "";
+                    $scope.filetypeForm.description = "";
                 
                 };
             });

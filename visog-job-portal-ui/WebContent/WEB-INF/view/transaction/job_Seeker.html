@@ -25,7 +25,7 @@ $(document).ready(function(e){
 </script>
 <meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-    <script src="/visog-job-portal-ui/resources/js/addressType.js"></script>
+    <script src="/visog-job-portal-ui/resources/js/jobseeker.js"></script>
     <title>AngularJS $http Rest example</title>  
  <script type="text/javascript">
             var app = angular.module("JobSeekerManagement", []);
@@ -67,7 +67,7 @@ $(document).ready(function(e){
                         //Id is absent in form data, it is create new role operation
                         
                         method = "POST";
-                        url = 'http://localhost:8080/visog-job-portal-api/master/jobseeker/';
+                        url = 'http://localhost:8080/visog-job-portal-api/transaction/jobseeker/';
                         $http.post(url, { 	"resumeHeadline": $scope.jobseekerForm.resumeHeadline,
                         					"domain": $scope.jobseekerForm.domain,
                         					"companyName": $scope.jobseekerForm.companyName,
@@ -91,7 +91,7 @@ $(document).ready(function(e){
                         //Id is present in form data, it is edit role operation
                         id=$scopejobseekerForm.id;
                         method = "PUT";
-                        url = 'http://localhost:8080/visog-job-portal-api/master/jobseeker/'+ id;
+                        url = 'http://localhost:8080/visog-job-portal-api/transaction/jobseeker/'+ id;
                       $http.put(url, { 
                     	  "resumeHeadline": $scope.jobseekerForm.resumeHeadline,
       					"domain": $scope.jobseekerForm.domain,
@@ -127,7 +127,7 @@ $(document).ready(function(e){
                 $scope.deleteJobSeeker = function(jobseeker) {
                     $http({
                         method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/jobseeker/' + jobseeker.id
+                        url : 'http://localhost:8080/visog-job-portal-api/transaction/jobseeker/' + jobseeker.id
                     }).then(_success, _error);
                 };
  
@@ -156,7 +156,7 @@ $(document).ready(function(e){
                 function _refreshJobSeekerData() {
                     $http({
                         method : 'GET',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/jobseeker/'
+                        url : 'http://localhost:8080/visog-job-portal-api/transaction/jobseeker/'
                     }).then(function successCallback(response) {
                     	//alert(response.data.data)
                         $scope.jobseeker = response.data.data;
