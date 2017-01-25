@@ -88,7 +88,7 @@ app
 						$http(
 								{
 									method : 'GET',
-									url : 'http://localhost:8080/visog-job-portal-api/master/employersType/'
+									url : 'http://localhost:8080/visog-job-portal-api/master/employerType/'
 								}).then(function successCallback(response) {
 							// alert(response.data.data)
 							$scope.employertype = response.data.data;
