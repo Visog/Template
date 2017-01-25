@@ -6,7 +6,7 @@ app
 				"EmployerTypeController",
 				function($scope, $http) {
 
-					$scope.countries = [];
+					$scope.employertype = [];
 					$scope.employertypeForm = {
 					 id : -1,
 						name : "",
@@ -67,8 +67,8 @@ app
 						$http(
 								{
 									method : 'DELETE',
-									url : 'http://localhost:8080/visog-job-portal-api/master/state/'
-											+ state.id
+									url : 'http://localhost:8080/visog-job-portal-api/master/employerType/'
+											+ employertype.id
 								}).then(_success, _error);
 					};
 
@@ -76,8 +76,8 @@ app
 					// with role id
 					$scope.editEmployerType = function(employertype) {
 
-						$scope.employertypeForm.name = state.name;
-						$scope.employertypeForm.discription = state.discription;
+						$scope.employertypeForm.name = employertype.name;
+						$scope.employertypeForm.discription = employertype.discription;
 					
 						$scope.employertypeForm.id = employertype.id;
 					};
@@ -91,7 +91,7 @@ app
 									url : 'http://localhost:8080/visog-job-portal-api/master/employersType/'
 								}).then(function successCallback(response) {
 							// alert(response.data.data)
-							$scope.employersType = response.data.data;
+							$scope.employertype = response.data.data;
 						}, function errorCallback(response) {
 							console.log(response.statusText);
 						});
@@ -99,7 +99,7 @@ app
 
 					function _success(response) {
 
-						_refreshStateData();
+						_refreshEmployerTypeData();
 						_clearFormData()
 					}
 

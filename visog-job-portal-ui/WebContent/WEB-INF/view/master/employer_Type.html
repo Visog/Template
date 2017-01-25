@@ -276,7 +276,7 @@ tfoot tr th:last-child {
     
     <div class="content" ng-app="EmployerTypeManagement" ng-controller="EmployerTypeController">
          <h1>
-           EmployerType Master
+           Employer Type Master
         </h1> 
         <form ng-submit="submitEmployerType()">
             <table>
@@ -306,7 +306,7 @@ tfoot tr th:last-child {
                
             </tr>
  
-            <tr ng-repeat="employertype in employertype">
+            <tr ng-repeat="employertype in employertypes">
        
     <td> {{ employertype.name }}</td>
     <td >{{ employertype.description }}</td>  
