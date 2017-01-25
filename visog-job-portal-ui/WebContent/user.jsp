@@ -53,7 +53,7 @@ $(document).ready(function(e){
 				<li class="child"><a href="/visog-job-portal-ui/courses">Courses</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/specialization">Specialization</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/university">University</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/educationtype">Education Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/educationType">Education Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/languages">Languages </a></li>
 				<li class="child"><a href="/visog-job-portal-ui/currency">Currency</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/industry">Industry</a></li>

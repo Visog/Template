@@ -79,9 +79,9 @@ public class HelloSpring4Controller {
 		return "master/university";
 	}
 
-	@RequestMapping(value = "/educationtype", method = RequestMethod.GET)
-	public String educationtype() {
-		return "master/education_Type";
+	@RequestMapping(value = "/educationType", method = RequestMethod.GET)
+	public String educationType() {
+		return "master/educationType";
 	}
 
 	@RequestMapping(value = "/languages", method = RequestMethod.GET)
