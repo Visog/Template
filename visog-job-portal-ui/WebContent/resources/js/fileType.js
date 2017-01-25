@@ -61,9 +61,9 @@
              // In case of edit, populate form fields and assign form.id with file id
                 $scope.editFileType = function(filetype) {
                   
-                    $scope.filetypeForm.extension = file.extension;
-                    $scope.filetypeForm.description = file.description;
-                    $scope.filetypeForm.id = file.id;
+                    $scope.filetypeForm.extension = filetype.extension;
+                    $scope.filetypeForm.description = filetype.description;
+                    $scope.filetypeForm.id = filetype.id;
                 };
          
                 /* Private Methods */
@@ -74,7 +74,7 @@
                         url : 'http://localhost:8080/visog-job-portal-api/master/fileType/'
                     }).then(function successCallback(response) {
                     //	alert(response.data.data)
-                        $scope.files = response.data.data;
+                        $scope.filetype = response.data.data;
                     }, function errorCallback(response) {
                         console.log(response.statusText);
                     });
@@ -85,7 +85,7 @@
                 		{
                 	alert(response.data.message);
                			 } 
-                    _refreshFileData();
+                    _refreshFileTypeData();
                     _clearFormData()
                 }
          

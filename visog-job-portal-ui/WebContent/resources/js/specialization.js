@@ -6,7 +6,7 @@
             app.controller("SpecilizationController", function($scope, $http) {
          
                
-                $scope.Specilization = [];
+                $scope.specilization = [];
                 $scope.specilizationForm = {
                   // id : -1,
                     name : "",
@@ -53,7 +53,7 @@
                 $scope.deleteSpecilization = function(specilization) {
                     $http({
                         method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/specialization/' + specialization.id
+                        url : 'http://localhost:8080/visog-job-portal-api/master/specialization/' + specilization.id
                     }).then(_success, _error);
                 };
  
