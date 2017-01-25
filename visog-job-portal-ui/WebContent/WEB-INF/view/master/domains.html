@@ -15,93 +15,95 @@ $(document).ready(function(e){
 		$(this).toggleClass('tap');
 		
 	});
+	
 	$('.transactions').click(function(){
 		$(this).toggleClass('tap');
 		
 	});
+	
 });
 </script>
 <meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-    
+    <script src="/visog-job-portal-ui/resources/js/domains.js"></script>
     <title>AngularJS $http Rest example</title>  
  <script type="text/javascript">
-            var app = angular.module("DomainsManagement", []);
+            var app = angular.module("DomainManagement", []);
          
             //Controller Part
-            app.controller("DomainsController", function($scope, $http) {
+            app.controller("DomainController", function($scope, $http) {
          
                
-                $scope.domains = [];
-                $scope.domainsForm = {
+                $scope.domain = [];
+                $scope.domainForm = {
                   //  id : -1,
                     name : "",
                     description : ""
                 };
          
                 //Now load the data from server
-                _refreshDomainsData();
+                _refreshDomainData();
          
-                //HTTP POST/PUT methods for add/edit role 
+                //HTTP POST/PUT methods for add/edit domain 
                 // with the help of id, we are going to find out whether it is put or post operation
                 
-                $scope.submitDomains = function() {
+                $scope.submitDomain = function() {
          
                     var method = "";
                     var url = "";
-                   // alert($scope.roleForm.id);
-                    if ($scope.domainsForm.id == -1 || $scope.domainsForm.id == undefined) {
-                        //Id is absent in form data, it is create new role operation
+                   // alert($scope.domainForm.id);
+                    if ($scope.domainForm.id == -1 || $scope.domainForm.id == undefined) {
+                        //Id is absent in form data, it is create new domain operation
                         
                         method = "POST";
-                        url = 'http://localhost:8080/visog-job-portal-api/master/domains/';
-                        $http.post(url, { "name": $scope.domainsForm.name, "description" : $scope.domainsForm.description }).then( _success, _error ); 
+                        url = 'http://localhost:8080/visog-job-portal-api/master/domain/';
+                        $http.post(url, { "name": $scope.domainForm.name, "description" : $scope.domainForm.description }).then( _success, _error ); 
                     
                     } else {
                     	 
-                        //Id is present in form data, it is edit role operation
-                        id=$scope.domainsForm.id;
+                        //Id is present in form data, it is edit domain operation
+                        id=$scope.domainForm.id;
                         method = "PUT";
-                        url = 'http://localhost:8080/visog-job-portal-api/master/domains/'+ id;
-                      $http.put(url, { "name": $scope.domainsForm.name, "description" : $scope.domainsForm.description }).then( _success, _error );
-                      $scope.domainsForm.id = -1;
+                        url = 'http://localhost:8080/visog-job-portal-api/master/domain/'+ id;
+                      $http.put(url, { "name": $scope.domainForm.name, "description" : $scope.domainForm.description }).then( _success, _error );
+                      $scope.domainForm.id = -1;
                     }
  /*         
                     $http({
                         method : method,
                         url : url,
-                        data : angular.toJson($scope.roleForm),
+                        data : angular.toJson($scope.domainForm),
                         headers : {
                             'Content-Type' : 'application/json'
                         }
                     }).then( _success, _error ); */
                 };
          
-                //HTTP DELETE- delete role by Id
-                $scope.deleteDomains = function(domains) {
+                //HTTP DELETE- delete domain by Id
+                $scope.deleteDomain = function(domain) {
                     $http({
                         method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/domains/' + domains.id
+                        url : 'http://localhost:8080/visog-job-portal-api/master/domain/' + domain.id
                     }).then(_success, _error);
                 };
  
-             // In case of edit, populate form fields and assign form.id with role id
-                $scope.editDomains = function(domain) {
+             // In case of edit, populate form fields and assign form.id with domain id
+                $scope.editDomain = function(domain) {
                   
-                    $scope.domainsForm.name = domain.name;
-                    $scope.domainsForm.description = domain.description;
-                    $scope.domainsForm.id = domain.id;
+                    $scope.domainForm.name = domain.name;
+                    $scope.domainForm.description = domain.description;
+                    $scope.domainForm.id = domain.id;
                 };
          
                 /* Private Methods */
                 //HTTP GET- get all countries collection
-                function _refreshDomainsData() {
+                function _refreshDomainData() {
                     $http({
                         method : 'GET',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/domains/'
+                        url : 'http://localhost:8080/visog-job-portal-api/master/domain/'
                     }).then(function successCallback(response) {
                     	//alert(response.data.data)
-                        $scope.domains = response.data.data;
+                        $scope.domain = response.data.data;
                     }, function errorCallback(response) {
                         console.log(response.statusText);
                     });
@@ -109,7 +111,7 @@ $(document).ready(function(e){
          
                 function _success(response) {
                 	
-                    _refreshDomainsData();
+                    _refreshDomainData();
                     _clearFormData()
                 }
          
@@ -120,9 +122,9 @@ $(document).ready(function(e){
          
                 //Clear the form
                 function _clearFormData() {
-                  //  $scope.roleForm.id = -1;
-                    $scope.domainsForm.name = "";
-                    $scope.domainsForm.description = "";
+                  //  $scope.domainForm.id = -1;
+                    $scope.domainForm.name = "";
+                    $scope.domainForm.description = "";
                 
                 };
             });
@@ -210,8 +212,7 @@ tfoot tr th:last-child {
         </style>
     <head>
     <body >
-    
-	<div id="header">
+    <div id="header">
 		<div class="logo">
 			<a href="#">Job<span>Portal</span></a>
 		</div>
@@ -243,6 +244,7 @@ tfoot tr th:last-child {
 				<li class="child"><a href="/visog-job-portal-ui/employmenttype">employment Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employertype">employer Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/filetype">file Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/domain">Domain</a></li>
 				
 				</ul>
 				</li>
@@ -269,23 +271,23 @@ tfoot tr th:last-child {
 				<li><a href="/visog-job-portal-ui/user">login</a></li>
 			</ul>
 		</div>
-    <div class="content" ng-app="DomainsManagement" ng-controller="DomainsController">
+    <div class="content" ng-app="DomainManagement" ng-controller="DomainController">
          <h1>
-           Domains Master
+           Domain Master
         </h1> 
-        <form ng-submit="submitDomains()">
+        <form ng-submit="submitDomain()">
             <table>
                
                 <tr>
-                    <th colspan="2">Add/Edit Domain</th>
+                    <th colspan="2">Add/Edit domain</th>
                  </tr>
                 <tr>
-                    <td>Domains Name</td>
-                    <td><input type="text" ng-model="domainsForm.name" /></td>
+                    <td>Name</td>
+                    <td><input type="text" ng-model="domainForm.name" /></td>
                 </tr>
                 <tr>
                     <td>Description</td>
-                    <td><input type="text" ng-model="domainsForm.description"  /></td>
+                    <td><input type="text" ng-model="domainForm.description"  /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" value="Submit" class="blue-button" /></td>
@@ -301,20 +303,16 @@ tfoot tr th:last-child {
                
             </tr>
  
-            <tr ng-repeat="domain in domains">
+            <tr ng-repeat="domain in domain">
        
     <td> {{ domain.name }}</td>
     <td >{{ domain.description }}</td>  
                 
-                <td><a ng-click="editDomains(domain)" class="blue-button">Edit</a> | <a ng-click="deleteDomains(domain)" class="red-button">Delete</a></td>
+                <td><a ng-click="editDomain(domain)" class="blue-button">Edit</a> | <a ng-click="deleteDomain(domain)" class="red-button">Delete</a></td>
             </tr>
  
-        </table>
- 
-       </div>
-       </div>
- 
-       
-      
+        </table> 
+      </div>
+      </div>
   </body>
 </html>
