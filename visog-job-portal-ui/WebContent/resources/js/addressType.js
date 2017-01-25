@@ -5,8 +5,8 @@
             app.controller("AddressTypeController", function($scope, $http) {
          
                
-                $scope.addresstype = [];
-                $scope.addresstypeForm = {
+                $scope.addressType = [];
+                $scope.addressTypeForm = {
                  id : -1,
                     name : "",
                     description : ""
@@ -23,21 +23,21 @@
                     var method = "";
                     var url = "";
                    // alert($scope.roleForm.id);
-                    if ($scope.addresstypeForm.id == -1 || $scope.addresstypeForm.id == undefined) {
+                    if ($scope.addressTypeForm.id == -1 || $scope.addressTypeForm.id == undefined) {
                         //Id is absent in form data, it is create new role operation
                         
                         method = "POST";
                         url = 'http://localhost:8080/visog-job-portal-api/master/addressType/';
-                        $http.post(url, { "name": $scope.addresstypeForm.name, "description" : $scope.addresstypeForm.description }).then( _success, _error ); 
+                        $http.post(url, { "name": $scope.addressTypeForm.name, "description" : $scope.addressTypeForm.description }).then( _success, _error ); 
                     
                     } else {
                     	 
                         //Id is present in form data, it is edit role operation
-                        id=$scope.addresstypeForm.id;
+                        id=$scope.addressTypeForm.id;
                         method = "PUT";
                         url = 'http://localhost:8080/visog-job-portal-api/master/addressType/'+ id;
-                      $http.put(url, { "name": $scope.addresstypeForm.name, "description" : $scope.addresstypeForm.description }).then( _success, _error );
-                      $scope.addresstypeForm.id = -1;
+                      $http.put(url, { "name": $scope.addressTypeForm.name, "description" : $scope.addressTypeForm.description }).then( _success, _error );
+                      $scope.addressTypeForm.id = -1;
                     }
  /*         
                     $http({
@@ -51,7 +51,7 @@
                 };
          
                 //HTTP DELETE- delete role by Id
-                $scope.deleteAddressType = function(addresstype) {
+                $scope.deleteAddressType = function(addressType) {
                     $http({
                         method : 'DELETE',
                         url : 'http://localhost:8080/visog-job-portal-api/master/addressType/' + addresstype.id
@@ -59,11 +59,11 @@
                 };
  
              // In case of edit, populate form fields and assign form.id with role id
-                $scope.editAddressType = function(addresstype) {
+                $scope.editAddressType = function(addressType) {
                   
-                    $scope.addresstypeForm.name = addresstype.name;
-                    $scope.addresstypeForm.description = addresstype.description;
-                    $scope.addresstypeForm.id = addresstype.id;
+                    $scope.addressTypeForm.name = addressType.name;
+                    $scope.addressTypeForm.description = addressType.description;
+                    $scope.addressTypeForm.id = addressType.id;
                 };
          
                 /* Private Methods */
@@ -74,7 +74,7 @@
                         url : 'http://localhost:8080/visog-job-portal-api/master/addressType/'
                     }).then(function successCallback(response) {
                     	//alert(response.data.data)
-                        $scope.address = response.data.data;
+                        $scope.addressType = response.data.data;
                     }, function errorCallback(response) {
                         console.log(response.statusText);
                     });
@@ -96,9 +96,9 @@
          
                 //Clear the form
                 function _clearFormData() {
-                    $scope.addresstypeForm.id = -1;
-                    $scope.addresstypeForm.name = "";
-                    $scope.addresstypeForm.description = "";
+                    $scope.addressTypeForm.id = -1;
+                    $scope.addressTypeForm.name = "";
+                    $scope.addressTypeForm.description = "";
                 
                 };
             });
