@@ -27,47 +27,47 @@ $(document).ready(function(e){
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
       <script src="/visog-job-portal-ui/resources/js/employerType.js"></script>
     
-    <title>AngularJS $http Rest example</title>  
-<!--  <script type="text/javascript">
-            var app = angular.module("RoleManagement", []);
+    <title>AngularJS $http Rest example</title> 
+     <script type="text/javascript">
+            var app = angular.module("EmployerTypeManagement", []);
          
             //Controller Part
-            app.controller("RoleController", function($scope, $http) {
+            app.controller("EmployerTypeController", function($scope, $http) {
          
                
-                $scope.countries = [];
-                $scope.roleForm = {
-                  //  id : -1,
-                    name : "",
-                    description : ""
+                $scope.employertype = [];
+                $scope.employertypeForm = {
+                	//	 id : -1,
+ 						name : "",
+ 						discription :""
                 };
          
                 //Now load the data from server
-                _refreshRoleData();
+                _refreshEmployerTypeData();
          
                 //HTTP POST/PUT methods for add/edit role 
                 // with the help of id, we are going to find out whether it is put or post operation
                 
-                $scope.submitRole = function() {
+                $scope.submiEmployerType = function() {
          
                     var method = "";
                     var url = "";
                    // alert($scope.roleForm.id);
-                    if ($scope.roleForm.id == -1 || $scope.roleForm.id == undefined) {
+                    if ($scope.employertypeForm.id == -1 || $scope.employertypeForm.id == undefined) {
                         //Id is absent in form data, it is create new role operation
                         
                         method = "POST";
-                        url = 'http://localhost:8080/visog-job-portal-api/master/roles/';
-                        $http.post(url, { "name": $scope.roleForm.name, "description" : $scope.roleForm.description }).then( _success, _error ); 
+                        url = 'http://localhost:8080/visog-job-portal-api/master/employerType/';
+                        $http.post(url, { "name": $scope.employertypeForm.name, "description" : $scope.employertypeForm.description }).then( _success, _error ); 
                     
                     } else {
                     	 
                         //Id is present in form data, it is edit role operation
-                        id=$scope.roleForm.id;
+                        id=$scope.employertypeForm.id;
                         method = "PUT";
-                        url = 'http://localhost:8080/visog-job-portal-api/master/roles/'+ id;
-                      $http.put(url, { "name": $scope.roleForm.name, "description" : $scope.roleForm.description }).then( _success, _error );
-                      $scope.roleForm.id = -1;
+                        url = 'http://localhost:8080/visog-job-portal-api/master/employerType/'+ id;
+                      $http.put(url, { "name": $scope.employertypeForm.name, "description" : $scope.employertypeForm.description }).then( _success, _error );
+                      $scope.employertypeForm.id = -1;
                     }
  /*         
                     $http({
@@ -81,27 +81,27 @@ $(document).ready(function(e){
                 };
          
                 //HTTP DELETE- delete role by Id
-                $scope.deleteRole = function(role) {
+                $scope.deleteEmployerType = function(employertype) {
                     $http({
                         method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/roles/' + role.id
+                        url : 'http://localhost:8080/visog-job-portal-api/master/employerType/' + employertype.id
                     }).then(_success, _error);
                 };
  
              // In case of edit, populate form fields and assign form.id with role id
-                $scope.editRole = function(role) {
+                $scope.editEmployerType = function(employertype) {
                   
-                    $scope.roleForm.name = role.name;
-                    $scope.roleForm.description = role.description;
-                    $scope.roleForm.id = role.id;
+                    $scope.employertypeForm.name = employertype.name;
+                    $scope.employertypeForm.description = employertype.description;
+                    $scope.employertypeForm.id = employertype.id;
                 };
          
                 /* Private Methods */
                 //HTTP GET- get all countries collection
-                function _refreshRoleData() {
+                function _refreshEmployerTypeData() {
                     $http({
                         method : 'GET',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/roles/'
+                        url : 'http://localhost:8080/visog-job-portal-api/master/employerType/'
                     }).then(function successCallback(response) {
                     	//alert(response.data.data)
                         $scope.roles = response.data.data;
@@ -112,7 +112,7 @@ $(document).ready(function(e){
          
                 function _success(response) {
                 	
-                    _refreshRoleData();
+                    _refreshEmployerTypeData();
                     _clearFormData()
                 }
          
@@ -124,12 +124,12 @@ $(document).ready(function(e){
                 //Clear the form
                 function _clearFormData() {
                   //  $scope.roleForm.id = -1;
-                    $scope.roleForm.name = "";
-                    $scope.roleForm.description = "";
+                    $scope.employertypeForm.name = "";
+                    $scope.employertypeForm.description = "";
                 
                 };
             });
-        </script> -->
+        </script> 
         <style>
            
 .blue-button{
