@@ -54,7 +54,7 @@
                 $scope.deleteFileType = function(filetype) {
                     $http({
                         method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/fileType/' + file.id
+                        url : 'http://localhost:8080/visog-job-portal-api/master/fileType/' + filetype.id
                     }).then(_success, _error);
                 };
  
