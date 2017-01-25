@@ -53,12 +53,12 @@ $(document).ready(function(e){
 				<li class="child"><a href="/visog-job-portal-ui/courses">courses</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/specialization">specialization</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/university">university</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/educationtype">education Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/educationType">Education Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/languages">languages </a></li>
 				<li class="child"><a href="/visog-job-portal-ui/currency">currency</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/industry">industry</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/domains">domains</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/jobrole">job Role</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/domains">Domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobRole">Job Role</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/status">status</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employmenttype">employment Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employertype">employer Type</a></li>
