@@ -27,68 +27,88 @@ $(document).ready(function(e){
 <meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 <script src="/visog-job-portal-ui/resources/js/address.js"></script>
-<!-- <script>bbmb
-	var app = angular.module("CountryManagement", []);
+ <script>bbmb
+	var app = angular.module("AddressManagement", []);
 <commit2>
 	//Controller Part
 	app
 			.controller(
-					"CountryController",
+					"AddressController",
 					function($scope, $http) {
 
-						$scope.countries = [];
+						$scope.address = [];
 						$scope.countryForm = {
 							// id : -1,
-							name : "",
-							code : "",
-							orderNum : ""
+								addresstype : "",
+								line1 : "",
+								line2 : "",
+								city : "",
+								state : "",
+								country : "",
+								zipcode : "",
+								associatedtype : "",
+								associatedid : ""
 						};
 
 						// Now load the data from server
-						_refreshCountryData();
+						_refreshAddressData();
 
 						// HTTP POST/PUT methods for add/edit role
 						// with the help of id, we are going to find out whether it
 						// is put or post operation
 
-						$scope.submitCountry = function() {
+						$scope.submitAddress = function() {
 
 							var method = "";
 							var url = "";
 							// alert($scope.genderForm.id);
 							if ($scope.countryForm.id == -1
-									|| $scope.countryForm.id == undefined) {
+									|| $scope.addressForm.id == undefined) {
 								// Id is absent in form data, it is create new role
 								// operation
 
 								method = "POST";
-								url = 'http://localhost:8080/visog-job-portal-api/master/country/';
+								url = 'http://localhost:8080/visog-job-portal-api/transaction/address/';
 								$http
 										.post(
 												url,
 												{
-													"name" : $scope.countryForm.name,
-													"code" : $scope.countryForm.code,
-													"orderNum" : $scope.countryForm.orderNum
+													"addresstype" : $scope.addressForm.addresstype,
+													"line1" : $scope.addressForm.line1,
+													"line2" : $scope.addressForm.line2,
+													"city" : $scope.addressForm.city,
+													"state" : $scope.addressForm.state,
+													"country" : $scope.addressForm.country,
+													"zipcode" : $scope.addressForm.zipcode,
+													"associatedtype" : $scope.addressForm.associatedtype,
+													"associatedid" : $scope.addressForm.associatedid
+													
 												}).then(_success, _error);
 
 							} else {
 
 								// Id is present in form data, it is edit role
 								// operation
-								id = $scope.countryForm.id;
+								id = $scope.addressForm.id;
+								
 								method = "PUT";
-								url = 'http://localhost:8080/visog-job-portal-api/master/country/'
+								url = 'http://localhost:8080/visog-job-portal-api/transaction/address/'
 										+ id;
 								$http
 										.put(
 												url,
 												{
-													"name" : $scope.countryForm.name,
-													"code" : $scope.countryForm.code,
-													"orderNum" : $scope.countryForm.orderNum
+													"addresstype" : $scope.addressForm.addresstype,
+													"line1" : $scope.addressForm.line1,
+													"line2" : $scope.addressForm.line2,
+													"city" : $scope.addressForm.city,
+													"state" : $scope.addressForm.state,
+													"country" : $scope.addressForm.country,
+													"zipcode" : $scope.addressForm.zipcode,
+													"associatedtype" : $scope.addressForm.associatedtype,
+													"associatedid" : $scope.addressForm.associatedid
 												}).then(_success, _error);
-								$scope.countryForm.id = -1;
+								$scope.addressForm.id = -1;
 							}
 							/*
 							 * $http({ method : method, url : url, data :
@@ -99,35 +119,41 @@ $(document).ready(function(e){
 						};
 
 						// HTTP DELETE- delete role by Id
-						$scope.deleteCountry = function(country) {
+						$scope.deleteAddress = function(address) {
 							$http(
 									{
 										method : 'DELETE',
-										url : 'http://localhost:8080/visog-job-portal-api/master/country/'
-												+ country.id
+										url : 'http://localhost:8080/visog-job-portal-api/master/address/'
+												+ address.id
 									}).then(_success, _error);
 						};
 
 						// In case of edit, populate form fields and assign form.id
 						// with role id
-						$scope.editCountry = function(country) {
+						$scope.editAddress = function(address) {
 
-							$scope.countryForm.name = country.name;
-							$scope.countryForm.code = country.code;
-							$scope.countryForm.orderNum = country.orderNum;
-							$scope.countryForm.id =country.id;
+							$scope.addressForm.addresstype = address.addresstype;
+							$scope.addressForm.line1 = address.line1;
+							$scope.addressForm.line2 = address.line2;
+							$scope.addressForm.city = address.city;
+							$scope.addressForm.state = address.state;
+							$scope.addressForm.country = address.country;
+							$scope.addressForm.zipcode = address.zipcode;
+							$scope.addressForm.associatedtype = address.associatedtype;
+							$scope.addressForm.associatedid = address.associatedid;
+							$scope.addressForm.id =address.id;
 						};
 
 						/* Private Methods */
 						// HTTP GET- get all countries collection
-						function _refreshCountryData() {
+						function _refreshAddressData() {
 							$http(
 									{
 										method : 'GET',
-										url : 'http://localhost:8080/visog-job-portal-api/master/country/'
+										url : 'http://localhost:8080/visog-job-portal-api/master/address/'
 									}).then(function successCallback(response) {
 								// alert(response.data.data)
-								$scope.countrys = response.data.data;
+								$scope.address = response.data.data;
 							}, function errorCallback(response) {
 								console.log(response.statusText);
 							});
@@ -135,7 +161,7 @@ $(document).ready(function(e){
 
 						function _success(response) {
 
-							_refreshCountryData();
+							_refreshAddressData();
 							_clearFormData()
 						}
 
@@ -147,14 +173,20 @@ $(document).ready(function(e){
 						// Clear the form
 						function _clearFormData() {
 							// $scope.genderForm.id = -1;
-							$scope.countryForm.name = "";
-							$scope.countryForm.code = "";
-							$scope.countryForm.orderNum = "";
+							$scope.addressForm.addresstype = "";
+							$scope.addressForm.line1 = "";
+							$scope.addressForm.line2 = "";
+							$scope.addressForm.city = "";
+							$scope.addressForm.state = "";
+							$scope.addressForm.country = "";
+							$scope.addressForm.zipcode = "";
+							$scope.addressForm.associatedtype = "";
+							$scope.addressForm.associatedid = "";
 
 						}
 						;
 					});
-</script> -->
+</script> 
 <style>
 .blue-button {
 	background: #25A6E1;
@@ -346,13 +378,6 @@ td, th {
 				<td>Associated Id</td>
 				<td><input type="text" ng-model="addressForm.associatedid" /></td>
 			</tr>
-
-			
-			<!-- <tr>
-				<td>OrderNum</td>
-				<td><input type="text" ng-model="countryForm.orderNum" /></td>
-			</tr> -->
-			
 			<tr>
 				<td colspan="2"><input type="submit" value="Submit"
 					class="blue-button" /></td>
@@ -371,7 +396,7 @@ td, th {
 			<th>ZipCode</th>
 			<th>Associated  Type</th>
 			<th>Associated Id</th>
-			<!-- <th>OrderNum</th> -->
+			
 			<th></th>
 
 		</tr>
@@ -396,10 +421,9 @@ td, th {
 			
 						<td>{{ address.associatedid }}</td>
 			
-			<!-- <td>{{ country.orderNum }}</td> -->
+			
 
-			<td><a ng-click="editAddress(address)" class="blue-button">Edit</a>
-				| <a ng-click="deleteAddress(address)" class="red-button">Delete</a></td>
+			<td><a ng-click="editAddress(address)" class="blue-button">Edit</a>	| <a ng-click="deleteAddress(address)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>
