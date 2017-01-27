@@ -169,7 +169,7 @@ public class HelloSpring4Controller {
 		return "transaction/language_Known";
 	}
 
-	@RequestMapping(value = "/postjob", method = RequestMethod.GET)
+	@RequestMapping(value = "/postJob", method = RequestMethod.GET)
 	public String postjob() {
 		return "transaction/post_Job";
 	}
