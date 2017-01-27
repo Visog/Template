@@ -1,0 +1,350 @@
+
+<html>
+  <head>  
+  <link rel="stylesheet" type="text/css" href="resources/css/user.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script src="resources/js/jquery-3.1.1.min.js"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(e){
+	$('.masters').click(function(){
+		$(this).toggleClass('tap');
+		
+	});
+	
+	$('.transactions').click(function(){
+		$(this).toggleClass('tap');
+		
+	});
+	
+});
+</script>
+<meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="/visog-job-portal-ui/resources/js/employementType.js"></script>
+    <title>AngularJS $http Rest example</title>  
+ <script type="text/javascript">
+            var app = angular.module("EmployementTypeManagement", []);
+         
+            //Controller Part
+            app.controller("EmployementTypeController", function($scope, $http) {
+         
+               
+                $scope.employementType = [];
+                $scope.employementTypeForm = {
+                  //  id : -1,
+                    statuscode : "",
+                    status : "",
+                    statusdescription : "",
+                    data : ""
+                };
+         
+                //Now load the data from server
+                _refreshEmployementTypeData();
+         
+                //HTTP POST/PUT methods for add/edit jobRole 
+                // with the help of id, we are going to find out whether it is put or post operation
+                
+                $scope.submitEmployementType = function() {
+         
+                    var method = "";
+                    var url = "";
+                   // alert($scope.jobRoleForm.id);
+                    if ($scope.employementTypeForm.id == -1 || $scope.employementTypeForm.id == undefined) {
+                        //Id is absent in form data, it is create new jobRole operation
+                        
+                        method = "POST";
+                        url = 'http://localhost:8080/visog-job-portal-api/master/employementType/';
+                        $http.post
+                        (url, {
+                        		"statuscode": $scope.employementTypeForm.code,
+                        		"status" : $scope.employementTypeForm.status,
+                        		"statusdescription": $scope.employementTypeForm.description,
+                        		"data": $scope.employementTypeForm.data
+                   			 ).then( _success, _error ); 
+                        }
+                     
+                    } else {
+                    	 
+                        //Id is present in form data, it is edit jobRole operation
+                        id=$scope.employementTypeForm.id;
+                        method = "PUT";
+                        url = 'http://localhost:8080/visog-job-portal-api/master/employementType/'+ id;
+                      $http.put
+                      (url, { 
+                    	  "statuscode": $scope.employementTypeForm.code, 
+                    	  "status" : $scope.employementTypeForm.status,
+                    	  "statusdescription": $scope.employementTypeForm.description,
+                    	  "data": $scope.employementTypeForm.data
+                    	  }).then( _success, _error );
+                      }
+                      $scope.employementTypeForm.id = -1;
+                    }
+ /*         
+                    $http({
+                        method : method,
+                        url : url,
+                        data : angular.toJson($scope.jobRoleForm),
+                        headers : {
+                            'Content-Type' : 'application/json'
+                        }
+                    }).then( _success, _error ); */
+                };
+         
+                //HTTP DELETE- delete jobRole by Id
+                $scope.deleteEmployementType = function(employementType) {
+                    $http({
+                        method : 'DELETE',
+                        url : 'http://localhost:8080/visog-job-portal-api/master/employementType/' + employementType.id
+                    }).then(_success, _error);
+                };
+ 
+             // In case of edit, populate form fields and assign form.id with jobRole id
+                $scope.editEmployementType = function(employementType) {
+                  
+                    $scope.employementTypeForm.code = employementType.code;
+                    $scope.employementTypeForm.status = employementType.status;
+                    $scope.employementTypeForm.description = employementType.description;
+                    $scope.employementTypeForm.data = employementType.data;
+                    
+                    $scope.employementTypeForm.id = employementType.id;
+                };
+         
+                /* Private Methods */
+                //HTTP GET- get all countries collection
+                function _refreshEmployementTypeData() {
+                    $http({
+                        method : 'GET',
+                        url : 'http://localhost:8080/visog-job-portal-api/master/employementType/'
+                    }).then(function successCallback(response) {
+                    	//alert(response.data.data)
+                        $scope.jobRole = response.data.data;
+                    }, function errorCallback(response) {
+                        console.log(response.statusText);
+                    });
+                }
+         
+                function _success(response) {
+                	
+                    _refreshEmployementTypeData();
+                    _clearFormData()
+                }
+         
+                function _error(response) {
+                	
+                    console.log(response.statusText);
+                }
+         
+                //Clear the form
+                function _clearFormData() {
+                  //  $scope.jobRoleForm.id = -1;
+                    $scope.employementTypeForm.code = "";
+                    $scope.employementTypeForm.description = "";
+                    $scope.employementType.status ="";
+                    $scope.employementType.data=""
+                
+                };
+            });
+        </script>
+        <style>
+           
+.blue-button{
+	background: #25A6E1;
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#25A6E1',endColorstr='#188BC0',GradientType=0);
+	padding:3px 5px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:4px;
+	border:1px solid #1A87B9
+}     
+
+.red-button{
+	background: #CD5C5C;
+
+	padding:3px 5px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:4px;
+	border:1px solid #CD5C5C
+}      
+
+table {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+   width: 50%;
+}
+
+caption {
+  text-align: left;
+  color: silver;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+th {
+  background: SteelBlue;
+  color: white;
+}
+
+
+tbody tr:nth-child(even) {
+  background: WhiteSmoke;
+}
+
+tbody tr td:nth-child(2) {
+  text-align:center;
+}
+
+tbody tr td:nth-child(3),
+tbody tr td:nth-child(4) {
+  text-align: center;
+  font-family: monospace;
+}
+
+tfoot {
+  background: SeaGreen;
+  color: white;
+  text-align: right;
+}
+
+tfoot tr th:last-child {
+  font-family: monospace;
+}
+
+            td,th{
+                border: 1px solid gray;
+                width: 25%;
+                text-align: left;
+                padding: 5px 10px;
+            }
+          
+            
+            
+        </style>
+    <head>
+    <body >
+    <div id="header">
+		<div class="logo">
+			<a href="#">Job<span>Portal</span></a>
+		</div>
+
+	</div>
+	
+	<div id="container">
+		<div class="sidebar">
+			<ul id="nav">
+
+				<li class="masters"><a href="#">Masters<span class="sub"></span></a>
+				<ul>
+				<li class="child"><a href="/visog-job-portal-ui/roles">roles</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/gender">gender</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/country">country</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/state">state</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/city">city</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/addresstype">address Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/courses">courses</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/specialization">specialization</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/university">university</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/educationtype">education Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/languages">languages </a></li>
+				<li class="child"><a href="/visog-job-portal-ui/currency">currency</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/industry">industry</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/domains">Domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobRole">Job Role</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/status">status</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employmenttype">employment Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employertype">employer Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/filetype">file Type</a></li>
+				
+				
+				</ul>
+				</li>
+				
+				<li class="transactions"><a href="#">Transactions<span class="sub"></span></a>
+				<ul>
+				<li class="child"><a href="/visog-job-portal-ui/users">users</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/address">address</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employer">employer</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postjob">post Job</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postjobdomains">post Job Domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/files">files</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employerjobseeker">employer Job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postjobseeker">post Job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobseeker">job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/educationdetails">education Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/languagesknown">languages Known</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/projectdetails">project Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/experiencedetails">experience Details</a></li>
+				
+				</ul>
+				</li>
+				<li><a href="/visog-job-portal-ui/reg">registration</a></li>
+				<li><a href="/visog-job-portal-ui/user">login</a></li>
+			</ul>
+		</div>
+    <div class="content" ng-app="EmployementTypeManagement" ng-controller="EmployementTypeController">
+         <h1>
+           Employement Type 
+        </h1> 
+        <form ng-submit="submitEmployementType()">
+            <table>
+               
+                <tr>
+                    <th colspan="2">Add/Edit EmployementType</th>
+                 </tr>
+                <tr>
+                    <td>Status Code</td>
+                    <td><input type="text" ng-model="employementTypeForm.code" /></td>
+                </tr>
+                <tr>
+                    <td>Status Description</td>
+                    <td><input type="text" ng-model="employementTypeForm.description"  /></td>
+                </tr>
+                <tr>
+                    <td>Status </td>
+                    <td><input type="text" ng-model="employementTypeForm.status" /></td>
+                </tr>
+                <tr>
+                    <td>Data</td>
+                    <td><input type="text" ng-model="employementTypeForm.data"  /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" class="blue-button" /></td>
+                </tr>
+            </table>
+        </form>
+        <table>
+            <tr>
+              
+                <th>Status Code</th>
+                <th>Status Description</th>
+                <th>Status</th>
+                <th>Data</th>
+               
+            </tr>
+ 
+            <tr ng-repeat="employementType in employementTypes">
+       
+    <td> {{ employementType.code }}</td>
+    <td >{{ employementType.description }}</td>
+    <td>{{employementType.status}}</td>
+    <td>{{employementType.data}}</td>  
+                
+                <td><a ng-click="editEmployementType(employementType)" class="blue-button">Edit</a> | <a ng-click="deleteEmployementType(employementType)" class="red-button">Delete</a></td>
+            </tr>
+ 
+        </table> 
+      </div>
+      </div>
+  </body>
+</html>
