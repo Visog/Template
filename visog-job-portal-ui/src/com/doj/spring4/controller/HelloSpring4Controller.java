@@ -59,7 +59,7 @@ public class HelloSpring4Controller {
 		return "master/city";
 	}
 
-	@RequestMapping(value = "/addresstype", method = RequestMethod.GET)
+	@RequestMapping(value = "/addressType", method = RequestMethod.GET)
 	public String addresstype() {
 		return "master/address_Type";
 	}
@@ -114,17 +114,17 @@ public class HelloSpring4Controller {
 		return "master/status";
 	}
 
-	@RequestMapping(value = "/employmenttype", method = RequestMethod.GET)
+	@RequestMapping(value = "/employmentType", method = RequestMethod.GET)
 	public String employmenttype() {
 		return "master/employmentType";
 	}
 
-	@RequestMapping(value = "/employertype", method = RequestMethod.GET)
+	@RequestMapping(value = "/employerType", method = RequestMethod.GET)
 	public String employertype() {
 		return "master/employer_Type";
 	}
 
-	@RequestMapping(value = "/filetype", method = RequestMethod.GET)
+	@RequestMapping(value = "/fileType", method = RequestMethod.GET)
 	public String filetype() {
 		return "master/file_Type";
 	}
@@ -139,17 +139,17 @@ public class HelloSpring4Controller {
 		return "transaction/files";
 	}
 
-	@RequestMapping(value = "/experiencedetails", method = RequestMethod.GET)
+	@RequestMapping(value = "/experienceDetails", method = RequestMethod.GET)
 	public String experiencedetails() {
 		return "transaction/experience_Details";
 	}
 
-	@RequestMapping(value = "/jobseeker", method = RequestMethod.GET)
+	@RequestMapping(value = "/jobSeeker", method = RequestMethod.GET)
 	public String jobseeker() {
 		return "transaction/job_Seeker";
 	}
 
-	@RequestMapping(value = "/employerjobseeker", method = RequestMethod.GET)
+	@RequestMapping(value = "/employerJobseeker", method = RequestMethod.GET)
 	public String employerjobseeker() {
 		return "transaction/employer_Jobseeker";
 	}
@@ -164,7 +164,7 @@ public class HelloSpring4Controller {
 		return "transaction/employer";
 	}
 	
-	@RequestMapping(value = "/languagesknown", method = RequestMethod.GET)
+	@RequestMapping(value = "/languagesKnown", method = RequestMethod.GET)
 	public String languageknown() {
 		return "transaction/language_Known";
 	}
@@ -174,21 +174,21 @@ public class HelloSpring4Controller {
 		return "transaction/post_Job";
 	}
 	
-	@RequestMapping(value = "/projectdetails", method = RequestMethod.GET)
+	@RequestMapping(value = "/projectDetails", method = RequestMethod.GET)
 	public String projectdetails() {
 		return "transaction/project_Details";
 	}
 	
-	@RequestMapping(value = "/postjobdomains", method = RequestMethod.GET)
+	@RequestMapping(value = "/postJodDomains", method = RequestMethod.GET)
 	public String Post_JodDomains() {
 		return "transaction/post_JobDomains";
 	}
 	
-	@RequestMapping(value = "/educationdetails", method = RequestMethod.GET)
+	@RequestMapping(value = "/educationDetails", method = RequestMethod.GET)
 	public String educationdetails() {
 		return "transaction/education_Details";
 	}
-	@RequestMapping(value = "/postjobseeker", method = RequestMethod.GET)
+	@RequestMapping(value = "/postJobseeker", method = RequestMethod.GET)
 	public String postjobseeker() {
 		return "transaction/postJobSeeker";
 	}

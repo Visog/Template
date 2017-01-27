@@ -49,7 +49,7 @@ $(document).ready(function(e){
 				<li class="child"><a href="/visog-job-portal-ui/country">Country</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/state">State</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/city">City</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/addresstype">Address Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/addressType">Address Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/courses">Courses</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/specialization">Specialization</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/university">University</a></li>
@@ -60,9 +60,9 @@ $(document).ready(function(e){
 				<li class="child"><a href="/visog-job-portal-ui/domains">Domains</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/jobRole">Job Role</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/status">Status</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/employmenttype">Employment Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employmentType">Employment Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employerType">Employer Type</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/filetype">File Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/fileType">File Type</a></li>
 				
 				</ul>
 				</li>
@@ -72,16 +72,16 @@ $(document).ready(function(e){
 				<li class="child"><a href="/visog-job-portal-ui/users">Users</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/address">Address</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employer">Employer</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/postjob">Post Job</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/Post_JodDomains">Post Job Domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postJob">Post Job</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postJodDomains">Post Job Domains</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/files">Files</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/employerjobseeker">Employer Job Seeker</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/postjobseeker">PostJob Seeker</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/jobseeker">Job Seeker</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/educationdetails">Education Details</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/languageknown">Language Known</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/projectdetails">Project Details</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/experiencedetails">Experience Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employerJobseeker">Employer Job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postJobseeker">PostJob Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobSeeker">Job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/educationDetails">Education Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/languageKnown">Language Known</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/projectDetails">Project Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/experienceDetails">Experience Details</a></li>
 				
 				</ul>
 				</li>
