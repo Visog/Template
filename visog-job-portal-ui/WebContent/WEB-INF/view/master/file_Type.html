@@ -1,9 +1,7 @@
 
 <html>
-<head>
-
-<!-- <link rel="stylesheet" type="text/css" href="/Spring4HelloWorld/resources/css/master.css" /> -->
-<link rel="stylesheet" type="text/css" href="resources/css/user.css">
+  <head>  
+  <link rel="stylesheet" type="text/css" href="resources/css/user.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
 <script src="resources/js/jquery-3.1.1.min.js"></script>
@@ -17,6 +15,7 @@ $(document).ready(function(e){
 		$(this).toggleClass('tap');
 		
 	});
+	
 	$('.transactions').click(function(){
 		$(this).toggleClass('tap');
 		
@@ -25,90 +24,195 @@ $(document).ready(function(e){
 });
 </script>
 <meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-<script src="/visog-job-portal-ui/resources/js/fileType.js"></script>
-
-<style>
-.blue-button {
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="/visog-job-portal-ui/resources/js/fileType.js"></script>
+    <title>AngularJS $http Rest example</title>  
+ <script type="text/javascript">
+            var app = angular.module("FileTypeManagement", []);
+         
+            //Controller Part
+            app.controller("FileTypeController", function($scope, $http) {
+         
+               
+                $scope.fileType = [];
+                $scope.fileTypeForm = {
+                  //  id : -1,
+                    extension : "",
+                    description : ""
+                };
+         
+                //Now load the data from server
+                _refreshFileTypeData();
+         
+                //HTTP POST/PUT methods for add/edit fileType 
+                // with the help of id, we are going to find out whether it is put or post operation
+                
+                $scope.submitFileType = function() {
+         
+                    var method = "";
+                    var url = "";
+                   // alert($scope.fileTypeForm.id);
+                    if ($scope.fileTypeForm.id == -1 || $scope.fileTypeForm.id == undefined) {
+                        //Id is absent in form data, it is create new fileType operation
+                        
+                        method = "POST";
+                        url = 'http://localhost:8080/visog-job-portal-api/master/fileType/';
+                        $http.post(url, { "extension": $scope.fileTypeForm.extension, "description" : $scope.fileTypeForm.description }).then( _success, _error ); 
+                    
+                    } else {
+                    	 
+                        //Id is present in form data, it is edit fileType operation
+                        id=$scope.fileTypeForm.id;
+                        method = "PUT";
+                        url = 'http://localhost:8080/visog-job-portal-api/master/fileType/'+ id;
+                      $http.put(url, { "extension": $scope.fileTypeForm.extension, "description" : $scope.fileTypeForm.description }).then( _success, _error );
+                      $scope.fileTypeForm.id = -1;
+                    }
+ /*         
+                    $http({
+                        method : method,
+                        url : url,
+                        data : angular.toJson($scope.fileTypeForm),
+                        headers : {
+                            'Content-Type' : 'application/json'
+                        }
+                    }).then( _success, _error ); */
+                };
+         
+                //HTTP DELETE- delete fileType by Id
+                $scope.deleteFileType = function(fileType) {
+                    $http({
+                        method : 'DELETE',
+                        url : 'http://localhost:8080/visog-job-portal-api/master/fileType/' + fileType.id
+                    }).then(_success, _error);
+                };
+ 
+             // In case of edit, populate form fields and assign form.id with fileType id
+                $scope.editFileType = function(fileType) {
+                  
+                    $scope.fileTypeForm.extension = fileType.extension;
+                    $scope.fileTypeForm.description = fileType.description;
+                    $scope.fileTypeForm.id = fileType.id;
+                };
+         
+                /* Private Methods */
+                //HTTP GET- get all countries collection
+                function _refreshFileTypeData() {
+                    $http({
+                        method : 'GET',
+                        url : 'http://localhost:8080/visog-job-portal-api/master/fileType/'
+                    }).then(function successCallback(response) {
+                    	//alert(response.data.data)
+                        $scope.fileType = response.data.data;
+                    }, function errorCallback(response) {
+                        console.log(response.statusText);
+                    });
+                }
+         
+                function _success(response) {
+                	
+                    _refreshFileTypeData();
+                    _clearFormData()
+                }
+         
+                function _error(response) {
+                	
+                    console.log(response.statusText);
+                }
+         
+                //Clear the form
+                function _clearFormData() {
+                  //  $scope.fileTypeForm.id = -1;
+                    $scope.fileTypeForm.extension = "";
+                    $scope.fileTypeForm.description = "";
+                
+                };
+            });
+        </script>
+        <style>
+           
+.blue-button{
 	background: #25A6E1;
-	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#25A6E1',
-		endColorstr='#188BC0', GradientType=0);
-	padding: 3px 5px;
-	color: #fff;
-	font-family: 'Helvetica Neue', sans-serif;
-	font-size: 12px;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 4px;
-	border: 1px solid #1A87B9
-}
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#25A6E1',endColorstr='#188BC0',GradientType=0);
+	padding:3px 5px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:4px;
+	border:1px solid #1A87B9
+}     
 
-.red-button {
+.red-button{
 	background: #CD5C5C;
-	padding: 3px 5px;
-	color: #fff;
-	font-family: 'Helvetica Neue', sans-serif;
-	font-size: 12px;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 4px;
-	border: 1px solid #CD5C5C
-}
+
+	padding:3px 5px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:4px;
+	border:1px solid #CD5C5C
+}      
 
 table {
-	font-family: "Helvetica Neue", Helvetica, sans-serif;
-	width: 50%;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+   width: 50%;
 }
 
 caption {
-	text-align: left;
-	color: silver;
-	font-weight: bold;
-	text-transform: uppercase;
-	padding: 5px;
+  text-align: left;
+  color: silver;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
 }
 
 th {
-	background: SteelBlue;
-	color: white;
+  background: SteelBlue;
+  color: white;
 }
 
+
 tbody tr:nth-child(even) {
-	background: WhiteSmoke;
+  background: WhiteSmoke;
 }
 
 tbody tr td:nth-child(2) {
-	text-align: center;
+  text-align:center;
 }
 
-tbody tr td:nth-child(3), tbody tr td:nth-child(4) {
-	text-align: center;
-	font-family: monospace;
+tbody tr td:nth-child(3),
+tbody tr td:nth-child(4) {
+  text-align: center;
+  font-family: monospace;
 }
 
 tfoot {
-	background: SeaGreen;
-	color: white;
-	text-align: right;
+  background: SeaGreen;
+  color: white;
+  text-align: right;
 }
 
 tfoot tr th:last-child {
-	font-family: monospace;
+  font-family: monospace;
 }
 
-td, th {
-	border: 1px solid gray;
-	width: 25%;
-	text-align: left;
-	padding: 5px 10px;
-}
-</style>
-
-
-<title>AngularJS $http Rest example</title>
-<head>
-<body>
-<div id="header">
+            td,th{
+                border: 1px solid gray;
+                width: 25%;
+                text-align: left;
+                padding: 5px 10px;
+            }
+          
+            
+            
+        </style>
+    <head>
+    <body >
+    <div id="header">
 		<div class="logo">
 			<a href="#">Job<span>Portal</span></a>
 		</div>
@@ -139,8 +243,9 @@ td, th {
 				<li class="child"><a href="/visog-job-portal-ui/status">status</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employmenttype">employment Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employertype">employer Type</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/filetype">file Type</a></li>
-				
+				<li class="child"><a href="/visog-job-portal-ui/fileType">File Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/domain">Domain</a></li>
+				    
 				</ul>
 				</li>
 				
@@ -166,54 +271,48 @@ td, th {
 				<li><a href="/visog-job-portal-ui/user">login</a></li>
 			</ul>
 		</div>
-<div class="content" ng-app="FileTypeManagement" ng-controller="FileTypeController">
-	<h1>FileType Master</h1>
-	<form ng-submit="submitFileType()">
-		<table>
-
-			<tr>
-				<th colspan="2">Add/Edit FileType</th>
-			</tr>
-			<tr>
-				<td> Extension</td>
-				<td><input type="text" ng-model="filetypeForm.extension" /></td>
-			</tr>
-
-			<tr>
-				<td>Description</td>
-				<td><input type="text" ng-model="filetypeForm.description" /></td>
-			</tr>
-			
-			<tr>
-				<td colspan="2"><input type="submit" value="Submit"	class="blue-button" /></td>
-			</tr>
-		</table>
-	</form>
-	<table>
-		<tr>
-
-			<th> Extension</th>
-			<th>Description</th>
-			
-			<th></th>
-
-		</tr>
-
-		<tr ng-repeat="filetype in filetypes">
-
-			<td>{{ filetype.extension }}</td>
-			<td>{{ filetype.description }}</td>
-			
-
-			<td><a ng-click="editFileType(filetype)" class="blue-button">Edit</a> 
-			| <a ng-click="deleteFileType(filetype)" class="red-button">Delete</a></td>
-		</tr>
-
-	</table>
-</div>
-</div>
-	<!-- <script src="static/js/gender.js"></script> -->
-	<!-- 	<style rel="stylesheet" href ="css/master.css"></style> -->
-	<!-- 	<link rel="stylesheet" type="text/css" href="staic/css/master.css" media="screen" /> -->
-</body>
+    <div class="content" ng-app="FileTypeManagement" ng-controller="FileTypeController">
+         <h1>
+           FileType Master
+        </h1> 
+        <form ng-submit="submitFileType()">
+            <table>
+               
+                <tr>
+                    <th colspan="2">Add/Edit fileType</th>
+                 </tr>
+                <tr>
+                    <td>Extension</td>
+                    <td><input type="text" ng-model="fileTypeForm.extension" /></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td><input type="text" ng-model="fileTypeForm.description"  /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" class="blue-button" /></td>
+                </tr>
+            </table>
+        </form>
+        <table>
+            <tr>
+              
+                <th>Extension</th>
+                <th>Description</th>
+                <th> </th>
+               
+            </tr>
+ 
+            <tr ng-repeat="fileType in fileTypes">
+       
+    <td> {{ fileType.extension }}</td>
+    <td >{{ fileType.description }}</td>  
+                
+                <td><a ng-click="editFileType(fileType)" class="blue-button">Edit</a> | <a ng-click="deleteFileType(fileType)" class="red-button">Delete</a></td>
+            </tr>
+ 
+        </table> 
+      </div>
+      </div>
+  </body>
 </html>
