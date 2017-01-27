@@ -79,9 +79,9 @@ public class HelloSpring4Controller {
 		return "master/university";
 	}
 
-	@RequestMapping(value = "/educationtype", method = RequestMethod.GET)
-	public String educationtype() {
-		return "master/education_Type";
+	@RequestMapping(value = "/educationType", method = RequestMethod.GET)
+	public String educationType() {
+		return "master/educationType";
 	}
 
 	@RequestMapping(value = "/languages", method = RequestMethod.GET)
@@ -104,8 +104,8 @@ public class HelloSpring4Controller {
 		return "master/domains";
 	}
 
-	@RequestMapping(value = "/jobrole", method = RequestMethod.GET)
-	public String jobrole() {
+	@RequestMapping(value = "/jobRole", method = RequestMethod.GET)
+	public String jobRole() {
 		return "master/job_Role";
 	}
 
@@ -115,7 +115,7 @@ public class HelloSpring4Controller {
 	}
 
 	@RequestMapping(value = "/employmenttype", method = RequestMethod.GET)
-	public String empType() {
+	public String employmenttype() {
 		return "master/employment_Type";
 	}
 

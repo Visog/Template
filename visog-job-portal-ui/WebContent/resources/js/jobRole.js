@@ -1,63 +1,63 @@
-	var app = angular.module("DomainManagement", []);
+	var app = angular.module("JobRoleManagement", []);
 
 	//Controller Part
 	app
 			.controller(
-					"DomainController",
+					"JobRoleController",
 					function($scope, $http) {
 
-						$scope.domain = [];
-						$scope.domainForm = {
+						$scope.jobRole = [];
+						$scope.jobRoleForm = {
 							// id : -1,
 							name : "",
 							description : "",
 						};
 
 						// Now load the data from server
-						_refreshDomainData();
+						_refreshJobRoleData();
 
-						// HTTP POST/PUT methods for add/edit domain
+						// HTTP POST/PUT methods for add/edit jobRole
 						// with the help of id, we are going to find out whether it
 						// is put or post operation
 
-						$scope.submitDomain = function() {
+						$scope.submitJobRole = function() {
 
 							var method = "";
 							var url = "";
 							// alert($scope.genderForm.id);
-							if ($scope.domainForm.id == -1
-									|| $scope.domainForm.id == undefined) {
-								// Id is absent in form data, it is create new domain
+							if ($scope.jobRoleForm.id == -1
+									|| $scope.jobRoleForm.id == undefined) {
+								// Id is absent in form data, it is create new jobRole
 								// operation
 
 								method = "POST";
-								url = 'http://localhost:8080/visog-job-portal-api/master/domain/';
+								url = 'http://localhost:8080/visog-job-portal-api/master/jobRole/';
 								$http
 										.post(
 												url,
 												{
-													"name" : $scope.domainForm.name,
-													"description" : $scope.domainForm.description,
+													"name" : $scope.jobRoleForm.name,
+													"description" : $scope.jobRoleForm.description,
 													
 												}).then(_success, _error);
 
 							} else {
 
-								// Id is present in form data, it is edit domain
+								// Id is present in form data, it is edit jobRole
 								// operation
-								id = $scope.domainForm.id;
+								id = $scope.jobRoleForm.id;
 								method = "PUT";
-								url = 'http://localhost:8080/visog-job-portal-api/master/domain/'
+								url = 'http://localhost:8080/visog-job-portal-api/master/jobRole/'
 										+ id;
 								$http
 										.put(
 												url,
 												{
-													"name" : $scope.domainForm.name,
-													"code" : $scope.domainForm.description,
+													"name" : $scope.jobRoleForm.name,
+													"code" : $scope.jobRoleForm.description,
 													
 												}).then(_success, _error);
-								$scope.domainForm.id = -1;
+								$scope.jobRoleForm.id = -1;
 							}
 							/*
 							 * $http({ method : method, url : url, data :
@@ -67,36 +67,36 @@
 							 */
 						};
 
-						// HTTP DELETE- delete domain by Id
-						$scope.deleteDomain = function(domain) {
+						// HTTP DELETE- delete jobRole by Id
+						$scope.deleteJobRole = function(jobRole) {
 							$http(
 									{
 										method : 'DELETE',
-										url : 'http://localhost:8080/visog-job-portal-api/master/domain/'
-												+ domain.id
+										url : 'http://localhost:8080/visog-job-portal-api/master/jobRole/'
+												+ jobRole.id
 									}).then(_success, _error);
 						};
 
 						// In case of edit, populate form fields and assign form.id
-						// with domain id
-						$scope.editDomain = function(domain) {
+						// with jobRole id
+						$scope.editJobRole = function(jobRole) {
 
-							$scope.domainForm.name = domain.name;
-							$scope.domainForm.description = domain.description;
+							$scope.jobRoleForm.name = jobRole.name;
+							$scope.jobRoleForm.description = jobRole.description;
 							
-							$scope.domainForm.id =domain.id;
+							$scope.jobRoleForm.id =jobRole.id;
 						};
 
 						/* Private Methods */
 						// HTTP GET- get all countries collection
-						function _refreshDomainData() {
+						function _refreshJobRoleData() {
 							$http(
 									{
 										method : 'GET',
-										url : 'http://localhost:8080/visog-job-portal-api/master/domain/'
+										url : 'http://localhost:8080/visog-job-portal-api/master/jobRole/'
 									}).then(function successCallback(response) {
 								// alert(response.data.data)
-								$scope.domain = response.data.data;
+								$scope.jobRole = response.data.data;
 							}, function errorCallback(response) {
 								console.log(response.statusText);
 							});
@@ -104,7 +104,7 @@
 
 						function _success(response) {
 
-							_refreshDomainData();
+							_refreshJobRoleData();
 							_clearFormData()
 						}
 
@@ -116,8 +116,8 @@
 						// Clear the form
 						function _clearFormData() {
 							// $scope.genderForm.id = -1;
-							$scope.domainForm.name = "";
-							$scope.domainForm.description = "";
+							$scope.jobRoleForm.name = "";
+							$scope.jobRoleForm.description = "";
 							
 
 						}

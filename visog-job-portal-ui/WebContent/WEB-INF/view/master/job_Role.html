@@ -1,9 +1,7 @@
 
 <html>
-<head>
-
-<!-- <link rel="stylesheet" type="text/css" href="/Spring4HelloWorld/resources/css/master.css" /> -->
-<link rel="stylesheet" type="text/css" href="resources/css/user.css">
+  <head>  
+  <link rel="stylesheet" type="text/css" href="resources/css/user.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
 <script src="resources/js/jquery-3.1.1.min.js"></script>
@@ -17,6 +15,7 @@ $(document).ready(function(e){
 		$(this).toggleClass('tap');
 		
 	});
+	
 	$('.transactions').click(function(){
 		$(this).toggleClass('tap');
 		
@@ -25,217 +24,195 @@ $(document).ready(function(e){
 });
 </script>
 <meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-<script src="/visog-job-portal-ui/resources/js/jobrole.js"></script>
-<!-- <script>bbmb
-	var app = angular.module("CountryManagement", []);
-<commit2>
-	//Controller Part
-	app
-			.controller(
-					"CountryController",
-					function($scope, $http) {
-
-						$scope.countries = [];
-						$scope.countryForm = {
-							// id : -1,
-							name : "",
-							code : "",
-							orderNum : ""
-						};
-
-						// Now load the data from server
-						_refreshCountryData();
-
-						// HTTP POST/PUT methods for add/edit role
-						// with the help of id, we are going to find out whether it
-						// is put or post operation
-
-						$scope.submitCountry = function() {
-
-							var method = "";
-							var url = "";
-							// alert($scope.genderForm.id);
-							if ($scope.countryForm.id == -1
-									|| $scope.countryForm.id == undefined) {
-								// Id is absent in form data, it is create new role
-								// operation
-
-								method = "POST";
-								url = 'http://localhost:8080/visog-job-portal-api/master/country/';
-								$http
-										.post(
-												url,
-												{
-													"name" : $scope.countryForm.name,
-													"code" : $scope.countryForm.code,
-													"orderNum" : $scope.countryForm.orderNum
-												}).then(_success, _error);
-
-							} else {
-
-								// Id is present in form data, it is edit role
-								// operation
-								id = $scope.countryForm.id;
-								method = "PUT";
-								url = 'http://localhost:8080/visog-job-portal-api/master/country/'
-										+ id;
-								$http
-										.put(
-												url,
-												{
-													"name" : $scope.countryForm.name,
-													"code" : $scope.countryForm.code,
-													"orderNum" : $scope.countryForm.orderNum
-												}).then(_success, _error);
-								$scope.countryForm.id = -1;
-							}
-							/*
-							 * $http({ method : method, url : url, data :
-							 * angular.toJson($scope.genderForm), headers : {
-							 * 'Content-Type' : 'application/json' } }).then(
-							 * _success, _error );
-							 */
-						};
-
-						// HTTP DELETE- delete role by Id
-						$scope.deleteCountry = function(country) {
-							$http(
-									{
-										method : 'DELETE',
-										url : 'http://localhost:8080/visog-job-portal-api/master/country/'
-												+ country.id
-									}).then(_success, _error);
-						};
-
-						// In case of edit, populate form fields and assign form.id
-						// with role id
-						$scope.editCountry = function(country) {
-
-							$scope.countryForm.name = country.name;
-							$scope.countryForm.code = country.code;
-							$scope.countryForm.orderNum = country.orderNum;
-							$scope.countryForm.id =country.id;
-						};
-
-						/* Private Methods */
-						// HTTP GET- get all countries collection
-						function _refreshCountryData() {
-							$http(
-									{
-										method : 'GET',
-										url : 'http://localhost:8080/visog-job-portal-api/master/country/'
-									}).then(function successCallback(response) {
-								// alert(response.data.data)
-								$scope.countrys = response.data.data;
-							}, function errorCallback(response) {
-								console.log(response.statusText);
-							});
-						}
-
-						function _success(response) {
-
-							_refreshCountryData();
-							_clearFormData()
-						}
-
-						function _error(response) {
-
-							console.log(response.statusText);
-						}
-
-						// Clear the form
-						function _clearFormData() {
-							// $scope.genderForm.id = -1;
-							$scope.countryForm.name = "";
-							$scope.countryForm.code = "";
-							$scope.countryForm.orderNum = "";
-
-						}
-						;
-					});
-</script> -->
-<style>
-.blue-button {
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="/visog-job-portal-ui/resources/js/jobRole.js"></script>
+    <title>AngularJS $http Rest example</title>  
+ <script type="text/javascript">
+            var app = angular.module("JobRoleManagement", []);
+         
+            //Controller Part
+            app.controller("JobRoleController", function($scope, $http) {
+         
+               
+                $scope.jobRole = [];
+                $scope.jobRoleForm = {
+                  //  id : -1,
+                    name : "",
+                    description : ""
+                };
+         
+                //Now load the data from server
+                _refreshJobRoleData();
+         
+                //HTTP POST/PUT methods for add/edit jobRole 
+                // with the help of id, we are going to find out whether it is put or post operation
+                
+                $scope.submitJobRole = function() {
+         
+                    var method = "";
+                    var url = "";
+                   // alert($scope.jobRoleForm.id);
+                    if ($scope.jobRoleForm.id == -1 || $scope.jobRoleForm.id == undefined) {
+                        //Id is absent in form data, it is create new jobRole operation
+                        
+                        method = "POST";
+                        url = 'http://localhost:8080/visog-job-portal-api/master/jobRole/';
+                        $http.post(url, { "name": $scope.jobRoleForm.name, "description" : $scope.jobRoleForm.description }).then( _success, _error ); 
+                    
+                    } else {
+                    	 
+                        //Id is present in form data, it is edit jobRole operation
+                        id=$scope.jobRoleForm.id;
+                        method = "PUT";
+                        url = 'http://localhost:8080/visog-job-portal-api/master/jobRole/'+ id;
+                      $http.put(url, { "name": $scope.jobRoleForm.name, "description" : $scope.jobRoleForm.description }).then( _success, _error );
+                      $scope.jobRoleForm.id = -1;
+                    }
+ /*         
+                    $http({
+                        method : method,
+                        url : url,
+                        data : angular.toJson($scope.jobRoleForm),
+                        headers : {
+                            'Content-Type' : 'application/json'
+                        }
+                    }).then( _success, _error ); */
+                };
+         
+                //HTTP DELETE- delete jobRole by Id
+                $scope.deleteJobRole = function(jobRole) {
+                    $http({
+                        method : 'DELETE',
+                        url : 'http://localhost:8080/visog-job-portal-api/master/jobRole/' + jobRole.id
+                    }).then(_success, _error);
+                };
+ 
+             // In case of edit, populate form fields and assign form.id with jobRole id
+                $scope.editJobRole = function(jobRole) {
+                  
+                    $scope.jobRoleForm.name = jobRole.name;
+                    $scope.jobRoleForm.description = jobRole.description;
+                    $scope.jobRoleForm.id = jobRole.id;
+                };
+         
+                /* Private Methods */
+                //HTTP GET- get all countries collection
+                function _refreshJobRoleData() {
+                    $http({
+                        method : 'GET',
+                        url : 'http://localhost:8080/visog-job-portal-api/master/jobRole/'
+                    }).then(function successCallback(response) {
+                    	//alert(response.data.data)
+                        $scope.jobRole = response.data.data;
+                    }, function errorCallback(response) {
+                        console.log(response.statusText);
+                    });
+                }
+         
+                function _success(response) {
+                	
+                    _refreshJobRoleData();
+                    _clearFormData()
+                }
+         
+                function _error(response) {
+                	
+                    console.log(response.statusText);
+                }
+         
+                //Clear the form
+                function _clearFormData() {
+                  //  $scope.jobRoleForm.id = -1;
+                    $scope.jobRoleForm.name = "";
+                    $scope.jobRoleForm.description = "";
+                
+                };
+            });
+        </script>
+        <style>
+           
+.blue-button{
 	background: #25A6E1;
-	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#25A6E1',
-		endColorstr='#188BC0', GradientType=0);
-	padding: 3px 5px;
-	color: #fff;
-	font-family: 'Helvetica Neue', sans-serif;
-	font-size: 12px;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 4px;
-	border: 1px solid #1A87B9
-}
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#25A6E1',endColorstr='#188BC0',GradientType=0);
+	padding:3px 5px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:4px;
+	border:1px solid #1A87B9
+}     
 
-.red-button {
+.red-button{
 	background: #CD5C5C;
-	padding: 3px 5px;
-	color: #fff;
-	font-family: 'Helvetica Neue', sans-serif;
-	font-size: 12px;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 4px;
-	border: 1px solid #CD5C5C
-}
+
+	padding:3px 5px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:4px;
+	border:1px solid #CD5C5C
+}      
 
 table {
-	font-family: "Helvetica Neue", Helvetica, sans-serif;
-	width: 50%;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+   width: 50%;
 }
 
 caption {
-	text-align: left;
-	color: silver;
-	font-weight: bold;
-	text-transform: uppercase;
-	padding: 5px;
+  text-align: left;
+  color: silver;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
 }
 
 th {
-	background: SteelBlue;
-	color: white;
+  background: SteelBlue;
+  color: white;
 }
 
+
 tbody tr:nth-child(even) {
-	background: WhiteSmoke;
+  background: WhiteSmoke;
 }
 
 tbody tr td:nth-child(2) {
-	text-align: center;
+  text-align:center;
 }
 
-tbody tr td:nth-child(3), tbody tr td:nth-child(4) {
-	text-align: center;
-	font-family: monospace;
+tbody tr td:nth-child(3),
+tbody tr td:nth-child(4) {
+  text-align: center;
+  font-family: monospace;
 }
 
 tfoot {
-	background: SeaGreen;
-	color: white;
-	text-align: right;
+  background: SeaGreen;
+  color: white;
+  text-align: right;
 }
 
 tfoot tr th:last-child {
-	font-family: monospace;
+  font-family: monospace;
 }
 
-td, th {
-	border: 1px solid gray;
-	width: 25%;
-	text-align: left;
-	padding: 5px 10px;
-}
-</style>
-
-
-<title>AngularJS $http Rest example</title>
-<head>
-<body>
-<div id="header">
+            td,th{
+                border: 1px solid gray;
+                width: 25%;
+                text-align: left;
+                padding: 5px 10px;
+            }
+          
+            
+            
+        </style>
+    <head>
+    <body >
+    <div id="header">
 		<div class="logo">
 			<a href="#">Job<span>Portal</span></a>
 		</div>
@@ -261,12 +238,13 @@ td, th {
 				<li class="child"><a href="/visog-job-portal-ui/languages">languages </a></li>
 				<li class="child"><a href="/visog-job-portal-ui/currency">currency</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/industry">industry</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/domains">domains</a></li>
-				<li class="child"><a href="/visog-job-portal-ui/jobrole">job Role</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/domains">Domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobRole">Job Role</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/status">status</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employmenttype">employment Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/employertype">employer Type</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/filetype">file Type</a></li>
+				
 				
 				</ul>
 				</li>
@@ -293,58 +271,48 @@ td, th {
 				<li><a href="/visog-job-portal-ui/user">login</a></li>
 			</ul>
 		</div>
-<div class="content" ng-app="JobRoleManagement" ng-controller="JobRoleController">
-	<h1>JobRole Master</h1>
-	<form ng-submit="submitJobRole()">
-		<table>
-
-			<tr>
-				<th colspan="2">Add/Edit JobRole</th>
-			</tr>
-			<tr>
-				<td> Name</td>
-				<td><input type="text" ng-model="jobroleForm.name" /></td>
-			</tr>
-
-			<tr>
-				<td>Description</td>
-				<td><input type="text" ng-model="jobroleForm.description" /></td>
-			</tr>
-			<!-- <tr>
-				<td>OrderNum</td>
-				<td><input type="text" ng-model="countryForm.orderNum" /></td>
-			</tr> -->
-			<tr>
-				<td colspan="2"><input type="submit" value="Submit"
-					class="blue-button" /></td>
-			</tr>
-		</table>
-	</form>
-	<table>
-		<tr>
-
-			<th>Name</th>
-			<th>description</th>
-			<!-- <th>OrderNum</th> -->
-			<th></th>
-
-		</tr>
-
-		<tr ng-repeat="jobrole in jobroles">
-
-			<td>{{ jobrole.name }}</td>
-			<td>{{ jobrole.description }}</td>
-			<!-- <td>{{ country.orderNum }}</td> -->
-
-			<td><a ng-click="editJobRole(jobrole)" class="blue-button">Edit</a>
-				| <a ng-click="deleteJobRole(jobrole)" class="red-button">Delete</a></td>
-		</tr>
-
-	</table>
-</div>
-</div>
-	<!-- <script src="static/js/gender.js"></script> -->
-	<!-- 	<style rel="stylesheet" href ="css/master.css"></style> -->
-	<!-- 	<link rel="stylesheet" type="text/css" href="staic/css/master.css" media="screen" /> -->
-</body>
+    <div class="content" ng-app="JobRoleManagement" ng-controller="JobRoleController">
+         <h1>
+           JobRole Master
+        </h1> 
+        <form ng-submit="submitJobRole()">
+            <table>
+               
+                <tr>
+                    <th colspan="2">Add/Edit jobRole</th>
+                 </tr>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" ng-model="jobRoleForm.name" /></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td><input type="text" ng-model="jobRoleForm.description"  /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" class="blue-button" /></td>
+                </tr>
+            </table>
+        </form>
+        <table>
+            <tr>
+              
+                <th>Name</th>
+                <th>Description</th>
+                <th> </th>
+               
+            </tr>
+ 
+            <tr ng-repeat="jobRole in jobRole">
+       
+    <td> {{ jobRole.name }}</td>
+    <td >{{ jobRole.description }}</td>  
+                
+                <td><a ng-click="editJobRole(jobRole)" class="blue-button">Edit</a> | <a ng-click="deleteJobRole(jobRole)" class="red-button">Delete</a></td>
+            </tr>
+ 
+        </table> 
+      </div>
+      </div>
+  </body>
 </html>
