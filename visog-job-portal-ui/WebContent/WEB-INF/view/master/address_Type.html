@@ -325,8 +325,9 @@ td, th {
 			<td>{{ addressType.name }}</td>
 			<td>{{ addressType.description }}</td>
 			<!-- <td>{{ country.orderNum }}</td> -->
+`					
 
-			<td><a ng-click="editAddressType(addressType)" class="blue-button">Edit</a>	| <a ng-click="deleteAddressType(addressType)" class="red-button">Delete</a></td>
+			<td><a ng-click="editAddressType(addressType)" class="blue-button">Edit</a>	| <a ng-click="deleteAddressType(addressType)" onclick="return confirm('Are you sure you want to delete this item?')" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>
