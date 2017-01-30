@@ -37,10 +37,9 @@ $(document).ready(function(e){
                 $scope.employementType = [];
                 $scope.employementTypeForm = {
                   //  id : -1,
-                    statuscode : "",
-                    status : "",
-                    statusdescription : "",
-                    data : ""
+                    name : "",
+                    description : ""
+                    
                 };
          
                 //Now load the data from server
@@ -61,10 +60,9 @@ $(document).ready(function(e){
                         url = 'http://localhost:8080/visog-job-portal-api/master/employementType/';
                         $http.post
                         (url, {
-                        		"statuscode": $scope.employementTypeForm.code,
-                        		"status" : $scope.employementTypeForm.status,
-                        		"statusdescription": $scope.employementTypeForm.description,
-                        		"data": $scope.employementTypeForm.data
+                        		"name": $scope.employementTypeForm.name,
+                        		
+                        		"description": $scope.employementTypeForm.description
                    			 ).then( _success, _error ); 
                         }
                      
@@ -76,10 +74,9 @@ $(document).ready(function(e){
                         url = 'http://localhost:8080/visog-job-portal-api/master/employementType/'+ id;
                       $http.put
                       (url, { 
-                    	  "statuscode": $scope.employementTypeForm.code, 
-                    	  "status" : $scope.employementTypeForm.status,
-                    	  "statusdescription": $scope.employementTypeForm.description,
-                    	  "data": $scope.employementTypeForm.data
+                    	  "name": $scope.employementTypeForm.name,
+                  		
+                  		"description": $scope.employementTypeForm.description
                     	  }).then( _success, _error );
                       }
                       $scope.employementTypeForm.id = -1;
@@ -106,10 +103,9 @@ $(document).ready(function(e){
              // In case of edit, populate form fields and assign form.id with jobRole id
                 $scope.editEmployementType = function(employementType) {
                   
-                    $scope.employementTypeForm.code = employementType.code;
-                    $scope.employementTypeForm.status = employementType.status;
+                    $scope.employementTypeForm.name = employementType.name;
+                    
                     $scope.employementTypeForm.description = employementType.description;
-                    $scope.employementTypeForm.data = employementType.data;
                     
                     $scope.employementTypeForm.id = employementType.id;
                 };
@@ -142,10 +138,8 @@ $(document).ready(function(e){
                 //Clear the form
                 function _clearFormData() {
                   //  $scope.jobRoleForm.id = -1;
-                    $scope.employementTypeForm.code = "";
+                    $scope.employementTypeForm.name = "";
                     $scope.employementTypeForm.description = "";
-                    $scope.employementType.status ="";
-                    $scope.employementType.data=""
                 
                 };
             });
@@ -302,21 +296,14 @@ tfoot tr th:last-child {
                     <th colspan="2">Add/Edit EmployementType</th>
                  </tr>
                 <tr>
-                    <td>Status Code</td>
-                    <td><input type="text" ng-model="employementTypeForm.code" /></td>
+                    <td>Name </td>
+                    <td><input type="text" ng-model="employementTypeForm.Name" /></td>
                 </tr>
                 <tr>
-                    <td>Status Description</td>
+                    <td> Description</td>
                     <td><input type="text" ng-model="employementTypeForm.description"  /></td>
                 </tr>
-                <tr>
-                    <td>Status </td>
-                    <td><input type="text" ng-model="employementTypeForm.status" /></td>
-                </tr>
-                <tr>
-                    <td>Data</td>
-                    <td><input type="text" ng-model="employementTypeForm.data"  /></td>
-                </tr>
+                
                 <tr>
                     <td colspan="2"><input type="submit" value="Submit" class="blue-button" /></td>
                 </tr>
@@ -325,19 +312,15 @@ tfoot tr th:last-child {
         <table>
             <tr>
               
-                <th>Status Code</th>
-                <th>Status Description</th>
-                <th>Status</th>
-                <th>Data</th>
+                <th>Name </th>
+                <th>Description</th>
                
             </tr>
  
             <tr ng-repeat="employementType in employementTypes">
        
-    <td> {{ employementType.code }}</td>
+    <td> {{ employementType.name }}</td>
     <td >{{ employementType.description }}</td>
-    <td>{{employementType.status}}</td>
-    <td>{{employementType.data}}</td>  
                 
                 <td><a ng-click="editEmployementType(employementType)" class="blue-button">Edit</a> | <a ng-click="deleteEmployementType(employementType)" class="red-button">Delete</a></td>
             </tr>

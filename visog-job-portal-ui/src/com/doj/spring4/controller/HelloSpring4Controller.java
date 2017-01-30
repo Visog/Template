@@ -192,4 +192,9 @@ public class HelloSpring4Controller {
 	public String postjobseeker() {
 		return "transaction/postJobSeeker";
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "transaction/login";
+	}
 }

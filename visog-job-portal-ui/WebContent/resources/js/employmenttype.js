@@ -6,12 +6,12 @@
 					"EmploymentTypeController",
 					function($scope, $http) {
 
-						$scope.employmenttypes = [];
-						$scope.employmenttypeForm = {
+						$scope.employementType = [];
+						$scope.employementTypeForm = {
 							// id : -1,
 							name : "",
-							code : "",
-							orderNum : ""
+							description : ""
+							
 						};
 
 						// Now load the data from server
@@ -26,39 +26,39 @@
 							var method = "";
 							var url = "";
 							// alert($scope.genderForm.id);
-							if ($scope.employmenttypeForm.id == -1
-									|| $scope.employmenttypeForm.id == undefined) {
+							if ($scope.employementTypeForm.id == -1
+									|| $scope.employementTypeForm.id == undefined) {
 								// Id is absent in form data, it is create new role
 								// operation
 
 								method = "POST";
-								url = 'http://localhost:8080/visog-job-portal-api/master/employmenttype/';
+								url = 'http://localhost:8080/visog-job-portal-api/master/employementType/';
 								$http
 										.post(
 												url,
 												{
-													"name" : $scope.employmenttypeForm.name,
-													"code" : $scope.employmenttypeForm.code,
-													"orderNum" : $scope.employmenttypeForm.orderNum
+													"name" : $scope.employementType.name,
+													"description" : $scope.employementType.description
+													
 												}).then(_success, _error);
 
 							} else {
 
 								// Id is present in form data, it is edit role
 								// operation
-								id = $scope.employmenttypeForm.id;
+								id = $scope.employementTypeForm.id;
 								method = "PUT";
-								url = 'http://localhost:8080/visog-job-portal-api/master/employmenttype/'
+								url = 'http://localhost:8080/visog-job-portal-api/master/employementType/'
 										+ id;
 								$http
 										.put(
 												url,
 												{
-													"name" : $scope.employmenttype.name,
-													"code" : $scope.employmenttype.code,
-													"orderNum" : $scope.employmenttype.orderNum
+													"name" : $scope.employementType.name,
+													"description" : $scope.employementType.description
+													
 												}).then(_success, _error);
-								$scope.employmenttype.id = -1;
+								$scope.employementType.id = -1;
 							}
 							/*
 							 * $http({ method : method, url : url, data :
@@ -69,23 +69,23 @@
 						};
 
 						// HTTP DELETE- delete role by Id
-						$scope.deleteCountry = function(country) {
+						$scope.deleteEmployementType = function(employementType) {
 							$http(
 									{
 										method : 'DELETE',
-										url : 'http://localhost:8080/visog-job-portal-api/master/employmenttype/'
-												+ country.id
+										url : 'http://localhost:8080/visog-job-portal-api/master/employementType/'
+												+ employementType.id
 									}).then(_success, _error);
 						};
 
 						// In case of edit, populate form fields and assign form.id
 						// with role id
-						$scope.editCountry = function(country) {
+						$scope.editEmployementType = function(employementType) {
 
-							$scope.employmenttypeForm.name = employmenttype.name;
-							$scope.employmenttypeForm.code = employmenttype.code;
-							$scope.employmenttypeForm.orderNum = employmenttype.orderNum;
-							$scope.employmenttypeForm.id =country.id;
+							$scope.employementTypeForm.name = employementType.name;
+							$scope.employementTypeForm.description = employementType.description;
+							
+							$scope.employementTypeForm.id =employementType.id;
 						};
 
 						/* Private Methods */
@@ -94,10 +94,10 @@
 							$http(
 									{
 										method : 'GET',
-										url : 'http://localhost:8080/visog-job-portal-api/master/employmenttype/'
+										url : 'http://localhost:8080/visog-job-portal-api/master/employementType/'
 									}).then(function successCallback(response) {
 								// alert(response.data.data)
-								$scope.employmenttypes = response.data.data;
+								$scope.employementType = response.data.data;
 							}, function errorCallback(response) {
 								console.log(response.statusText);
 							});
@@ -117,9 +117,9 @@
 						// Clear the form
 						function _clearFormData() {
 							// $scope.genderForm.id = -1;
-							$scope.employmenttypeForm.name = "";
-							$scope.employmenttypeForm.code = "";
-							$scope.employmenttypeForm.orderNum = "";
+							$scope.employementTypeForm.name = "";
+							$scope.employementTypeForm.description = "";
+							
 
 						}
 						;
