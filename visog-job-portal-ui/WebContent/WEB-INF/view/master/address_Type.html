@@ -320,14 +320,14 @@ td, th {
 
 		</tr>
 
-		<tr ng-repeat="addressType in addressType">
+		<tr ng-repeat="addressType in addressTypes">
 
 			<td>{{ addressType.name }}</td>
 			<td>{{ addressType.description }}</td>
 			<!-- <td>{{ country.orderNum }}</td> -->
 `					
 	
-			<td><a ng-click="editAddressType(addressType)" class="blue-button">Edit</a>	| <a ng-click="deleteAddressType(addressType)" onclick="return confirm('Are you sure to delete this record ?')" class="red-button">Delete</a></td>
+			<td><a ng-click="editAddressType(addressType)" class="blue-button">Edit</a>	| <a ng-click="deleteAddressType(addressType)" onclick="return confirm('Are you sure to delete ?')" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>
