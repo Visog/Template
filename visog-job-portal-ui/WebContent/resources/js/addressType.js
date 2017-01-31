@@ -51,7 +51,6 @@
                 };
          
                 //HTTP DELETE- delete role by Id
-                
                 $scope.deleteAddressType = function(addressType) {
                     $http({
                         method : 'DELETE',
