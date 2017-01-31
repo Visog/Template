@@ -211,7 +211,7 @@ tfoot tr th:last-child {
             
         </style>
     <head>
-    <body>
+    <body ng-controller="MainCtrl">
     
 	<div id="header">
 		<div class="logo">
@@ -312,7 +312,7 @@ tfoot tr th:last-child {
     <td> {{ role.name }}</td>
     <td >{{ role.description }}</td>  
                 
-                <td><a ng-click="editRole(role)" class="blue-button">Edit</a> | <a ng-click="deleteRole(role)" confirmed-click="delete(id)" ng-confirm-click="Are you sure?" class="red-button">Delete</a></td>
+                <td><a ng-click="editRole(role)" class="blue-button">Edit</a> | <a ng-click="deleteRole(role)" confirmed-click="deleteRole(role)" ng-confirm-click="Are you sure?" class="red-button">Delete</a></td>
             </tr>
  
         </table>
