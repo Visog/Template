@@ -171,7 +171,8 @@ public class HelloSpring4Controller {
 
 	@RequestMapping(value = "/postJob", method = RequestMethod.GET)
 	public String postjob() {
-		return "transaction/post_Job";
+	//	return "transaction/post_Job";
+		return "transaction//PostJobByEmployer";
 	}
 	
 	@RequestMapping(value = "/projectDetails", method = RequestMethod.GET)
@@ -192,6 +193,7 @@ public class HelloSpring4Controller {
 	public String postjobseeker() {
 		return "transaction/postJobSeeker";
 	}
+
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
