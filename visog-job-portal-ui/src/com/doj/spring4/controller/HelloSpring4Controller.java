@@ -197,6 +197,6 @@ public class HelloSpring4Controller {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
-		return "transaction/login";
+		return "transaction/LoginNew";
 	}
 }

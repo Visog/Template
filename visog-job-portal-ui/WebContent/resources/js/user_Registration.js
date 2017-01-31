@@ -4,7 +4,7 @@ var app = angular.module("myApp", []);
 		.controller(
 			"myCtrl",
 			function($scope, $http) {
-
+alert('hi');
 				$scope.registrationForm = [];
 				_refreshGenderData();
 
@@ -35,7 +35,7 @@ var app = angular.module("myApp", []);
 						//Id is absent in form data, it is create new file operation
 						//        alert('hhhh');
 						method = "POST";
-						url = 'http://localhost:8080/visog-job-portal-api/transaction/job_seeker/';
+						url = 'http://localhost:8080/visog-job-portal-api/registration/job_seeker/';
 
 						$http
 							.post(
@@ -50,8 +50,7 @@ var app = angular.module("myApp", []);
 									"dob" : $scope.registrationForm.dob,
 									"password" : $scope.registrationForm.password,
 									"phone" : $scope.registrationForm.mobile,
-									"landline" : $scope.registrationForm.landline,
-									"role" : "76af9c70-7820-412b-8788-6a4538c62f19"
+									"landline" : $scope.registrationForm.landline
 								}).then(_success, _error);
 								//	alert('complete');
 
@@ -60,7 +59,7 @@ var app = angular.module("myApp", []);
 						//Id is present in form data, it is edit file operation
 						id = $scope.registrationForm.id;
 						method = "PUT";
-						url = 'http://localhost:8080/visog-job-portal-api/transaction/job_seeker/'
+						url = 'http://localhost:8080/visog-job-portal-api/registration/job_seeker/'
 							+ id;
 						$http
 							.post(
@@ -75,8 +74,7 @@ var app = angular.module("myApp", []);
 									"dob" : $scope.registrationForm.dob,
 									"password" : $scope.registrationForm.password,
 									"phone" : $scope.registrationForm.mobile,
-									"landline" : $scope.registrationForm.landline,
-									"role" : "76af9c70-7820-412b-8788-6a4538c62f19"
+									"landline" : $scope.registrationForm.landline
 								}).then(_success, _error);
 						$scope.registrationForm.id = -1;
 					}

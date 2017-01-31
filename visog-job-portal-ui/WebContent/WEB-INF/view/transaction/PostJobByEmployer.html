@@ -85,11 +85,7 @@
 /* $('select[name=dropdown]').change(function() {
     $('#result').html($(this).val());
 }); */
-function g1(sel)
-{
-	alert('jj');
-	//sel.value();
-	}
+
 var app = angular.module("myApp", []);
 //Controller Part
 
@@ -130,7 +126,7 @@ app
 					
 					_CurrencyData();
 					_CountryData();
-					
+					_IndustryData();
 					  /* $scope.d1 = function() {
 						  alert('jjjj');
 					  } */
@@ -188,7 +184,7 @@ app
 												      "city": $scope.postJob.city,
 												      "zipcode": $scope.postJob.zipcode
 												}).then(_success, _error);
-								alert(url);
+								//alert(url);
 
 							} else {
 
@@ -244,6 +240,21 @@ app
 						console.log(response.statusText);
 					});//alert('jjffj');
 				}
+				
+				function _IndustryData() {
+					$http(
+							{
+								method : 'GET',
+								url : 'http://localhost:8080/visog-job-portal-api/master/industry'
+							}).then(function successCallback(response) {
+					//	 alert(response.data.data+"Country Data")
+						$scope.industries = response.data.data;
+					}, function errorCallback(response) {
+						console.log(response.statusText);
+					});
+				}
+				
+				
 				function _CountryData() {
 					$http(
 							{
