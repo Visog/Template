@@ -115,7 +115,7 @@ public class HelloSpring4Controller {
 	}
 
 	@RequestMapping(value = "/employementType", method = RequestMethod.GET)
-	public String employmenttype() {
+	public String employmentType() {
 		return "master/employementType";
 	}
 
