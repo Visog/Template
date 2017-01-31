@@ -108,12 +108,16 @@ $(document).ready(function(e){
                     <th colspan="2">Add/Edit specialization</th>
                  </tr>
                 <tr>
-                    <td>Specialization Name</td>
-                    <td><input type="text" ng-model=" specilizationForm.name" /></td>
+                    <td> Name</td>
+                    <td><input type="text" ng-model=" Specilization.name" /></td>
                 </tr>
                 <tr>
                     <td>Description</td>
-                    <td><input type="text" ng-model="specilizationForm.description"  /></td>
+                    <td><input type="text" ng-model="Specilization.description"  /></td>
+                </tr>
+                <tr>
+                    <td>course</td>
+                    <td><input type="text" ng-model="Specilization.course"  /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" value="Submit" class="blue-button" /></td>
@@ -125,16 +129,17 @@ $(document).ready(function(e){
               
                 <th>Specialization</th>
                 <th>Description</th>
-                <th> </th>
+                <th> course</th>
                
             </tr>
  
-            <tr ng-repeat="specilization in specilizations">
+            <tr ng-repeat="Specilization in Specilization">
        
-    <td> {{ specilization.name }}</td>
-    <td >{{ specilization.description }}</td>  
+    <td> {{ Specilization.name }}</td>
+    <td >{{ Specilization.description }}</td> 
+    <td >{{ Specilization.course }}</td>  
                 
-                <td><a ng-click="editSpecilization(specilization)" class="blue-button">Edit</a> | <a ng-click="deleteSpecilization(specilization)" class="red-button">Delete</a></td>
+                <td><a ng-click="editSpecilization(Specilization)" class="blue-button">Edit</a> | <a ng-click="deleteSpecilization(Specilization)" class="red-button">Delete</a></td>
             </tr>
  
         </table>
