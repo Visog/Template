@@ -58,7 +58,7 @@
                         url : 'http://localhost:8080/visog-job-portal-api/master/fileType/' + filetype.id
                     }).then(_success, _error);
                 };*/
-                
+                	
                 app.directive('ngConfirmClick', [
                                                  function(){
                                                      return {
