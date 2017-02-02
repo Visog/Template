@@ -49,7 +49,7 @@ app
 											      "password": $scope.Login.password
 											}).then(function successCallback(response) {
 												alert("before"+response.data.data.id);
-												// $sessionStorage.SessionMessage = "SessionStorage:st";
+												// $sessionStorage.SessionMessage = "SessionStorage:stmnn";
 												sessionStorage.setItem('user', JSON.stringify(response.data.data));
 												var obj = JSON.parse(sessionStorage.getItem('user')); 
 												alert(obj.id+":::: OBJ");
