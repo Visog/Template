@@ -319,7 +319,7 @@ tfoot tr th:last-child {
     <td> {{ languages.code }}</td>
     <td >{{ languages.name }}</td>  
                 
-                <td><a ng-click="editLanguages(languages)" class="blue-button">Edit</a> | <a ng-click="deleteLanguages(languages)" class="red-button">Delete</a></td>
+                <td><a ng-click="editLanguages(languages)" class="blue-button">Edit</a> | <a ng-click="deleteLanguages(languages)" onclick="deleteLanguages(languages)" class="red-button">Delete</a></td>
             </tr>
  
         </table>

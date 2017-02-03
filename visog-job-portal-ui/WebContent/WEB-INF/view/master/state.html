@@ -138,8 +138,7 @@ $(document).ready(function(e){
 			<td>{{ state.country }}</td>
 			
 
-			<td><a ng-click="editState(state)" class="blue-button">Edit</a> |
-				<a ng-click="deleteState(state)" class="red-button">Delete</a></td>
+			<td><a ng-click="editState(state)" class="blue-button">Edit</a> | <a ng-click="deleteState(state)" onclick="deleteState(state)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>
