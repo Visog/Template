@@ -94,10 +94,12 @@ $(document).ready(function(e){
          
                 //HTTP DELETE- delete jobRole by Id
                 $scope.deleteEmploymentType = function(employmentType) {
+                	if(confirm("Are you sure to Delete ?") == true){
                     $http({
                         method : 'DELETE',
                         url : 'http://localhost:8080/visog-job-portal-api/master/employmentType/' + employmentType.id
                     }).then(_success, _error);
+                	}
                 };
  
              // In case of edit, populate form fields and assign form.id with jobRole id
@@ -322,7 +324,7 @@ tfoot tr th:last-child {
     <td> {{ employmentType.name }}</td>
     <td >{{ employmentType.description }}</td>
                 
-                <td><a ng-click="editEmploymentType(employmentType)" class="blue-button">Edit</a> | <a ng-click="deleteEmploymentType(employmentType)" class="red-button">Delete</a></td>
+                <td><a ng-click="editEmploymentType(employmentType)" class="blue-button">Edit</a> | <a ng-click="deleteEmploymentType(employmentType)" onclick="deleteEmploymentType(employmentType)" class="red-button">Delete</a></td>
             </tr>
  
         </table> 

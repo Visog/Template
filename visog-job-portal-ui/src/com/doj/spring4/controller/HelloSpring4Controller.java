@@ -9,6 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class HelloSpring4Controller {
 	
+	@RequestMapping("/New")
+	public ModelAndView New() {
+		return new ModelAndView("main/New");
+	}
+	
 	@RequestMapping("/user")
 	public ModelAndView user() {
 		return new ModelAndView("main/user");

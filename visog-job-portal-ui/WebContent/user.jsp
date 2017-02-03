@@ -88,6 +88,7 @@ $(document).ready(function(e){
 				</li>
 				<li><a href="/visog-job-portal-ui/reg">registration</a></li>
 				<li><a href="/visog-job-portal-ui/user">login</a></li>
+				<li><a href="/visog-job-portal-ui/New">New</a></li>
 			</ul>
 		</div>
 		<div class="content">

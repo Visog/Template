@@ -217,8 +217,7 @@ td, th {
 					<td>{{ gender.code }}</td>
 					<td>{{ gender.description }}</td>
 
-					<td><a ng-click="editGender(gender)" class="blue-button">Edit</a>
-						| <a ng-click="deleteGender(gender)" class="red-button">Delete</a></td>
+					<td><a ng-click="editGender(gender)" class="blue-button">Edit</a> | <a ng-click="deleteGender(gender)" onclick="deleteGender(gender)" class="red-button">Delete</a></td>
 				</tr>
 
 			</table>

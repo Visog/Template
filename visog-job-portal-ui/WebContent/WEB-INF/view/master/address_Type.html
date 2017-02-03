@@ -97,7 +97,7 @@ $(document).ready(function(e){
 						// HTTP DELETE- delete role by Id
 						$scope.deleteAddressType = function(addressType) {
 							
-							if(confirm("ok") == true){
+							if(confirm("Are you sure to Delete ?") == true){
 							$http(
 									{
 										method : 'DELETE',
@@ -330,7 +330,7 @@ td, th {
 			<!-- <td>{{ country.orderNum }}</td> -->
 `					
 	
-			<td><a ng-click="editAddressType(addressType)" class="blue-button">Edit</a>	| <a ng-click="deleteAddressType(addressType)" onclick="return confirm('Are you sure to delete ?')" class="red-button">Delete</a></td>
+			<td><a ng-click="editAddressType(addressType)" class="blue-button">Edit</a>	| <a ng-click="deleteAddressType(addressType)" onclick="deleteAddressType(addressType)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>
