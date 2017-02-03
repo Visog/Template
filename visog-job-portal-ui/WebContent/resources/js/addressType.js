@@ -53,7 +53,7 @@
                 //HTTP DELETE- delete role by Id
                 $scope.deleteAddressType = function(addressType) {
                 	
-                	if(confirm("ok") == true){
+                	if(confirm("Are you sure to Delete ?") == true){
                 		
 						$http(
 								{

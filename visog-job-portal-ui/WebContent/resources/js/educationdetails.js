@@ -81,12 +81,14 @@
 
 						// HTTP DELETE- delete projectDetails by Id
 						$scope.deleteEducationDetails = function(educationDetails) {
+							if(confirm("Are you sure to Delete ?") == true){
 							$http(
 									{
 										method : 'DELETE',
 										url : 'http://localhost:8080/visog-job-portal-api/transaction/educationDetails/'
 												+ educationDetails.id
 									}).then(_success, _error);
+							}
 						};
 
 						// In case of edit, populate form fields and assign form.id
