@@ -56,10 +56,12 @@
          
                 //HTTP DELETE- delete role by Id
                 $scope.deleteLanguageKnown = function(languageknown) {
+                	if(confirm("Are you sure to Delete ?") == true){
                     $http({
                         method : 'DELETE',
                         url : 'http://localhost:8080/visog-job-portal-api/transaction/languageknown/' + languageknown.id
                     }).then(_success, _error);
+                	}
                 };
  
              // In case of edit, populate form fields and assign form.id with role id
