@@ -52,10 +52,16 @@
          
                 //HTTP DELETE- delete role by Id
                 $scope.deleteAddressType = function(addressType) {
-                    $http({
-                        method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/addressType/' + addresstype.id
-                    }).then(_success, _error);
+                	
+                	if(confirm("ok") == true){
+                		
+						$http(
+								{
+									method : 'DELETE',
+									url : 'http://localhost:8080/visog-job-portal-api/master/addressType/'
+											+ addressType.id
+								}).then(_success, _error);
+						}
                 };
  
              // In case of edit, populate form fields and assign form.id with role id
