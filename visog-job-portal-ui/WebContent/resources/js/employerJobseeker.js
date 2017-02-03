@@ -73,12 +73,14 @@
 
 						// HTTP DELETE- delete role by Id
 						$scope.deleteEmployerJobseeker = function(employerjobseeker) {
+							if(confirm("Are you sure to Delete ?") == true){
 							$http(
 									{
 										method : 'DELETE',
 										url : 'http://localhost:8080/visog-job-portal-api/transaction/employerjobseeker/'
 												+ employerjobseeker.id
 									}).then(_success, _error);
+							}
 						};
 
 						// In case of edit, populate form fields and assign form.id

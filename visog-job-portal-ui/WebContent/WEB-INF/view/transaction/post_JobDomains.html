@@ -134,7 +134,7 @@ $(document).ready(function(e){
     <td> {{ postJobDomain.postJob }}</td>
     <td >{{ postJobDomain.domain }}</td>  
                 
-                <td><a ng-click="editPostJobDomains(postJobDomain)" class="blue-button">Edit</a> | <a ng-click="deletePostJobDomains(postJobDomain)" class="red-button">Delete</a></td>
+                <td><a ng-click="editPostJobDomains(postJobDomain)" class="blue-button">Edit</a> | <a ng-click="deletePostJobDomains(postJobDomain)" onclick="deletePostJobDomain(postJobDomain)" class="red-button">Delete</a></td>
             </tr>
  
         </table> 

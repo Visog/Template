@@ -440,7 +440,7 @@ tfoot tr th:last-child {
     <td> {{ jobseeker.profileSummary }}</td>
     <td >{{ jobseeker.employmentType }}</td>  
                 
-                <td><a ng-click="editJobSeeker(jobseeker)" class="blue-button">Edit</a> | <a ng-click="deleteJobSeeker(jobseeker)" class="red-button">Delete</a></td>
+                <td><a ng-click="editJobSeeker(jobseeker)" class="blue-button">Edit</a> | <a ng-click="deleteJobSeeker(jobseeker)" onclick="deleteJobseeker(jobseeker)" class="red-button">Delete</a></td>
             </tr>
  
         </table> 

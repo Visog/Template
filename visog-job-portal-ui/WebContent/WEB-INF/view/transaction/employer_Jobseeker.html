@@ -344,8 +344,7 @@ td, th {
 			<td>{{ employerjobseeker.status }}</td>
 			<td>{{ employerjobseeker.actionDone }}</td>
 
-			<td><a ng-click="editEmployerJobseeker(employerjobseeker)" class="blue-button">Edit</a>
-				| <a ng-click="deleteEmployerJobseeker(employerjobseeker)" class="red-button">Delete</a></td>
+			<td><a ng-click="editEmployerJobseeker(employerjobseeker)" class="blue-button">Edit</a> | <a ng-click="deleteEmployerJobseeker(employerjobseeker)" onclick="deleteEmployerjobseeker(employerjobseeker)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>
