@@ -199,4 +199,9 @@ public class HelloSpring4Controller {
 	public String login() {
 		return "transaction/LoginNew";
 	}
+	
+	@RequestMapping(value = "/session", method = RequestMethod.GET)
+	public String session() {
+		return "transaction/session";
+	}
 }

@@ -83,6 +83,7 @@ $(document).ready(function(e){
 				<li class="child"><a href="/visog-job-portal-ui/projectDetails">Project Details</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/experienceDetails">Experience Details</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/login">login</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/session">session</a></li>
 				
 				</ul>
 				</li>

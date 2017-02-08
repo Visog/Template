@@ -34,7 +34,7 @@ $(document).ready(function(e){
             app.controller("RoleController", function($scope, $http) {
          
                
-                $scope.countries = [];
+               // $scope.countries = [];
                 $scope.roleForm = {
                   //  id : -1,
                     name : "",
@@ -110,7 +110,7 @@ $(document).ready(function(e){
                 }
          
                 function _success(response) {
-                	
+                	alert(response.data.message)
                     _refreshRoleData();
                     _clearFormData()
                 }
