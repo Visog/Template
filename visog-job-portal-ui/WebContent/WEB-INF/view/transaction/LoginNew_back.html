@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Bootstrap Snippet: Login Form</title>
+  
+  
+<link rel="stylesheet" type="text/css" href="/visog-job-portal-ui/resources/css/Loginstyle.css">
+
+  
+
+  <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
+  
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script >
+/* $('select[name=dropdown]').change(function() {
+    $('#result').html($(this).val());
+}); */
+
+var app = angular.module("myApp", []);
+//Controller Part
+
+app
+		.controller(
+				"myCtrl",
+				
+				function($scope, $http) {
+				
+					
+					 $scope.submitLogin = function() {
+			        	// alert('hhhh');
+						var method = "";
+						var url = "";
+						// alert($scope.postJob.id);
+						if ($scope.Login.id == -1
+								|| $scope.Login.id == undefined) {
+							//Id is absent in form data, it is create new file operation
+							    
+							method = "POST";
+							url = 'http://localhost:8080/visog-job-portal-api/Login/details';
+							//alert('hi');
+							$http
+									.post(
+											url,
+											{
+												
+												
+											      "email": $scope.Login.username,
+											      "password": $scope.Login.password
+											}).then(function successCallback(response) {
+												
+												//$scope.users = response.data.data;
+												//$scope.currencys = response.data.data;
+												//alert(response.data.data.id);
+												alert(response.data.message);
+											}, function errorCallback(response) {
+												alert(response.data.message);
+												console.log(response.statusText);
+											});
+							//alert(url);
+
+						} 
+					};
+					function _error(response) {
+	                   // alert('kkkkkkkkkkkk'+response);
+	                	//alert(response.data.message);
+						console.log(response.statusText);
+					}
+					function _success(response) {
+						   // alert('iiiii');
+						//	alert(response.data.message);
+							
+							_clearFormData()
+						}
+					
+					
+					
+					
+				});
+				
+				
+				
+				
+				
+				
+				</script>
+  
+  
+</head>
+
+<body  ng-app="myApp" ng-controller="myCtrl">
+    <div class="wrapper">
+
+     <form class="form-signin" ng-submit="submitLogin()" id="Login" method="post"><div id='result'></div>    
+      <h2 class="form-signin-heading">Please login</h2>
+      <input type="text" class="form-control" name="username" placeholder="Email Address *" required  ng-model="Login.username" />
+      <input type="password" class="form-control" name="password" placeholder="Password *" required  ng-model="Login.password" />      
+      <!-- <label class="checkbox">
+        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+      </label> -->
+      <button class="btn btn-lg btn-primary btn-block" value="Submit" type="submit">Login</button>  
+      
+   
+    </form>
+  </div>
+  
+  
+</body>
+</html>
