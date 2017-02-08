@@ -132,8 +132,7 @@ $(document).ready(function(e){
 			<td>{{ currency.description }}</td>
 			<td>{{ currency.currency_code }}</td>
 
-			<td><a ng-click="editCurrency(currency)" class="blue-button">Edit</a>
-				| <a ng-click="deleteCurrency(currency)" class="red-button">Delete</a></td>
+			<td><a ng-click="editCurrency(currency)" class="blue-button">Edit</a> | <a ng-click="deleteCurrency(currency)" onclick="deleteCurrency(currency)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>

@@ -66,12 +66,14 @@ var app = angular.module("CurrencyManagement", []);
 
 						// HTTP DELETE- delete role by Id
 						$scope.deleteCurrency = function(currency) {
+							if(confirm("Are you sure to Delete ?") == true){
 							$http(
 									{
 										method : 'DELETE',
 										url : 'http://localhost:8080/visog-job-portal-api/master/currency/<CURRENCY_ID>/'
 												+ currency.id
 									}).then(_success, _error);
+							}
 						};
 
 						// In case of edit, populate form fields and assign form.id

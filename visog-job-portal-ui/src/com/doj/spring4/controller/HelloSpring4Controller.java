@@ -9,6 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class HelloSpring4Controller {
 	
+	@RequestMapping("/New")
+	public ModelAndView New() {
+		return new ModelAndView("main/New");
+	}
+	
 	@RequestMapping("/user")
 	public ModelAndView user() {
 		return new ModelAndView("main/user");
@@ -114,9 +119,9 @@ public class HelloSpring4Controller {
 		return "master/status";
 	}
 
-	@RequestMapping(value = "/employementType", method = RequestMethod.GET)
-	public String employmenttype() {
-		return "master/employementType";
+	@RequestMapping(value = "/employmentType", method = RequestMethod.GET)
+	public String employmentType() {
+		return "master/employmentType";
 	}
 
 	@RequestMapping(value = "/employerType", method = RequestMethod.GET)

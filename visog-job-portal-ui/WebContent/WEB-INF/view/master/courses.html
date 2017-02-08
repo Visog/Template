@@ -81,10 +81,13 @@ $(document).ready(function(e){
          
                 //HTTP DELETE- delete role by Id
                 $scope.deleteCourses = function(courses) {
+                	
+                	if(confirm("Are you sure to Delete ?") == true){
                     $http({
                         method : 'DELETE',
                         url : 'http://localhost:8080/visog-job-portal-api/master/courses/' + courses.id
                     }).then(_success, _error);
+                	}
                 };
  
              // In case of edit, populate form fields and assign form.id with role id
@@ -307,7 +310,7 @@ tfoot tr th:last-child {
     <td> {{ course.name }}</td>
     <td >{{ course.description }}</td>  
                 
-                <td><a ng-click="editCourses(course)" class="blue-button">Edit</a> | <a ng-click="deleteCourses(course)" class="red-button">Delete</a></td>
+                <td><a ng-click="editCourses(course)" class="blue-button">Edit</a> | <a ng-click="deleteCourses(course)" onclick="deleteCourse(course)" class="red-button">Delete</a></td>
             </tr>
  
         </table> 

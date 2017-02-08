@@ -51,13 +51,17 @@
                 };
          
                 //HTTP DELETE- delete file by Id
+                
                 $scope.deleteFileType = function(filetype) {
+                	if(confirm("Are you sure to Delete ?") == true){
                     $http({
                         method : 'DELETE',
                         url : 'http://localhost:8080/visog-job-portal-api/master/fileType/' + filetype.id
                     }).then(_success, _error);
+                	}
                 };
- 
+                	
+                                                            
              // In case of edit, populate form fields and assign form.id with file id
                 $scope.editFileType = function(filetype) {
                   

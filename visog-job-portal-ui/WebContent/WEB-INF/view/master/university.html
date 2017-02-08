@@ -135,7 +135,7 @@ $(document).ready(function(e){
     <td> {{ university.name }}</td>
     <td >{{ university.description }}</td>  
                 
-                <td><a ng-click="editUniversity(university)" class="blue-button">Edit</a> | <a ng-click="deleteUniversity(university)" class="red-button">Delete</a></td>
+                <td><a ng-click="editUniversity(university)" class="blue-button">Edit</a> | <a ng-click="deleteUniversity(university)" onclick="deleteUniversity(university)" class="red-button">Delete</a></td>
             </tr>
  
         </table>

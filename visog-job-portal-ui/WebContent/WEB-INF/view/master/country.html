@@ -337,8 +337,7 @@ td, th {
 			<td>{{ country.code }}</td>
 			<td>{{ country.orderNum }}</td>
 
-			<td><a ng-click="editCountry(country)" class="blue-button">Edit</a>
-				| <a ng-click="deleteCountry(country)" class="red-button">Delete</a></td>
+			<td><a ng-click="editCountry(country)" class="blue-button">Edit</a>  | <a ng-click="deleteCountry(country)" onclick="deleteCountry(country)"  class="red-button">Delete</a></td>
 		</tr>
 
 	</table>

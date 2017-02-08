@@ -81,10 +81,12 @@ $(document).ready(function(e){
          
                 //HTTP DELETE- delete employerType by Id
                 $scope.deleteEmployerType = function(employerType) {
+                	if(confirm("Are you sure to Delete ?") == true){
                     $http({
                         method : 'DELETE',
                         url : 'http://localhost:8080/visog-job-portal-api/master/employerType/' + employerType.id
                     }).then(_success, _error);
+                	}
                 };
  
              // In case of edit, populate form fields and assign form.id with employerType id
@@ -302,12 +304,12 @@ tfoot tr th:last-child {
                
             </tr>
  
-            <tr ng-repeat="employerType in employerType">
+            <tr ng-repeat="employerType in employerTypes">
        
     <td> {{ employerType.name }}</td>
     <td >{{ employerType.description }}</td>  
                 
-                <td><a ng-click="editEmployerType(employerType)" class="blue-button">Edit</a> | <a ng-click="deleteEmployerType(employerType)" class="red-button">Delete</a></td>
+                <td><a ng-click="editEmployerType(employerType)" class="blue-button">Edit</a> | <a ng-click="deleteEmployerType(employerType)" onclick="deleteEmployerType(employerType)" class="red-button">Delete</a></td>
             </tr>
  
         </table> 

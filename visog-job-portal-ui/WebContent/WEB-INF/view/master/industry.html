@@ -132,7 +132,7 @@ $(document).ready(function(e){
     <td> {{ industry.name }}</td>
     <td >{{ industry.description }}</td>  
                 
-                <td><a ng-click="editIndustry(industry)" class="blue-button">Edit</a> | <a ng-click="deleteIndustry(industry)" class="red-button">Delete</a></td>
+                <td><a ng-click="editIndustry(industry)" class="blue-button">Edit</a> | <a ng-click="deleteIndustry(industry)" onclick="deleteIndustry(industry)" class="red-button">Delete</a></td>
             </tr>
  
         </table>

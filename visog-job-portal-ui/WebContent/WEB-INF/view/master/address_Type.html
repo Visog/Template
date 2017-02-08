@@ -96,12 +96,15 @@ $(document).ready(function(e){
 
 						// HTTP DELETE- delete role by Id
 						$scope.deleteAddressType = function(addressType) {
+							
+							if(confirm("Are you sure to Delete ?") == true){
 							$http(
 									{
 										method : 'DELETE',
 										url : 'http://localhost:8080/visog-job-portal-api/master/addressType/'
 												+ addressType.id
 									}).then(_success, _error);
+							}
 						};
 
 						// In case of edit, populate form fields and assign form.id
@@ -326,8 +329,8 @@ td, th {
 			<td>{{ addressType.description }}</td>
 			<!-- <td>{{ country.orderNum }}</td> -->
 `					
-
-			<td><a ng-click="editAddressType(addressType)" class="blue-button">Edit</a>	| <a ng-click="deleteAddressType(addressType)" onclick="return confirm('Are you sure you want to delete this item?')" class="red-button">Delete</a></td>
+	
+			<td><a ng-click="editAddressType(addressType)" class="blue-button">Edit</a>	| <a ng-click="deleteAddressType(addressType)" onclick="deleteAddressType(addressType)" class="red-button">Delete</a></td>
 		</tr>
 
 	</table>

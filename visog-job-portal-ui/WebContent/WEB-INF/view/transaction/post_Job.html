@@ -441,7 +441,7 @@ tfoot tr th:last-child {
     <td >{{ postjob.phoneNo }}</td>  
     <td >{{ postjob.walkIn }}</td>  
                 
-                <td><a ng-click="editPostJob(postjob)" class="blue-button">Edit</a> | <a ng-click="deletePostJob(postjob)" class="red-button">Delete</a></td>
+                <td><a ng-click="editPostJob(postjob)" class="blue-button">Edit</a> | <a ng-click="deletePostJob(postjob)" onclick="deletePostjob(postjob)" class="red-button">Delete</a></td>
             </tr>
  
         </table> 
