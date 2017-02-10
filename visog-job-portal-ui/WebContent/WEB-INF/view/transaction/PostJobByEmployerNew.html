@@ -154,7 +154,7 @@ app
 							
 							if ($scope.postJob.id == -1
 									|| $scope.postJob.id == undefined) {
-								//Id is absent in form data, it is create new file operation
+								//Id is absent in form data, it is create new file operation//
 								    
 								method = "POST";
 								url = 'http://localhost:8080/visog-job-portal-api/transaction/postJob';
@@ -165,7 +165,8 @@ app
 							        'Accept': 'application/json;odata=verbose',
 							        'X-User-Id': $sessionStorage.SessionUser
 							    }
-							};alert("Session data afetr header :::"+$sessionStorage.SessionUser);
+							};
+							 //alert("Session data afetr header :::"+$sessionStorage.SessionUser);
 								 reqBody ={
 											
 										 "user": "",
