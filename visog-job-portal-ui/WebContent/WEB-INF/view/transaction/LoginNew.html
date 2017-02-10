@@ -2,7 +2,7 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>Bootstrap Snippet: Login Form</title>
+  <title> Login Form</title>
   
   
 <link rel="stylesheet" type="text/css" href="/visog-job-portal-ui/resources/css/Loginstyle.css">
@@ -20,7 +20,6 @@
 var app = angular.module("myApp", ["ngStorage"]);
 //Controller Part
 
-//Divya
 app
 		.controller(
 				"myCtrl",
@@ -29,63 +28,54 @@ app
 				
 					
 					 $scope.submitLogin = function() {
-			        	
-						var method = "";
+			        	var method = "";
 						var url = "";
 						 var headers = "";
 						
 
 						var reqBody = "";
-						// alert($scope.postJob.id);
+				//		alert('hi');
 						if ($scope.Login.id == -1
 								|| $scope.Login.id == undefined) {
 							//Id is absent in form data, it is create new file operation
-							    
+						//$http.defaults.headers.common['Auth-Token'] = 'token';
 							method = "POST";
 							url = 'http://localhost:8080/visog-job-portal-api/Login/details';
-							 headers = {
-								        'Content-Type' : 'application/json',
-								        'userid' : '11123'
-								    };
+							// headers= {'Access-Control-Expose-Headers': 'true','userid': '08d344ed-61c6-4b04-8638-76f5eaa60f5d'};
+							 var config = {headers:  { 
+							        'Accept': 'application/json;odata=verbose',
+							        'X-User-Id': 'visog header'
+							    }
+							};
+
 							 reqBody = {
 										
 										
 								      "email": $scope.Login.username,
 								      "password": $scope.Login.password
 								};
-							
-							$http
+							// $http.defaults.headers.post["userid"] = "application/x-www-form-urlencoded;charset=utf-8";
+						//	 $config.headers['userid'] = "hhhhhh";
+						 
+							 $http
 									.post(
-											url,reqBody,headers
+											url,reqBody,config
 											).then(function successCallback(response) {
 											
 												if(response.data.statusCode==200)
 													{
 												sessionStorage.setItem('user', JSON.stringify(response.data.data));
 												var obj = JSON.parse(sessionStorage.getItem('user')); 
-												alert(obj.id+":::: OBJ");
+												//alert(obj.id+":::: OBJ");
 												$sessionStorage.SessionUser = response.data.data.id;
+												
 												_clearFormData();
 													}
 												alert(response.data.message);
 												_clearFormData();
-											url,
-											{
-												
-												
-											      "email": $scope.Login.username,
-											      "password": $scope.Login.password
-											}).then(function successCallback(response) {
-												//alert("before"+response.data.data.id);
-												// $sessionStorage.SessionMessage = "SessionStorage:stmnn";
-												sessionStorage.setItem('user', JSON.stringify(response.data.data));
-												var obj = JSON.parse(sessionStorage.getItem('user')); 
-												console.log(obj.id+":::: OBJ");
-												console.log(obj.firstName+":::: OBJ");
-												
 											}, function errorCallback(response) {
 												alert(response.data.message);
-												console.log(response.statusText);
+												//console.log(response.statusText);
 											});
 							//alert(url);
 							
@@ -99,18 +89,6 @@ app
 						} 
 					};
 				
-					function _error(response) {
-	                   // alert('kkkkkkkkkkkk'+response);
-	                	//alert(response.data.message);
-						console.log(response.statusText);
-					}
-					function _success(response) {
-						   // alert('iiiii');
-						//	alert(response.data.message);
-							
-							_clearFormData()
-						}
-					
 					
 					
 					
@@ -132,8 +110,6 @@ app
      <form class="form-signin" ng-submit="submitLogin()" id="Login" ><div id='result'></div>    
       <h2 class="form-signin-heading">Please login</h2>
        <input type="hidden" class="form-control" name="id" value="-1" ng-model="Login.id" />      
-
-       
       
       <input type="text" class="form-control" name="username" placeholder="Email Address *" required  ng-model="Login.username" />
       <input type="password" class="form-control" name="password" placeholder="Password *" required  ng-model="Login.password" />      
