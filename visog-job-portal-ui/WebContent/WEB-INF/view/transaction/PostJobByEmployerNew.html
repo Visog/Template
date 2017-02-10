@@ -1,10 +1,10 @@
 <!DOCTYPE html>
+<html >
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="UTF-8">
   <title>Registration Form</title>
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
- 
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
 <style type="text/css">
 .form-style-8{
     font-family: 'Open Sans Condensed', arial, sans;
@@ -86,21 +86,19 @@
     $('#result').html($(this).val());
 }); */
 
-var app = angular.module("myApp", []);
+var app = angular.module("myApp",  ["ngStorage"]);
 //Controller Part
 
 app
 		.controller(
 				"myCtrl",
 				
-				function($scope, $http) {
-
+				function($scope, $http, $sessionStorage) {
+					// alert('sessionStorage');
 					$scope.postJob = []; 
 					$scope.usersForm = {
 						// id : -1,
-						
-					
-							
+				
 
 							 user: "",
 						      jobTitle: "",
@@ -123,7 +121,7 @@ app
 						      zipcode: "",
 					};
 
-					
+					_SessionData();
 					_CurrencyData();
 					_CountryData();
 					_IndustryData();
@@ -148,43 +146,54 @@ app
 				        
 				        
 				        $scope.submitPostJob = function() {
-				        	 // alert('hhhh');
+				        	
 							var method = "";
 							var url = "";
-							// alert($scope.postJob.id);
+							var reqBody="";
+							var config="";
+							
 							if ($scope.postJob.id == -1
 									|| $scope.postJob.id == undefined) {
-								//Id is absent in form data, it is create new file operation
+								//Id is absent in form data, it is create new file operation//
 								    
 								method = "POST";
 								url = 'http://localhost:8080/visog-job-portal-api/transaction/postJob';
+							
+								
+								
+							 config = {headers:  {
+							        'Accept': 'application/json;odata=verbose',
+							        'X-User-Id': $sessionStorage.SessionUser
+							    }
+							};//alert("Session data afetr header :::"+$sessionStorage.SessionUser);
+								 reqBody ={
+											
+										 "user": "",
+									      "jobTitle": $scope.postJob.jobtitle,
+									      "jobDescription": $scope.postJob.description,
+									      "annualPackageFrom": $scope.postJob.fromrange,
+									      "annualPackageTo": $scope.postJob.torange,
+									      "currency":  $scope.postJob.currency,
+									      "company": $scope.postJob.company,
+									      "effectedDateFrom": $scope.postJob.fromdate,
+									      "effectedDateTo": $scope.postJob.todate,
+									      "status": "",
+									      "minExperience": $scope.postJob.minExperience,
+									      "phoneNo": $scope.postJob.PhoneNumber,
+									      "walkIn": $scope.postJob.Walkin,
+									      "addressLine1": $scope.postJob.address1,
+									      "addressLine2": $scope.postJob.address2,
+									      "country": $scope.postJob.country,
+									      "state": $scope.postJob.state,
+									      "city": $scope.postJob.city,
+									      "zipcode": $scope.postJob.zipcode
+									}
 								//alert('hi');
 								$http
 										.post(
-												url,
-												{
-													
-													 "user": "",
-												      "jobTitle": $scope.postJob.jobtitle,
-												      "jobDescription": $scope.postJob.description,
-												      "annualPackageFrom": $scope.postJob.fromrange,
-												      "annualPackageTo": $scope.postJob.torange,
-												      "currency":  $scope.postJob.currency,
-												      "company": $scope.postJob.company,
-												      "effectedDateFrom": $scope.postJob.fromdate,
-												      "effectedDateTo": $scope.postJob.todate,
-												      "status": "",
-												      "minExperience": $scope.postJob.minExperience,
-												      "phoneNo": $scope.postJob.PhoneNumber,
-												      "walkIn": $scope.postJob.Walkin,
-												      "addressLine1": $scope.postJob.address1,
-												      "addressLine2": $scope.postJob.address2,
-												      "country": $scope.postJob.country,
-												      "state": $scope.postJob.state,
-												      "city": $scope.postJob.city,
-												      "zipcode": $scope.postJob.zipcode
-												}).then(_success, _error);
-								//alert(url);
+												url,reqBody,config
+												).then(_success, _error);
+								alert("done");
 
 							} else {
 
@@ -195,34 +204,15 @@ app
 										+ id;
 								$http
 										.post(
-												url,
-												{
-
-													 "user": "",
-												      "jobTitle": $scope.postJob.jobtitle,
-												      "jobDescription": $scope.postJob.description,
-												      "annualPackageFrom": $scope.postJob.fromrange,
-												      "annualPackageTo": $scope.postJob.torange,
-												      "currency": "",
-												      "company": $scope.postJob.company,
-												      "effectedDateFrom": $scope.postJob.fromdate,
-												      "effectedDateTo": $scope.postJob.todate,
-												      "status": "",
-												      "minExperience": $scope.postJob.minExperience,
-												      "phoneNo": $scope.postJob.PhoneNumber,
-												      "walkIn": $scope.postJob.Walkin,
-												      "addressLine1": $scope.postJob.address1,
-												      "addressLine2": $scope.postJob.address2,
-												      "country": $scope.postJob.country,
-												      "state": $scope.postJob.state,
-												      "city": $scope.postJob.city,
-												      "zipcode": $scope.postJob.zipcode
-												}).then(_success, _error);
+												url,reqBody,config).then(_success, _error);
 								$scope.postJob.id = -1;
 							}
 						};
   
-				        
+						function _SessionData(){
+							
+									//alert($sessionStorage.SessionUser);
+							}      
 				        
 				        
 
@@ -350,7 +340,7 @@ app
 					_clearFormData()
 				}
 				function _clearFormData() {
-					
+					  $scope.postJob.id = "-1";
 					  $scope.postJob.jobtitle = "";
 				     $scope.postJob.description = "";
 				     $scope.postJob.fromrange = "";
@@ -380,11 +370,9 @@ app
 				}
 				});
 				
-$scope.update = function(id){
-	//alert('jjj');
-    //id = event.target.id;
-   // $scope.item[id+'Date'] = new Date();
- };
+/* $scope.update = function(id){
+	
+ }; */
 /* 
 function adjust_textarea(h) {
     h.style.height = "20px";
@@ -397,6 +385,7 @@ function adjust_textarea(h) {
 <div class="form-style-8">
   <h2>Post a job</h2>
  <form ng-submit="submitPostJob()" id="postJob"><div id='result'></div>
+    <input type="hidden" class="form-control" name="id" value="-1" ng-model="postJob.id" />  
     <input type="text" name="company" placeholder="Company Name *"   required ng-model="postJob.company"/>
 	<input type="text" name="jobtitle" placeholder="Job title *" ng-model="postJob.jobtitle" />
 	<textarea rows="4" cols="50" name="Jobdescription" placeholder="Job Description *"  ng-model="postJob.description"></textarea>
