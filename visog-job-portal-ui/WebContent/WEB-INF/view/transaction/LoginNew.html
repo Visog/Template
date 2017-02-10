@@ -38,7 +38,7 @@ app
 						if ($scope.Login.id == -1
 								|| $scope.Login.id == undefined) {
 							//Id is absent in form data, it is create new file operation
-						//$http.defaults.headers.common['Auth-Token'] = 'token';
+						//$http.defaults.headers.common['Auth-Token'] = 'token';//
 							method = "POST";
 							url = 'http://localhost:8080/visog-job-portal-api/Login/details';
 							// headers= {'Access-Control-Expose-Headers': 'true','userid': '08d344ed-61c6-4b04-8638-76f5eaa60f5d'};
