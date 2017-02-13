@@ -120,11 +120,18 @@ app
 						      city: "",
 						      zipcode: "",
 					};
-
+					 var config="";
 					_SessionData();
+					config = {headers:  {
+						 'Content-Type':'application/json',
+				        'Accept': 'application/json;odata=verbose',
+				        'X-User-Id': $sessionStorage.SessionUser
+				    }
+				};
 					_CurrencyData();
 					_CountryData();
 					_IndustryData();
+				
 					  /* $scope.d1 = function() {
 						  alert('jjjj');
 					  } */
@@ -150,22 +157,16 @@ app
 							var method = "";
 							var url = "";
 							var reqBody="";
-							var config="";
 							
+						
+							// alert(reqBody);
 							if ($scope.postJob.id == -1
 									|| $scope.postJob.id == undefined) {
 								//Id is absent in form data, it is create new file operation//
 								    
 								method = "POST";
 								url = 'http://localhost:8080/visog-job-portal-api/transaction/postJob';
-							
 								
-								
-							 config = {headers:  {
-							        'Accept': 'application/json;odata=verbose',
-							        'X-User-Id': $sessionStorage.SessionUser
-							    }
-							};//alert("Session data afetr header :::"+$sessionStorage.SessionUser);
 								 reqBody ={
 											
 										 "user": "",
@@ -187,19 +188,41 @@ app
 									      "state": $scope.postJob.state,
 									      "city": $scope.postJob.city,
 									      "zipcode": $scope.postJob.zipcode
-									}
-								//alert('hi');
+									};
+							
 								$http
 										.post(
 												url,reqBody,config
 												).then(_success, _error);
-								alert("done");
+							//	alert("done");
 
 							} else {
 
 								//Id is present in form data, it is edit file operation
 								id = $scope.postJob.id;
 								method = "PUT";
+								 reqBody ={
+											
+										 "user": "",
+									      "jobTitle": $scope.postJob.jobtitle,
+									      "jobDescription": $scope.postJob.description,
+									      "annualPackageFrom": $scope.postJob.fromrange,
+									      "annualPackageTo": $scope.postJob.torange,
+									      "currency":  $scope.postJob.currency,
+									      "company": $scope.postJob.company,
+									      "effectedDateFrom": $scope.postJob.fromdate,
+									      "effectedDateTo": $scope.postJob.todate,
+									      "status": "",
+									      "minExperience": $scope.postJob.minExperience,
+									      "phoneNo": $scope.postJob.PhoneNumber,
+									      "walkIn": $scope.postJob.Walkin,
+									      "addressLine1": $scope.postJob.address1,
+									      "addressLine2": $scope.postJob.address2,
+									      "country": $scope.postJob.country,
+									      "state": $scope.postJob.state,
+									      "city": $scope.postJob.city,
+									      "zipcode": $scope.postJob.zipcode
+									};
 								url = 'http://localhost:8080/visog-job-portal-api/transaction/postJob/'
 										+ id;
 								$http
@@ -211,58 +234,84 @@ app
   
 						function _SessionData(){
 							
-									//alert($sessionStorage.SessionUser);
+									alert($sessionStorage.SessionUser);
 							}      
 				        
 				        
 
 				function _CurrencyData() {
-					$http(
+					
+					method = 'GET';
+					url ='http://localhost:8080/visog-job-portal-api/master/currency/';
+					
+					$http
+							.get(
+									url,config
+									).then(function successCallback(response) {
+										
+										
+										$scope.currencys = response.data.data;
+										//alert('hijj dfdfdf 1'+response.data.data);
+									}, function errorCallback(response) {
+										alert(response.statusText);
+									})
+					
+					
+					
+				/* 	$http(
 							{
 								method : 'GET',
-								url : 'http://localhost:8080/visog-job-portal-api/master/currency/'
+								url : 'http://localhost:8080/visog-job-portal-api/master/currency/',config
 							}).then(function successCallback(response) {
 								
 								
 						$scope.currencys = response.data.data;
 						//alert('hijj dfdfdf 1'+response.data.data);
 					}, function errorCallback(response) {
-						console.log(response.statusText);
-					});//alert('jjffj');
+						alert(response.statusText);
+					});//alert('jjffj'); */
 				}
 				
 				function _IndustryData() {
-					$http(
-							{
-								method : 'GET',
-								url : 'http://localhost:8080/visog-job-portal-api/master/industry'
-							}).then(function successCallback(response) {
+					
+					method = 'GET';
+					url ='http://localhost:8080/visog-job-portal-api/master/industry';
+					
+					$http
+							.get(
+									url,config
+									).then(function successCallback(response) {
 					//	 alert(response.data.data+"Country Data")
 						$scope.industries = response.data.data;
 					}, function errorCallback(response) {
-						console.log(response.statusText);
+						alert(response.statusText);
 					});
 				}
 				
 				
 				function _CountryData() {
-					$http(
-							{
-								method : 'GET',
-								url : 'http://localhost:8080/visog-job-portal-api/master/country/'
-							}).then(function successCallback(response) {
+					
+					method = 'GET';
+					url ='http://localhost:8080/visog-job-portal-api/master/country/';
+					
+					$http
+							.get(
+									url,config
+									).then(function successCallback(response) {
 					//	 alert(response.data.data+"Country Data")
 						$scope.countrys = response.data.data;
 					}, function errorCallback(response) {
-						console.log(response.statusText);
+						alert(response.statusText);
 					});
 				}
 				function _StateData() {
-					$http(
-							{
-								method : 'GET',
-								url : 'http://localhost:8080/visog-job-portal-api/master/state/'
-							}).then(function successCallback(response) {
+					method = 'GET';
+					url ='http://localhost:8080/visog-job-portal-api/master/state/';
+					
+					$http
+							.get(
+									url,config
+									).then(function successCallback(response) {
 					//	 alert(response.data.data+"Country Data")
 						$scope.states = response.data.data;
 					
@@ -291,16 +340,18 @@ app
 					
 				//	alert('kkk');
 					}, function errorCallback(response) {
-						console.log(response.statusText);
+						alert(response.statusText);
 					});
 				}
 				
 				function _CityData() {
-					$http(
-							{
-								method : 'GET',
-								url : 'http://localhost:8080/visog-job-portal-api/master/city'
-							}).then(function successCallback(response) {
+					method = 'GET';
+					url ='http://localhost:8080/visog-job-portal-api/master/city/';
+					
+					$http
+							.get(
+									url,config
+									).then(function successCallback(response) {
 					//	 alert(response.data.data+"Country Data")
 						$scope.cities = response.data.data;
 					
@@ -329,7 +380,7 @@ app
 					
 				//	alert('kkk');
 					}, function errorCallback(response) {
-						console.log(response.statusText);
+						alert(response.statusText);
 					});
 				}
 				 
@@ -366,7 +417,7 @@ app
 				}
 				function _error(response) {
                     // alert('kkkkkkkkkkkk'+response);
-					console.log(response.statusText);
+					alert(response.statusText);
 				}
 				});
 				
