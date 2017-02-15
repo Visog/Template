@@ -19,8 +19,10 @@
 /* $('select[name=dropdown]').change(function() {
     $('#result').html($(this).val());
 }); */
+
 var app = angular.module("myApp", ["ngStorage"]);
 //Controller Part
+
 app
 		.controller(
 				"myCtrl",
@@ -32,7 +34,8 @@ app
 			        	var method = "";
 						var url = "";
 						 var headers = "";
-						 var config="";
+						
+
 						var reqBody = "";
 				//		alert('hi');
 						if ($scope.Login.id == -1
@@ -42,12 +45,12 @@ app
 							method = "POST";
 							url = 'http://localhost:8080/visog-job-portal-api/Login/details';
 							// headers= {'Access-Control-Expose-Headers': 'true','userid': '08d344ed-61c6-4b04-8638-76f5eaa60f5d'};
-							 config = {headers:  {
-								 'Content-Type':'application/json',
+							 var config = {headers:  { 
 							        'Accept': 'application/json;odata=verbose',
-							        'X-User-Id': '08d344ed-61c6-4b04-8638-76f5eaa60f5d'
+							        'X-User-Id': 'visog header'
 							    }
 							};
+
 							 reqBody = {
 										
 										
@@ -85,6 +88,7 @@ app
 								$scope.Login.username="";
 							    $scope.Login.password="";
 							}
+
 						} 
 					};
 				
@@ -124,3 +128,4 @@ app
   
 </body>
 </html>
+

@@ -33,7 +33,7 @@
 			<a href="/visog-job-portal-ui/city">City</a>
 		</h4>
 		<h4>
-			<a href="/visog-job-portal-ui/addresstype">Address Type</a>
+			<a href="/visog-job-portal-ui/addresstype">Address   Type</a>
 		</h4>
 		<h4>
 			<a href="/visog-job-portal-ui/courses">Courses</a>
