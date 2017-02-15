@@ -205,8 +205,9 @@ public class HelloSpring4Controller {
 		return "transaction/LoginNew";
 	}
 	
-	@RequestMapping(value = "/session", method = RequestMethod.GET)
-	public String session() {
-		return "transaction/session";
+	@RequestMapping(value = "/postjobwithindustry", method = RequestMethod.GET)
+	public String postjobwithindustry() {
+		return "transaction/postjobwithindustry";
 	}
+	
 }
