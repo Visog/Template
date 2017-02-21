@@ -10,7 +10,6 @@
 
 
 <script type="text/javascript">
-
 $(document).ready(function(e){
 	$('.masters').click(function(){
 		$(this).toggleClass('tap');
@@ -34,10 +33,12 @@ $(document).ready(function(e){
             //Controller Part
             app.controller("RoleController", function($scope, $http, $sessionStorage) {
             	var config="";
-            	 alert("testing 1"+$sessionStorage.SessionUser);
+            	
+            	
 				config = {headers:  {
+					 'Content-Type':'application/json',
 			        'Accept': 'application/json;odata=verbose',
-			        'x-session-Id': $sessionStorage.SessionID
+			        'X-Session-Id': $sessionStorage.SessionUser
 			    }
 			};
                
@@ -47,7 +48,7 @@ $(document).ready(function(e){
                     name : "",
                     description : ""
                 };
-        
+        // alert($sessionStorage.SessionUser);
                 //Now load the data from server
                 _refreshRoleData();
          
@@ -74,8 +75,17 @@ $(document).ready(function(e){
                         method = "PUT";
                         url = 'http://localhost:8080/visog-job-portal-api/master/roles/'+ id;
                       $http.put(url,reqBody,config).then( _success, _error );
+                      $scope.roleForm.id = -1;
                     }
-
+ /*         
+                    $http({
+                        method : method,
+                        url : url,
+                        data : angular.toJson($scope.roleForm),
+                        headers : {
+                            'Content-Type' : 'application/json'
+                        }
+                    }).then( _success, _error ); */
                 };
          
                 //HTTP DELETE- delete role by Id
@@ -83,13 +93,11 @@ $(document).ready(function(e){
                 	
                 	
                 	
-                	
                 	if(confirm("Are you sure to Delete ?") == true){
-                    $http({
-                        method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/roles/' + role.id,config
-                    }).then(_success, _error);
-                	}
+                		   url = 'http://localhost:8080/visog-job-portal-api/master/roles/' + role.id;
+                		$http.delete(url,config)
+                		.then(_success, _error);
+                    	}
                 };
  
              // In case of edit, populate form fields and assign form.id with role id
@@ -119,7 +127,20 @@ $(document).ready(function(e){
 										alert(response.statusText);
 									})  
 					
-                	
+                	/* 
+            
+                    method = 'GET';
+					url ='http://localhost:8080/visog-job-portal-api/master/roles/';
+					
+					$http
+							.get(
+									url,config
+									).then(function successCallback(response) {
+                    	//alert(response.data.data)
+                        $scope.roles = response.data.data;
+                    }, function errorCallback(response) {
+                        console.log(response.statusText);
+                    }); */
                 }
          
                 function _success(response) {
@@ -160,6 +181,7 @@ $(document).ready(function(e){
 				<li class="masters"><a href="#">Masters<span class="sub"></span></a>
 				<ul>
 				<li class="child"><a href="/visog-job-portal-ui/roles">Roles</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/roles1">Roles1</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/gender">Gender</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/country">Country</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/state">State</a></li>
@@ -245,7 +267,7 @@ $(document).ready(function(e){
     <td> {{ role.name }}</td>
     <td >{{ role.description }}</td>  
                 
-                <td><a ng-click="editRole(role)" class="blue-button">Edit</a> | <a ng-click="deleteRole(role)" onclick="deleteRole(role)" class="red-button">Delete</a></td>
+                <td><a ng-click="editRole(role)" class="blue-button">Edit</a> | <a ng-click="deleteRole(role)"  class="red-button">Delete</a></td>
             </tr>
  
         </table>
@@ -256,3 +278,5 @@ $(document).ready(function(e){
       
   </body>
 </html>
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
