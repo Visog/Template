@@ -34,11 +34,12 @@ $(document).ready(function(e){
             //Controller Part
             app.controller("RoleController", function($scope, $http, $sessionStorage) {
             	var config="";
-				
+            	
+            	
 				config = {headers:  {
 					 'Content-Type':'application/json',
 			        'Accept': 'application/json;odata=verbose',
-			        'X-Session-Id': $sessionStorage.SessionID
+			        'X-Session-Id': $sessionStorage.SessionUser
 			    }
 			};
                
@@ -93,13 +94,11 @@ $(document).ready(function(e){
                 	
                 	
                 	
-                	
                 	if(confirm("Are you sure to Delete ?") == true){
-                    $http({
-                        method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/roles/' + role.id,config
-                    }).then(_success, _error);
-                	}
+                		   url = 'http://localhost:8080/visog-job-portal-api/master/roles/' + role.id;
+                		$http.delete(url,config)
+                		.then(_success, _error);
+                    	}
                 };
  
              // In case of edit, populate form fields and assign form.id with role id
@@ -269,7 +268,7 @@ $(document).ready(function(e){
     <td> {{ role.name }}</td>
     <td >{{ role.description }}</td>  
                 
-                <td><a ng-click="editRole(role)" class="blue-button">Edit</a> | <a ng-click="deleteRole(role)" onclick="deleteRole(role)" class="red-button">Delete</a></td>
+                <td><a ng-click="editRole(role)" class="blue-button">Edit</a> | <a ng-click="deleteRole(role)"  class="red-button">Delete</a></td>
             </tr>
  
         </table>

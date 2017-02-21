@@ -62,8 +62,7 @@ app
 													{
 												sessionStorage.setItem('user', JSON.stringify(response.data.data));
 												var obj = JSON.parse(sessionStorage.getItem('user')); 
-												//alert(obj.id+":::: OBJ");//
-												$sessionStorage.SessionUser = response.data.data.id;
+												$sessionStorage.SessionUser = response.data.data.sessionId;
 													}
 												alert(response.data.message);
 												_clearFormData();

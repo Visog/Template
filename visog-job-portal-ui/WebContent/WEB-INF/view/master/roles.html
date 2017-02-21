@@ -34,11 +34,10 @@ $(document).ready(function(e){
             //Controller Part
             app.controller("RoleController", function($scope, $http, $sessionStorage) {
             	var config="";
-				
+            	 alert("testing 1"+$sessionStorage.SessionUser);
 				config = {headers:  {
-					 'Content-Type':'application/json',
 			        'Accept': 'application/json;odata=verbose',
-			        'X-Session-Id': $sessionStorage.SessionID
+			        'x-session-Id': $sessionStorage.SessionID
 			    }
 			};
                
@@ -48,7 +47,7 @@ $(document).ready(function(e){
                     name : "",
                     description : ""
                 };
-         alert($sessionStorage.SessionUser);
+        
                 //Now load the data from server
                 _refreshRoleData();
          
@@ -75,17 +74,8 @@ $(document).ready(function(e){
                         method = "PUT";
                         url = 'http://localhost:8080/visog-job-portal-api/master/roles/'+ id;
                       $http.put(url,reqBody,config).then( _success, _error );
-                      $scope.roleForm.id = -1;
                     }
- /*         
-                    $http({
-                        method : method,
-                        url : url,
-                        data : angular.toJson($scope.roleForm),
-                        headers : {
-                            'Content-Type' : 'application/json'
-                        }
-                    }).then( _success, _error ); */
+
                 };
          
                 //HTTP DELETE- delete role by Id
@@ -129,27 +119,7 @@ $(document).ready(function(e){
 										alert(response.statusText);
 									})  
 					
-                	/* 
                 	
-                	
-                	
-                	
-                	
-                	
-                	
-                	
-                    method = 'GET';
-					url ='http://localhost:8080/visog-job-portal-api/master/roles/';
-					
-					$http
-							.get(
-									url,config
-									).then(function successCallback(response) {
-                    	//alert(response.data.data)
-                        $scope.roles = response.data.data;
-                    }, function errorCallback(response) {
-                        console.log(response.statusText);
-                    }); */
                 }
          
                 function _success(response) {
