@@ -45,6 +45,7 @@ $(document).ready(function(e){
 				<li class="masters"><a href="#">Masters<span class="sub"></span></a>
 				<ul>
 				<li class="child"><a href="/visog-job-portal-ui/roles">Roles</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/roles1">Roles1</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/gender">Gender</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/country">Country</a></li>
 				<li class="child"><a href="/visog-job-portal-ui/state">State</a></li>

@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <title> Login Form</title>
   
-  <link rel="stylesheet" type="text/css" href="/Spring4HelloWorld/resources/css/master.css" />
   
   
 <link rel="stylesheet" type="text/css" href="/visog-job-portal-ui/resources/css/Loginstyle.css">
@@ -19,10 +18,8 @@
 /* $('select[name=dropdown]').change(function() {
     $('#result').html($(this).val());
 }); */
-
 var app = angular.module("myApp", ["ngStorage"]);
 //Controller Part
-
 app
 		.controller(
 				"myCtrl",
@@ -35,22 +32,18 @@ app
 						var url = "";
 						 var headers = "";
 						
-
 						var reqBody = "";
 				//		alert('hi');
-						if ($scope.Login.id == -1
-								|| $scope.Login.id == undefined) {
+						
 							//Id is absent in form data, it is create new file operation
 						//$http.defaults.headers.common['Auth-Token'] = 'token';//
 							method = "POST";
-							url = 'http://localhost:8080/visog-job-portal-api/Login/details';
+							url = 'http://localhost:8080/visog-job-portal-api/login/details';
 							// headers= {'Access-Control-Expose-Headers': 'true','userid': '08d344ed-61c6-4b04-8638-76f5eaa60f5d'};
 							 var config = {headers:  { 
-							        'Accept': 'application/json;odata=verbose',
-							        'X-User-Id': 'visog header'
+							        'Accept': 'application/json;odata=verbose'
 							    }
 							};
-
 							 reqBody = {
 										
 										
@@ -71,8 +64,6 @@ app
 												var obj = JSON.parse(sessionStorage.getItem('user')); 
 												//alert(obj.id+":::: OBJ");//
 												$sessionStorage.SessionUser = response.data.data.id;
-												
-												_clearFormData();
 													}
 												alert(response.data.message);
 												_clearFormData();
@@ -80,19 +71,18 @@ app
 												alert(response.data.message);
 	  											//console.log(response.statusText);
 											});
-							//alert(url);
 							
-							function _clearFormData()
-							{
-								$scope.Login.id="-1";
-								$scope.Login.username="";
-							    $scope.Login.password="";
-							}
-
-						} 
+							
+						 
 					};
 				
-					
+
+					function _clearFormData()
+					{
+						$scope.Login.id="-1";
+						$scope.Login.username="";
+					    $scope.Login.password="";
+					}
 					
 					
 				});

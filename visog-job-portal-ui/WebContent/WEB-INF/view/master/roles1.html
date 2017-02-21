@@ -1,0 +1,282 @@
+
+<html>
+  <head>  
+  <link rel="stylesheet" type="text/css" href="/visog-job-portal-ui/resources/css/master.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="resources/css/user.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script src="resources/js/jquery-3.1.1.min.js"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(e){
+	$('.masters').click(function(){
+		$(this).toggleClass('tap');
+		
+	});
+	$('.transactions').click(function(){
+		$(this).toggleClass('tap');
+		
+	});
+	
+});
+</script>
+<meta name="viewport" content="width=device-width, initial-scale:1, user-scalable=0"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
+    
+    <title>AngularJS $http Rest example</title>  
+ <script type="text/javascript">
+            var app = angular.module("RoleManagement",  ["ngStorage"]);
+         
+            //Controller Part
+            app.controller("RoleController", function($scope, $http, $sessionStorage) {
+            	var config="";
+				
+				config = {headers:  {
+					 'Content-Type':'application/json',
+			        'Accept': 'application/json;odata=verbose',
+			        'X-Session-Id': $sessionStorage.SessionID
+			    }
+			};
+               
+               // $scope.countries = [];
+                $scope.roleForm = {
+                    id : -1,
+                    name : "",
+                    description : ""
+                };
+         alert($sessionStorage.SessionUser);
+                //Now load the data from server
+                _refreshRoleData();
+         
+                //HTTP POST/PUT methods for add/edit role 
+                // with the help of id, we are going to find out whether it is put or post operation
+                  var reqBody="";
+                $scope.submitRole = function() {
+         
+                    var method = "";
+                    var url = "";
+                    reqBody={ "name": $scope.roleForm.name, "description" : $scope.roleForm.description };
+                   // alert($scope.roleForm.id);
+                    if ($scope.roleForm.id == -1 || $scope.roleForm.id == undefined) {
+                        //Id is absent in form data, it is create new role operation
+                        
+                        method = "POST";
+                        url = 'http://localhost:8080/visog-job-portal-api/master/roles/';
+                        $http.post(url,reqBody,config ).then( _success, _error ); 
+                    
+                    } else {
+                    	 
+                        //Id is present in form data, it is edit role operation
+                        id=$scope.roleForm.id;
+                        method = "PUT";
+                        url = 'http://localhost:8080/visog-job-portal-api/master/roles/'+ id;
+                      $http.put(url,reqBody,config).then( _success, _error );
+                      $scope.roleForm.id = -1;
+                    }
+ /*         
+                    $http({
+                        method : method,
+                        url : url,
+                        data : angular.toJson($scope.roleForm),
+                        headers : {
+                            'Content-Type' : 'application/json'
+                        }
+                    }).then( _success, _error ); */
+                };
+         
+                //HTTP DELETE- delete role by Id
+                $scope.deleteRole = function(role) {
+                	
+                	
+                	
+                	
+                	if(confirm("Are you sure to Delete ?") == true){
+                    $http({
+                        method : 'DELETE',
+                        url : 'http://localhost:8080/visog-job-portal-api/master/roles/' + role.id,config
+                    }).then(_success, _error);
+                	}
+                };
+ 
+             // In case of edit, populate form fields and assign form.id with role id
+                $scope.editRole = function(role) {
+                  
+                    $scope.roleForm.name = role.name;
+                    $scope.roleForm.description = role.description;
+                    $scope.roleForm.id = role.id;
+                };
+         
+                /* Private Methods */
+                //HTTP GET- get all countries collection
+                function _refreshRoleData() {
+                	
+                	method = 'GET';
+					url ='http://localhost:8080/visog-job-portal-api/master/roles';
+					
+					$http
+							.get(
+									url,config
+									).then(function successCallback(response) {
+										
+										
+										$scope.roles = response.data.data;
+										//alert('hijj dfdfdf 1'+response.data.data);/
+									}, function errorCallback(response) {
+										alert(response.statusText);
+									})  
+					
+                	/* 
+            
+                    method = 'GET';
+					url ='http://localhost:8080/visog-job-portal-api/master/roles/';
+					
+					$http
+							.get(
+									url,config
+									).then(function successCallback(response) {
+                    	//alert(response.data.data)
+                        $scope.roles = response.data.data;
+                    }, function errorCallback(response) {
+                        console.log(response.statusText);
+                    }); */
+                }
+         
+                function _success(response) {
+                	alert(response.data.message)
+                    _refreshRoleData();
+                    _clearFormData()
+                }
+         
+                function _error(response) {
+                	
+                    console.log(response.statusText);
+                }
+         
+                //Clear the form
+                function _clearFormData() {
+                   $scope.roleForm.id = -1;
+                    $scope.roleForm.name = "";
+                    $scope.roleForm.description = "";
+                
+                };
+            });
+        </script>
+       
+    <head>
+    <body ng-controller="MainCtrl">
+    
+	<div id="header">
+		<div class="logo">
+			<a href="#">Job<span>Portal</span></a>
+		</div>
+
+	</div>
+	<a class="mobile" href="#">Menu</a>
+	<div id="container">
+		<div class="sidebar">
+			<ul id="nav">
+			 
+				<li class="masters"><a href="#">Masters<span class="sub"></span></a>
+				<ul>
+				<li class="child"><a href="/visog-job-portal-ui/roles">Roles</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/roles1">Roles1</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/gender">Gender</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/country">Country</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/state">State</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/city">City</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/addressType">Address Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/courses">Courses</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/specialization">Specialization</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/university">University</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/educationType">Education Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/languages">Languages </a></li>
+				<li class="child"><a href="/visog-job-portal-ui/currency">Currency</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/industry">Industry</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/domains">Domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobRole">Job Role</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/status">Status</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employmentType">Employment Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employerType">Employer Type</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/fileType">File Type</a></li>
+				
+				</ul>
+				</li>
+				
+				<li class="transactions"><a href="#">Transactions<span class="sub"></span></a>
+				<ul>
+				<li class="child"><a href="/visog-job-portal-ui/users">Users</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/address">Address</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employer">Employer</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postJob">Post Job</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postJodDomains">Post Job Domains</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/files">Files</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/employerJobseeker">Employer Job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/postJobseeker">PostJob Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/jobSeeker">Job Seeker</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/educationDetails">Education Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/languageKnown">Language Known</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/projectDetails">Project Details</a></li>
+				<li class="child"><a href="/visog-job-portal-ui/experienceDetails">Experience Details</a></li>
+				
+				</ul>
+				</li>
+				<li><a href="/visog-job-portal-ui/reg">UsersRegistration</a></li>
+				<li><a href="#">Login</a></li>
+
+
+			</ul>
+
+		</div>
+    
+    <div class="content" ng-app="RoleManagement" ng-controller="RoleController">
+         <h1>
+           Roles Master
+        </h1> 
+        <form ng-submit="submitRole()">
+            <table>
+               
+                <tr>
+                    <th colspan="2">Add/Edit role</th>
+                 </tr>
+                <tr>
+                    <td>Roles Name</td>
+                    <td><input type="text" ng-model="roleForm.name" required /></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td><input type="text" ng-model="roleForm.description"  /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" class="blue-button" /></td>
+                </tr>
+            </table>
+        </form>
+        <table>
+            <tr>
+              
+                <th>Role</th>
+                <th>Description</th>
+                <th> </th>
+               
+            </tr>
+ 
+            <tr ng-repeat="role in roles">
+       
+    <td> {{ role.name }}</td>
+    <td >{{ role.description }}</td>  
+                
+                <td><a ng-click="editRole(role)" class="blue-button">Edit</a> | <a ng-click="deleteRole(role)" onclick="deleteRole(role)" class="red-button">Delete</a></td>
+            </tr>
+ 
+        </table>
+ </div>
+       
+ </div>
+       
+      
+  </body>
+</html>
