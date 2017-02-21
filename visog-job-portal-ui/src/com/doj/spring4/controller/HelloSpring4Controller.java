@@ -44,11 +44,7 @@ public class HelloSpring4Controller {
 		return "master/roles";
 	}
 	
-	@RequestMapping(value = "/roles1", method = RequestMethod.GET)
-	public String roles1() {
-		return "master/roles1";
-	}
-
+	
 	@RequestMapping(value = "/gender", method = RequestMethod.GET)
 	public String gender() {
 		return "master/gender";
