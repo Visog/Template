@@ -1,11 +1,21 @@
-var app = angular.module("IndustryManagement", []);
+var app = angular.module("IndustryManagement", ["ngStorage"]);
 
 // Controller Part
 app
 		.controller(
 				"IndustryController",
-				function($scope, $http) {
+				function($scope, $http, $sessionStorage) {
 
+					var config="";
+	            	
+	            	
+					config = {headers:  {
+						 'Content-Type':'application/json',
+				        'Accept': 'application/json;odata=verbose',
+				        'X-Session-Id': $sessionStorage.SessionUser
+				    }
+				};
+					
 					$scope.industry = [];
 					$scope.industryForm = {
 					 id : -1,
@@ -19,9 +29,13 @@ app
 					// HTTP POST/PUT methods for add/edit role
 					// with the help of id, we are going to find out whether it
 					// is put or post operation
-
+					var reqBody="";
 					$scope.submitIndustry = function() {
-
+						reqBody={
+								"name" : $scope.industryForm.name,
+								"description" : $scope.industryForm.description
+								
+							};
 						var method = "";
 						var url = "";
 						// alert($scope.cityForm.id);
@@ -32,11 +46,7 @@ app
 
 							method = "POST";
 							url = 'http://localhost:8080/visog-job-portal-api/master/industry/';
-							$http.post(url, {
-								"name" : $scope.industryForm.name,
-								"description" : $scope.industryForm.description
-								
-							}).then(_success, _error);
+							$http.post(url, reqBody, config ).then(_success, _error);
 
 						} else {
 
@@ -46,11 +56,7 @@ app
 							method = "PUT";
 							url = 'http://localhost:8080/visog-job-portal-api/master/industry/'
 									+ id;
-							$http.put(url, {
-								"name" : $scope.industryForm.name,
-								"description" : $scope.industryForm.description
-					
-							}).then(_success, _error);
+							$http.put(url, reqBody, config).then(_success, _error);
 							$scope.industryForm.id = -1;
 						}
 						/*
@@ -63,14 +69,15 @@ app
 
 					// HTTP DELETE- delete role by Id
 					$scope.deleteIndustry = function(industry) {
-						if(confirm("Are you sure to Delete ?") == true){
-						$http(
-								{
-									method : 'DELETE',
-									url : 'http://localhost:8080/visog-job-portal-api/master/industry/'
-											+ industry.id
-								}).then(_success, _error);
-						}
+						
+
+	                	if(confirm("Are you sure to Delete ?") == true){
+	                		   url = 'http://localhost:8080/visog-job-portal-api/master/industry/' + industry.id;
+	                		$http.delete(url,config)
+	                		.then(_success, _error);
+	                    	}
+						
+						
 					};
 
 					// In case of edit, populate form fields and assign form.id
@@ -85,16 +92,24 @@ app
 					/* Private Methods */
 					// HTTP GET- get all countries collection
 					function _refreshIndustryData() {
-						$http(
-								{
-									method : 'GET',
-									url : 'http://localhost:8080/visog-job-portal-api/master/industry/'
-								}).then(function successCallback(response) {
-							// alert(response.data.data)
-							$scope.industry = response.data.data;
-						}, function errorCallback(response) {
-							console.log(response.statusText);
-						});
+						method = 'GET';
+						url ='http://localhost:8080/visog-job-portal-api/master/industry/';
+						
+						
+						$http
+						.get(
+								url,config
+								).then(function successCallback(response) {
+									
+									
+									$scope.roles = response.data.data;
+									// alert('hijj dfdfdf
+									// 1'+response.data.data);/
+								}, function errorCallback(response) {
+									alert(response.statusText);
+								})  
+				
+					
 					}
 
 					function _success(response) {
@@ -110,7 +125,7 @@ app
 
 					// Clear the form
 					function _clearFormData() {
-						// $scope.cityForm.id = -1;
+						$scope.industryForm.id = -1;
 						$scope.industryForm.name = "";
 						$scope.industryForm.description = "";
 
