@@ -31,43 +31,46 @@ $(document).ready(function(e){
     <script src="/visog-job-portal-ui/resources/js/employmentType.js"></script>
     <title>AngularJS $http Rest example</title>  
  <script type="text/javascript">
-            var app = angular.module("EmploymentTypeManagement", []);
+            var app = angular.module("EmploymentTypeManagement", ["ngStorage"]);
          
             //Controller Part
-            app.controller("EmploymentTypeController", function($scope, $http) {
-         
-               
-                $scope.employmentType = [];
-                $scope.employmentTypeForm = {
-                  //  id : -1,
+            app.controller("EmploymentTypeController", function($scope, $http, $sessionStorage) {
+            	var config="";
+            	
+            	config = {headers:  {
+            		 'Content-Type':'application/json',
+ 			        'Accept': 'application/json;odata=verbose',
+ 			        'X-Session-Id': $sessionStorage.SessionUser
+ 			    }
+             	};
+            	
+                 $scope.employmentTypeForm = {
+                    id : -1,
                     name : "",
                     description : ""
                     
                 };
          
+              // alert($sessionStorage.SessionUser);
                 //Now load the data from server
                 _refreshEmploymentTypeData();
          
                 //HTTP POST/PUT methods for add/edit jobRole 
                 // with the help of id, we are going to find out whether it is put or post operation
-                
+                var reqBody="";
                 $scope.submitEmploymentType = function() {
          
                     var method = "";
                     var url = "";
+                    reqBody={ "name": $scope.employmentTypeForm.name, "description" : $scope.employmentTypeForm.description };
                    // alert($scope.jobRoleForm.id);
                     if ($scope.employmentTypeForm.id == -1 || $scope.employmentTypeForm.id == undefined) {
                         //Id is absent in form data, it is create new jobRole operation
                         
                         method = "POST";
                         url = 'http://localhost:8080/visog-job-portal-api/master/employmentType/';
-                        $http.post
-                        (url, {
-                        		"name": $scope.employmentTypeForm.name,
-                        		
-                        		"description": $scope.employmentTypeForm.description
-                   			 ).then( _success, _error ); 
-                        }
+                        $http.post(url, reqBody,config).then( _success, _error ); 
+                        
                      
                     } else {
                     	 
@@ -75,13 +78,8 @@ $(document).ready(function(e){
                         id=$scope.employmentTypeForm.id;
                         method = "PUT";
                         url = 'http://localhost:8080/visog-job-portal-api/master/employmentType/'+ id;
-                      $http.put
-                      (url, { 
-                    	  "name": $scope.employmentTypeForm.name,
-                  		
-                  		"description": $scope.employmentTypeForm.description
-                    	  }).then( _success, _error );
-                      }
+                      $http.post(url, reqBody,config).then( _success, _error ); 
+                      
                       $scope.employmentTypeForm.id = -1;
                     }
  /*         
@@ -98,10 +96,10 @@ $(document).ready(function(e){
                 //HTTP DELETE- delete jobRole by Id
                 $scope.deleteEmploymentType = function(employmentType) {
                 	if(confirm("Are you sure to Delete ?") == true){
-                    $http({
-                        method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/employmentType/' + employmentType.id
-                    }).then(_success, _error);
+                  
+                        url : 'http://localhost:8080/visog-job-portal-api/master/employmentType/' + employmentType.id;
+                	$http.delete(url,config)
+            		.then(_success, _error);
                 	}
                 };
  
@@ -120,10 +118,14 @@ $(document).ready(function(e){
                 function _refreshEmploymentTypeData() {
                     $http({
                         method : 'GET',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/employmentType/'
-                    }).then(function successCallback(response) {
+                        url : 'http://localhost:8080/visog-job-portal-api/master/employmentType/';
+                    $http
+					.get(
+							url,config
+					).then(function successCallback(response) {
+                    
                     	//alert(response.data.data)
-                        $scope.jobRole = response.data.data;
+                        $scope.employmentType = response.data.data;
                     }, function errorCallback(response) {
                         console.log(response.statusText);
                     });
@@ -142,7 +144,7 @@ $(document).ready(function(e){
          
                 //Clear the form
                 function _clearFormData() {
-                  //  $scope.jobRoleForm.id = -1;
+                    $scope.jobRoleForm.id = -1;
                     $scope.employmentTypeForm.name = "";
                     $scope.employmentTypeForm.description = "";
                 
@@ -230,7 +232,7 @@ tfoot tr th:last-child {
             
             
         </style> -->
-    <head>
+    <head ng-controller="MainCtrl">
     <body >
     <div id="header">
 		<div class="logo">
@@ -238,6 +240,7 @@ tfoot tr th:last-child {
 		</div>
 
 	</div>
+		<a class="mobile" href="#">Menu</a>
 	
 	<div id="container">
 		<div class="sidebar">
@@ -287,7 +290,7 @@ tfoot tr th:last-child {
 				</ul>
 				</li>
 				<li><a href="/visog-job-portal-ui/reg">registration</a></li>
-				<li><a href="/visog-job-portal-ui/user">login</a></li>
+				<li><a href="#">Login</a></li>
 			</ul>
 		</div>
     <div class="content" ng-app="EmploymentTypeManagement" ng-controller="EmploymentTypeController">
