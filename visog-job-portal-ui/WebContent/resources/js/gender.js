@@ -1,13 +1,25 @@
 
-	var app = angular.module("GenderManagement", []);
+	var app = angular.module("GenderManagement", ["ngStorage"]);
 
 	//Controller Part
-	app
-			.controller(
-					"GenderController",
-					function($scope, $http) {
+	
+	app.controller("GenderController",function($scope, $http, $sessionStorage) {
 
-						$scope.countries = [];
+		
+		var config="";
+    	
+    	
+		config = {headers:  {
+			 'Content-Type':'application/json',
+	        'Accept': 'application/json;odata=verbose',
+	        'X-Session-Id': $sessionStorage.SessionUser
+	    }
+	};
+		
+		
+		
+		
+						//$scope.countries = [];
 						$scope.genderForm = {
 							// id : -1,
 							name : "",
@@ -26,6 +38,7 @@
 
 							var method = "";
 							var url = "";
+							 reqBody={ "name": $scope.genderForm.name, "description" : $scope.genderForm.description };
 							// alert($scope.genderForm.id);
 							if ($scope.genderForm.id == -1
 									|| $scope.genderForm.id == undefined) {
