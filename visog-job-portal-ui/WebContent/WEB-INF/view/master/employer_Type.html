@@ -31,36 +31,45 @@ $(document).ready(function(e){
     <script src="/visog-job-portal-ui/resources/js/employerType.js"></script>
     <title>AngularJS $http Rest example</title>  
  <script type="text/javascript">
-            var app = angular.module("EmployerTypeManagement", []);
+            var app = angular.module("EmployerTypeManagement", ["ngStorage"]);
          
             //Controller Part
-            app.controller("EmployerTypeController", function($scope, $http) {
-         
+            app.controller("EmployerTypeController", function($scope, $http, $sessionStorage) {
+            	var config="";
+            	
+            	config = {headers:  {
+					 'Content-Type':'application/json',
+			        'Accept': 'application/json;odata=verbose',
+			        'X-Session-Id': $sessionStorage.SessionUser
+			    }
+            	};
                
-                $scope.employerType = [];
+               // $scope.employerType = [];
                 $scope.employerTypeForm = {
-                  //  id : -1,
+                    id : -1,
                     name : "",
                     description : ""
                 };
          
+            	 // alert($sessionStorage.SessionUser);
                 //Now load the data from server
                 _refreshEmployerTypeData();
          
                 //HTTP POST/PUT methods for add/edit employerType 
                 // with the help of id, we are going to find out whether it is put or post operation
-                
+                 var reqBody="";
                 $scope.submitEmployerType = function() {
          
                     var method = "";
                     var url = "";
+                    reqBody={ "name": $scope.employerTypeForm.name, "description" : $scope.employerTypeForm.description };
                    // alert($scope.employerTypeForm.id);
                     if ($scope.employerTypeForm.id == -1 || $scope.employerTypeForm.id == undefined) {
                         //Id is absent in form data, it is create new employerType operation
                         
                         method = "POST";
                         url = 'http://localhost:8080/visog-job-portal-api/master/employerType/';
-                        $http.post(url, { "name": $scope.employerTypeForm.name, "description" : $scope.employerTypeForm.description }).then( _success, _error ); 
+                        $http.post(url, reqBody,config).then( _success, _error ); 
                     
                     } else {
                     	 
@@ -68,7 +77,7 @@ $(document).ready(function(e){
                         id=$scope.employerTypeForm.id;
                         method = "PUT";
                         url = 'http://localhost:8080/visog-job-portal-api/master/employerType/'+ id;
-                      $http.put(url, { "name": $scope.employerTypeForm.name, "description" : $scope.employerTypeForm.description }).then( _success, _error );
+                      $http.put(url, reqBody,config).then( _success, _error );
                       $scope.employerTypeForm.id = -1;
                     }
  /*         
@@ -84,11 +93,11 @@ $(document).ready(function(e){
          
                 //HTTP DELETE- delete employerType by Id
                 $scope.deleteEmployerType = function(employerType) {
+                	
                 	if(confirm("Are you sure to Delete ?") == true){
-                    $http({
-                        method : 'DELETE',
-                        url : 'http://localhost:8080/visog-job-portal-api/master/employerType/' + employerType.id
-                    }).then(_success, _error);
+                    
+                         url : 'http://localhost:8080/visog-job-portal-api/master/employerType/' + employerType.id;
+                	$http.delete(url,config).then(_success, _error);
                 	}
                 };
  
@@ -103,19 +112,25 @@ $(document).ready(function(e){
                 /* Private Methods */
                 //HTTP GET- get all employerTypes collection
                 function _refreshEmployerTypeData() {
-                    $http({
+                	
                         method : 'GET',
                         url : 'http://localhost:8080/visog-job-portal-api/master/employerType/'
-                    }).then(function successCallback(response) {
+                        
+                       	$http
+							.get(
+									url,config
+							).then(function successCallback(response) {
+								   $scope.employerType = response.data.data;
+                   
                     	//alert(response.data.data)
-                        $scope.employerType = response.data.data;
+                        
                     }, function errorCallback(response) {
                         console.log(response.statusText);
                     });
                 }
          
                 function _success(response) {
-                	
+                	alert(response.data.message)
                     _refreshEmployerTypeData();
                     _clearFormData()
                 }
@@ -127,7 +142,7 @@ $(document).ready(function(e){
          
                 //Clear the form
                 function _clearFormData() {
-                  //  $scope.employerTypeForm.id = -1;
+                    $scope.employerTypeForm.id = -1;
                     $scope.employerTypeForm.name = "";
                     $scope.employerTypeForm.description = "";
                 
@@ -216,14 +231,14 @@ tfoot tr th:last-child {
             
         </style> -->
     <head>
-    <body >
-    <div id="header">
+    	<body ng-controller="MainCtrl">
+     <div id="header">
 		<div class="logo">
 			<a href="#">Job<span>Portal</span></a>
 		</div>
 
 	</div>
-	
+	<a class="mobile" href="#">Menu</a>
 	<div id="container">
 		<div class="sidebar">
 			<ul id="nav">
@@ -272,7 +287,7 @@ tfoot tr th:last-child {
 				</ul>
 				</li>
 				<li><a href="/visog-job-portal-ui/reg">registration</a></li>
-				<li><a href="/visog-job-portal-ui/user">login</a></li>
+				<li><a href="#">Login</a></li>
 			</ul>
 		</div>
     <div class="content" ng-app="EmployerTypeManagement" ng-controller="EmployerTypeController">
@@ -298,7 +313,7 @@ tfoot tr th:last-child {
                 </tr>
             </table>
         </form>
-        <table>
+        <table>	
             <tr>
               
                 <th>Name</th>
